@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<definitions targetNamespace="urn:middleware.campusdomar.es" xmlns:tns="urn:middleware.campusdomar.es"
+	     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	     xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types> 
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:middleware.campusdomar.es">
+      <xsd:complexType name="PersistentUser">
+	<xsd:all>
+	  <xsd:element name="id" type="xsd:int" />
+	  <xsd:element name="login" type="xsd:string" />
+	  <xsd:element name="password" type="xsd:string" />
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="surname1" type="xsd:string" />
+	  <xsd:element name="surname2" type="xsd:string" />
+	  <xsd:element name="photo" type="xsd:string" />
+	  <xsd:element name="mail" type="xsd:string" />
+	  <xsd:element name="phoneNumber" type="xsd:string" />
+	  <xsd:element name="url" type="xsd:string" />
+	  <xsd:element name="status" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	  <xsd:element name="organization" type="xsd:string" />
+	  <xsd:element name="mentor" type="xsd:string" />
+	</xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="IdUser">
+	<xsd:sequence>
+	  <xsd:element name="id" type="xsd:string">
+	  </xsd:element>
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfUser">
+	<xsd:complexContent>
+	  <xsd:restriction base="soapenc:Array">
+	    <xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="tns:PersistentUser[]" />
+	  </xsd:restriction>
+	</xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="PersistentGroup">
+	<xsd:all>
+	  <xsd:element name="id" type="xsd:int" />
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="key" type="xsd:string" />
+	  <xsd:element name="description" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	</xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="IdGroup">
+	<xsd:sequence>
+	  <xsd:element name="id" type="xsd:string">
+	  </xsd:element>
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfGroup">
+	<xsd:complexContent>
+	  <xsd:restriction base="soapenc:Array">
+	    <xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="tns:PersistentGroup[]" />
+	  </xsd:restriction>
+	</xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="NewOrganization">
+	<xsd:sequence>
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="acronym" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	  <xsd:element name="partner" type="xsd:string" />
+	  <xsd:element name="url" type="xsd:string" />
+	  <xsd:element name="logo" type="xsd:string" />
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PersistentOrganization">
+	<xsd:all>
+	  <xsd:element name="id" type="xsd:int" />
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="acronym" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	  <xsd:element name="partner" type="xsd:string" />
+	  <xsd:element name="url" type="xsd:string" />
+	  <xsd:element name="logo" type="xsd:string" />
+	</xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="IdOrganization">
+	<xsd:sequence>
+	  <xsd:element name="id" type="xsd:string">
+	  </xsd:element>
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfOrganization">
+	<xsd:complexContent>
+	  <xsd:restriction base="soapenc:Array">
+	    <xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="tns:PersistentOrganization[]" />
+	  </xsd:restriction>
+	</xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="StatusQuo">
+	<xsd:all>
+	  <xsd:element name="output" type="xsd:string" />
+	</xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="Result">
+	  <xsd:sequence>
+	  <xsd:element name="result" type="xsd:boolean">
+	  </xsd:element>
+	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema> 
+  </types>
+  <message name="UserPersistentMessage">
+    <part name="anUser" type="tns:PersistentUser" />
+  </message>
+  <message name="IdUserMessage">
+    <part name="idOfUser" type="tns:IdUser" />
+  </message>
+  <message name="AllUserMessage">
+    <part name="allUsers" type="tns:ArrayOfUser" />
+  </message>
+  <message name="GroupPersistentMessage">
+    <part name="aGroup" type="tns:PersistentGroup" />
+  </message>
+  <message name="IdGroupMessage">
+    <part name="idOfGroup" type="tns:IdGroup" />
+  </message>
+  <message name="AllGroupMessage">
+    <part name="allGroups" type="tns:ArrayOfGroup" />
+  </message>
+  <message name="OrganizationParamsMessage">
+    <part name="newOrganization" type="tns:NewOrganization" />
+  </message>
+  <message name="OrganizationPersistentMessage">
+    <part name="aOrganizationUpdate" type="tns:PersistentOrganization" />
+  </message>
+  <message name="IdOrganizationMessage">
+    <part name="idOfOrganization" type="tns:IdOrganization" />
+  </message>
+  <message name="AllOrganizationMessage">
+    <part name="allOrganizations" type="tns:ArrayOfOrganization" />
+  </message>
+  <message name="UserGroupMessage">
+    <part name="anUser" type="tns:PersistentUser" />
+    <part name="aGroup" type="tns:PersistentGroup" />
+  </message>
+  <message name="UserGroupRoleMessage">
+    <part name="anUser" type="tns:PersistentUser" />
+    <part name="aGroup" type="tns:PersistentGroup" />
+    <part name="role"   type="xsd:string" />
+  </message>
+  <message name="OperationResultMessage">
+    <part name="aResult" type="tns:Result" />
+  </message>
+    <message name="StatusMessage">
+    <part name="statusQuo" type="tns:StatusQuo" />
+  </message>
+  <message name="UpdateUserPersistentMessage">
+    <part name="oldUser" type="tns:PersistentUser" />
+    <part name="newUser" type="tns:PersistentUser" />
+  </message>
+  <message name="UpdateGroupPersistentMessage">
+    <part name="oldGroup" type="tns:PersistentGroup" />
+    <part name="newGroup" type="tns:PersistentGroup" />
+  </message>
+
+
+
+  <portType name="ServicesPortType">
+    <operation name="createUser">
+      <input message="tns:UserPersistentMessage" />
+      <output message="tns:UserPersistentMessage" />
+    </operation>
+    <operation name="updateUser">
+      <input message="tns:UpdateUserPersistentMessage" />
+      <output message="tns:UserPersistentMessage" />
+    </operation>
+    <operation name="deleteUser">
+      <input message="tns:UserPersistentMessage" />
+      <output message="tns:StatusMessage" />
+    </operation>
+    <operation name="createGroup">
+      <input message="tns:GroupPersistentMessage" />
+      <output message="tns:GroupPersistentMessage" />
+    </operation>
+    <operation name="updateGroup">
+      <input message="tns:UpdateGroupPersistentMessage" />
+      <output message="tns:GroupPersistentMessage" />
+    </operation>
+    <operation name="deleteGroup">
+      <input message="tns:GroupPersistentMessage" />
+      <output message="tns:StatusMessage" />
+    </operation>
+    <operation name="joinGroup">
+      <input message="tns:UserGroupRoleMessage" />
+      <output message="tns:OperationResultMessage" />
+    </operation>
+    <operation name="updateRoleInGroup">
+      <input message="tns:UserGroupRoleMessage" />
+      <output message="tns:OperationResultMessage" />
+    </operation>
+    <operation name="leaveGroup">
+      <input message="tns:UserGroupMessage" />
+      <output message="tns:OperationResultMessage" />
+    </operation>
+  </portType>
+  <binding name="ServicesBinding" type="tns:ServicesPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="createUser">
+      <soap:operation soapAction="createUserAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>
+    <operation name="updateUser">
+      <soap:operation soapAction="updateUserAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>
+    <operation name="deleteUser">
+      <soap:operation soapAction="deleteUserAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>						
+    <operation name="createGroup">
+      <soap:operation soapAction="createGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>
+    <operation name="updateGroup">
+      <soap:operation soapAction="updateGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>
+    <operation name="deleteGroup">
+      <soap:operation soapAction="deleteGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>
+    <operation name="joinGroup">
+      <soap:operation soapAction="joinGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>
+    <operation name="updateRoleInGroup">
+      <soap:operation soapAction="updateRoleInGroupAction" />
+      <input>
+	<soap:body use="literal" />
+      </input>
+      <output>
+	<soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="leaveGroup">
+      <soap:operation soapAction="leaveGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Services">
+    <port name="ServicesPort" binding="tns:ServicesBinding">
+      <soap:address location="http://meeting/middleware" />
+    </port>
+  </service>
+</definitions>

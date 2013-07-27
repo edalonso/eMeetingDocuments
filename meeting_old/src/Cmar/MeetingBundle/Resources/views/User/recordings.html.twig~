@@ -1,0 +1,43 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+My Historical Meetings
+{% endblock %}
+
+{% block body %}
+<select id="selectmeeting">
+  {% for meeting in meetings %}
+  <option value="{{ meeting.TITLE }}"
+          {%  if ( meeting.id == meeting_id ) %}
+	    selected="selected" 
+          {% endif %}
+	  data-url="{{ url('index_search_meeting', { 'meeting_id': meeting.id }) }}">
+    {{ meeting.TITLE }}
+  </option>
+  {% endfor %}
+</select>
+
+<script type="text/javascript">
+  var lista = document.getElementById('selectmonth');
+  lista.onchange = function () {
+    var url = lista.options[lista.selectedIndex].getAttribute('data-url');
+    window.location = url;
+  };
+</script>
+
+<ul>
+  {% for meeting in meetings_finished %}
+  <li>
+    {{ meeting.title }} 
+    <span style="font-size: 11px; font-style: italic">at {{ meeting.date|date('Y-m-d H:i') }}</span> 
+    {% for recording in meeting.recordings %}
+    <ul>
+      <li><a target="_blank" href="{{ path('index_recording', {'id': recording.id }) }}"> {{ recording.title }}</a></li>
+    </ul>
+    {% endfor %}
+  </li>
+  
+  {% else%}
+  <li>Don not have historical meetings</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2235/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form
+END
+MeetingType.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/3554/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/MeetingType.php
+END
+GroupType.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/1727/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/GroupType.php
+END
+RecordingType.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/1490/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/RecordingType.php
+END
+UserType.php
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/UserType.php
+END
+WizardDateType.php
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/WizardDateType.php
+END
+WizardMetadataType.php
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/WizardMetadataType.php
+END
+WizardUsersType.php
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/WizardUsersType.php
+END
+PasswordType.php
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/2235/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Form/PasswordType.php
+END

@@ -1,0 +1,180 @@
+<ul>
+  <li style="list-style-type: none;">
+    <div class="np" style="heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px;">
+      <font size="7">{{ meeting.title }}</font>
+      <div class="info" style="float:right; width:200px; padding: 10px 20px; margin:10px 0px; border-left:1px solid">
+	<div>
+  	  {% if meeting.public %}
+  	  <a class="go" target="_blank" href="{{ path('index_room', {'salt': meeting.salt }) }}" style="text-decoration:none"><button style="padding: 20px 8px;" class="button green"><i class="icon-upload icon-white"></i> Join</button></a>
+  	  {% else %}
+  	  <a target="_blank" href="{{ path('index_secretroom', {'salt': meeting.secretsalt }) }}" style="text-decoration:none"><button style="padding: 20px 8px;" class="button green"><i class="icon-upload icon-white"></i> Join</button></a>
+  	  {% endif %}
+  	  <button id="opener-delete-{{ meeting.id }}" class="button red" {% if meeting.owner !=  user  %} disabled="true" {% endif %}><i class="icon-trash icon-white"></i> Delete</button>
+	</div>
+	<div style="padding-top: 10px">
+          <span style="font-weight: bolder; font-size: 14px">Start Date: </span>
+	  <span style="font-size: 14px; font-style: italic">{{ meeting.date|date('Y-m-d H:i') }}</span>
+	</div>
+	<div>
+          <span style="font-weight: bolder; font-size: 14px">Type: </span>
+	  <span style="font-size: 14px; font-style: italic">{% if (meeting.public == 1) %} Public {% else %} Private {% endif %}</span>
+	</div>
+	<div>
+          <span style="font-weight: bolder; font-size: 14px;">Number of participants: </span>
+	  <span style="font-size: 14px; font-style: italic"> {{ (meeting.users|length +1 ) }} </span>
+	  <script type="text/javascript">
+	    $(function() {
+            $( ".dialog-modal" ).dialog({
+                dialogClass: 'dialogWithShadow',
+                hide: "highlight",
+                autoOpen: false,
+                modal: true,
+                minWidth: 470,
+	        minHeith: 144,
+                open: function() {
+	           self = $(this);
+	           if (self.data("ajax")) {
+                       self.load(self.data("url")); 
+                   } 
+	        }
+             });
+
+             $( "#dialog:ui-dialog" ).dialog( "destroy" );
+
+	     $( "#opener-{{ meeting.id }}" ).click(function() {
+               $( "#dialog-modal-users-{{ meeting.id }}" ).dialog( "open" );
+               return false;
+  	     });
+
+	     $( "#opener1-{{ meeting.id }}" ).click(function() {
+               $( "#dialog-modal-users-{{ meeting.id }}" ).dialog( "open" );
+               return false;
+  	     });
+
+	     $( "#opener-recordings-{{ meeting.id }}" ).click(function() {
+               $( "#dialog-modal-recordings-{{ meeting.id }}" ).dialog( "open" );
+               return false;
+  	     });
+
+	     $( "#opener-delete-{{ meeting.id }}" ).click(function() {
+               $( "#dialog-modal-delete-{{ meeting.id }}" ).dialog( "open" );
+               return false;
+  	     });
+
+	     $( "#opener-nickname-{{ meeting.id }}" ).click(function() {
+               $( "#dialog-modal-nickname-{{ meeting.id }}" ).dialog( "open" );
+               return false;
+  	     });
+
+             $("#remove-{{ meeting.id }}").click(function() {
+                return !$('#AddUsers-{{ meeting.id }} option:selected').remove().appendTo();
+             });
+	  });
+	</script>
+	<button style="font-size:12px; margin-top: 10px;" id="opener-{{ meeting.id }}" class="button otherblue"><i class="icon-plus icon-white"></i> DigiMar Users</button>
+	<button id="opener-recordings-{{ meeting.id }}" style="font-size:12px; margin-top: 10px" class="button otherblue"><i class="icon-recording icon-white"></i> Recordings</button>	
+	<button id="opener-nickname-{{ meeting.id }}" style="font-size:12px; margin-top: 10px" class="button otherblue"><i class="icon-user icon-white"></i> Change Nick Name</button>	
+      </div>
+    </div>
+    <div class="body" style="padding-right:210px;">
+      <div style="float: rigth; padding: 5px;">
+	<div>
+	{% if meeting.description != null %}
+  	  <b>Description</b>
+  	  <p style="margin: 15px; margin-top: 5px">{{ meeting.description }}</p>
+	{% endif %}
+	</div>
+        {% if meeting.public %}
+	<dl>
+	  <dt style="cursor: pointer; margin: 10px; margin-left: 0px">Click to Invite Partners <a href="" class="showr" title="Copy & send by Email the text in the drop down box below."><i class="icon-help icon-white"></i></a></dt>
+	  <dd><textarea rows="7" cols="63" onclick="this.select()">    Hi:
+    {{ user.name }} {{ user.surname }} want to invite you to an eMeeting on DigiMar.
+To access to the eMeeting click on the link below.
+
+{{ url('index_room', {'salt': meeting.salt}) }}
+
+For more information visit: help.campusdomar.es</textarea>
+	  </dd>
+	</dl>
+        {% else %}
+        <p style="margin-bottom: 0px">Invite Partners: <a href="" class="showr" title="To invite DigiMar partners press button: + DigiMar User. If you want to invite external DigiMar partners Copy & send By Email the Secret Link below."><i class="icon-help icon-white"></i></a></p>
+	<ul>
+  	    <li style="list-style-type: none; margin: 5px; margin-bottom: 0px;">
+  	      {#<h5 style="margin-bottom: 1px; margin-top: 5px;">Public Link:</h5>
+    	      <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 70%; margin:10px;  margin-top: 0px;" onclick="this.select()" value="{{ url('index_room', {'salt': meeting.salt}) }}">#}
+  	    </li>
+  	    <li style="list-style-type: none; margin: 5px; margin-bottom: 0px; margin-top: 0px">
+  	      <h5 style="margin-bottom: 1px; margin-top: 0px;">Secret Link:</h5>
+  	      <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 70%; margin:10px;  margin-top: 0px" onclick="this.select()" value="{{ url('index_secretroom', {'salt': meeting.secretsalt}) }}">
+	      <a href="{{ path('updatesecretsalt_meeting', { 'id': meeting.id }) }}" style="text-decoration:none"><button><i class="icon-reload icon-white"></i></button></a>
+  	    </li>
+	  </ul>
+        <p style="margin-bottom: 0px">Invite Students: <a href="" class="showr" title="This link allows you to invite partners at the meeting with limited functionality."><i class="icon-help icon-white"></i></a></p>
+	<p id="information2" style="display: none">
+	</p>
+	<ul>
+  	  <li style="list-style-type: none; margin: 5px; margin-bottom: 0px; margin-top: 0px">
+  	    <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 70%; margin:10px;  margin-top: 0px" onclick="this.select()" value="{{ url('index_secretroom', {'salt': meeting.viewsalt}) }}">
+	    <a href="{{ path('updateviewsalt_meeting', { 'id':  meeting.id }) }}" style="text-decoration:none"><button><i class="icon-reload icon-white"></i></button></a>
+  	  </li>
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</li>
+
+<div id="dialog-modal-users-{{ meeting.id }}" class="dialog-modal" data-ajax="true" data-url="{{ path('user_form', { 'id': meeting.id }) }}" title="Add Users" style="overflow:auto">
+</div>
+
+{#
+<div id="dialog-modal-{{ meeting.id }}" class="dialog-modal" title="Add Users">
+  <form action="{{ path('addusers_meeting') }}" method="get" onsubmit="selectall('AddUsers-{{ meeting.id }}')" >
+    <input type="hidden" name="id" value="{{ meeting.id }}" />
+    <div style="height: 140%; margin: 10px" id="container {{ meeting.id }}">
+      <div class="content all_users" style="height: 50%; width: 432px">
+	<div class="ui-widget">
+	  <input id="users-{{ meeting.id }}" placeholder="Introduce a User ..." style="width: 425px"/>
+	</div>
+	<div class="container">
+	  <select style="width: 430px" name="AddUsers[]" id="AddUsers-{{ meeting.id }}" multiple="multiple">
+	    {% for user in meeting.users %}
+	    <option>{{ user.nameAndEmail }}</option>
+	    {% endfor %}
+	  </select>
+	  <input style="text-align: center; font-size: 12px; margin: 5px; margin-left: 5px" id="remove-{{ meeting.id }}" value="Remove" type="button" class="button red" />
+	</div>
+      </div>
+      <input style="margin-top: 25px; font-size: 12px;" type="submit" class="button otherblue" value="Add Users" />
+      <a href="{{ path('index') }}" style="margin-top: 25px; font-size: 12px; text-decoration: none" class="button" >Cancel</a>
+    </div>
+  </form>
+</div>
+#}
+
+<div id="dialog-modal-delete-{{ meeting.id }}" class="dialog-modal" title="Delete meeting: '{{ meeting.title }}'" style="overflow:auto">
+  <div align="center">
+    <p>Are you sure?</p>
+    <a href="{{ path('index') }}" style="text-decoration:none"><button class="button otherblue">No way!</button></a>
+    <a href="{{ path('index_cancel', {'id': meeting.id }) }}" style="text-decoration:none"><button class="button red"><i class="icon-trash icon-white"></i>Yes, I'm sure</button></a>
+  </div>
+</div>
+
+<div id="dialog-modal-nickname-{{ meeting.id }}" class="dialog-modal" title="Change Nick Name for this eMeeting" style="width: 605px; height: 90px;">
+  <form action="{{ path('change_nickname', {'id': meeting.id }) }}" method="get" >
+    <input type="hidden" name="id" value="{{ meeting.id }}" />
+    <ul>
+      <li style="list-style-type: none;"><label for="form_NickName" class="required" style="margin: 10px;">Nick Name: </label><input id="NickName" name="Nick_name" type="text;" value="{{ meeting.nickname }}"></input></li>
+      <li style="list-style-type: none; margin-left: 70px"><input style="font-size: 14px; border-radius: 4px; margin: 20px" type="submit" value="Save" class="button"/><a href="{{ path('index') }}" style="font-size: 14px; border-radius: 4px; text-decoration: none; margin: 20px; margin-left: 50px" class="button"/>Cancel</a></li>
+    </ul>
+  </form>
+</div>
+
+
+<div id="dialog-modal-recordings-{{ meeting.id }}" class="dialog-modal" data-ajax="true" data-url="{{ path('recording_list', { 'id': meeting.id }) }}" title="Recordings: '{{ meeting.title }}'" style="overflow:auto">
+</div>
+
+{#<td>
+  Available Rooms: 
+</td>#}
+</ul>

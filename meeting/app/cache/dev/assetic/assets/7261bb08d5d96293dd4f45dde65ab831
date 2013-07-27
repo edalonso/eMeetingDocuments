@@ -1,0 +1,1 @@
+function filter_emeetings(a){$("#dropdown-title").html(a);if(a=="All eMeetings"){$(".ui-state-default div").fadeIn("slow").removeClass("hidden")}else{$(".ui-state-default div").each(function(){if(!$(this).hasClass(a)){$(this).fadeOut("normal").addClass("hidden")}else{$(this).fadeIn("slow").removeClass("hidden")}})}};

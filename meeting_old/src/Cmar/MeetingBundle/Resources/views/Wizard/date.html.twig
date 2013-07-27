@@ -1,0 +1,20 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+Date
+{% endblock %}
+
+{% block body %}
+<a href="{{ path('wizard_metadata') }}">Metadata</a> &raquo; <a href="#">Date</a> &raquo; Users &raquo; End
+
+{% if ErrorForDate %}
+<div><ul><li>{{ ErrorForDate }}</li></ul></div>
+{% endif %}
+<form action="{{ path('wizard_date_submit')}}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Next &raquo;</button>
+    </p>
+</form>
+
+
+{% endblock %}

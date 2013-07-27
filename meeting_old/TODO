@@ -1,0 +1,4 @@
+* Mostrar errores en cron de sync usuarios.
+* En "Mis reuniones actuales" invitar -> email con URL de room.
+
+* Crear AdoAdminInterface y AdoAdminMock para interfaces.

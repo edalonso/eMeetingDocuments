@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <div style="width: 181%; height: 140%" id="container {{ meeting.id }}">
+    {% for recording in meeting.recordings %}
+    <ul>
+	<li style="list-style-type: none;"><a target="_blank" href="{{ path('index_recording', {'id': recording.id }) }}"> {{ recording.title }}</a><span style="font-size: 12px; font-style: italic; margin: 5px; padding-bottom: 5px; margin-left: 10px"> at {{ recording.datecreated|date('Y-m-d H:i') }}</span></li>
+    </ul>
+  {% else %}
+    <center style="font-size: 30px; color: #BC0915; margin: 30px; margin-bottom: 5px">Do not have recordings in this meeting</center>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<?php
+
+namespace Cmar\MeetingBundle\Tests\Controller;
+
+use Cmar\MeetingBundle\Service\MeetingService;
+use Cmar\MeetingBundle\Entity\Meeting;
+use Cmar\MeetingBundle\Entity\User;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class RoomControllerTest extends WebTestCase
+{
+
+    private $em;
+    private $meetingRepository;
+    private $meetingService;
+
+    public function setUp()
+    {
+        //INIT TEST SUITE                                                                                                                                                                                                                     
+        $kernel = static::createKernel();
+        $kernel->boot();
+        $this->em = $kernel->getContainer()
+            ->get('doctrine.orm.entity_manager');
+        $this->meetingRepository = $this->em
+            ->getRepository('CmarMeetingBundle:Meeting');
+
+        //CREATE MEETING SERVICE                                                                                                                                                                                                              
+        //Uso a Mock for AdoAdmin                                                                                                                                                                                                             
+        $adoAdmin = $this->getMock('Cmar\MeetingBundle\Service\AdoAdminInterface');
+        $doctrine = $kernel->getContainer()->get('doctrine');
+        $logger = $kernel->getContainer()->get('logger');
+        $concurrentRooms = 5;
+        $this->meetingService = new MeetingService($doctrine, $adoAdmin, $concurrentRooms, $logger);
+
+        //DELETE DATABASE                                                                                                                                                                                                                     
+        $this->em->createQuery("DELETE CmarMeetingBundle:Meeting m")->getResult();
+        $this->em->createQuery("DELETE CmarMeetingBundle:Group g")->getResult();
+        $this->em->createQuery("DELETE CmarMeetingBundle:User u")->getResult();
+    }
+
+    public function testRoomIncrement() {
+        $this->assertEquals(7, 7);
+    }
+
+    /*
+    public function testRoomIncrement()
+    {
+        $user = $this->createUser("user");
+        $user2 = $this->createUser("user2");
+        $user3 = $this->createUser("user3");
+        $user4 = $this->createUser("user4");
+        $user5 = $this->createUser("user5");
+        $user6 = $this->createUser("user6");
+        $user7 = $this->createUser("user7");
+
+        $duration = 30;
+        $title = "Meeting for testRoomIncrement";
+        $meeting = array();
+
+        $datatime = '2012-01-17 10:00:00';
+        $meeting[1] = $this->createMeeting($user, $title, 270, $datatime);
+        $this->assertEquals($meeting[1], $this->meetingService->create($meeting[1]));
+        $this->assertEquals(1, roomIncrement($meeting[1]));
+
+        $datatime = '2012-01-17 10:30:00';
+        $meeting[2] = $this->createMeeting($user2, $title, 210, $datatime);
+        $this->meetingService->create($meeting[2]);
+        $this->assertEquals(1, $meeting[2]->getConcurrent());
+        $this->assertEquals(1, $meeting[1]->getConcurrent());
+
+
+        $datatime = '2012-01-17 11:00:00';
+        $meeting[3] = $this->createMeeting($user3, $title, 150, $datatime);
+        $this->meetingService->create($meeting[3]);
+        $this->assertEquals(2, $meeting[3]->getConcurrent());
+        $this->assertEquals(2, $meeting[2]->getConcurrent());
+        $this->assertEquals(2, $meeting[1]->getConcurrent());
+
+
+        $datatime = '2012-01-17 11:30:00';
+        $meeting[4] = $this->createMeeting($user4, $title, 90, $datatime);
+        $this->meetingService->create($meeting[4]);
+        $this->assertEquals(3, $meeting[4]->getConcurrent());
+        $this->assertEquals(3, $meeting[3]->getConcurrent());
+        $this->assertEquals(3, $meeting[2]->getConcurrent());
+        $this->assertEquals(3, $meeting[1]->getConcurrent());
+
+        $datatime = '2012-01-17 12:00:00';
+        $meeting[5] = $this->createMeeting($user5, $title, $duration, $datatime);
+        $this->meetingService->create($meeting[5]);
+        $this->assertEquals(4, $meeting[5]->getConcurrent());
+        $this->assertEquals(4, $meeting[4]->getConcurrent());
+        $this->assertEquals(4, $meeting[3]->getConcurrent());
+        $this->assertEquals(4, $meeting[2]->getConcurrent());
+        $this->assertEquals(4, $meeting[1]->getConcurrent());
+
+        $datatime = '2012-01-17 12:15:00';
+        $meeting[7] = $this->createMeeting($user7, $title, 10, $datatime);
+        $this->meetingService->create($meeting[7]);
+        $this->assertEquals(6, roomIncrement($meeting[2]));//No crea el meeting
+        $this->assertEquals(6, $meeting[6]->getConcurrent());
+        $this->assertEquals(6, $meeting[5]->getConcurrent());
+        $this->assertEquals(6, $meeting[4]->getConcurrent());
+
+
+        }
+
+    private function createUser($name)
+    {
+        $user = new User();
+        $user->setLogin($name);
+        $user->setName($name);
+        $user->setSurname($name);
+        $user->setEmail($name);
+        $user->setPassword($name);
+
+        $this->em->persist($user);
+        return $user;
+    }
+
+
+    private function createMeeting($user, $title, $duration, $datatime_string)
+    {
+
+        $meeting = new Meeting();
+        $meeting->setTitle($title);
+        $meeting->setDescription($duration . "minutes immediate test meeting");
+
+        $datatime = \DateTime::createFromFormat('Y-m-d H:i:s', $datatime_string);
+
+        $meeting->setDate($datatime);
+        $meeting->setDuration($duration);
+        $meeting->setPublic(true);
+        $meeting->setSalt(rand());
+        $meeting->setSecretSalt(rand());
+        $meeting->setOwner($user);
+
+        return $meeting;
+        }*/
+
+}

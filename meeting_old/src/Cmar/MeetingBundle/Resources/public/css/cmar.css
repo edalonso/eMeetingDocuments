@@ -1,0 +1,36 @@
+body {
+    font-family: Arial,Helvetica,'Nimbus Sans L',sans-serif;
+}
+
+h1 {
+    background: url('../images/sprite.png') repeat-x scroll 0 0 transparent; 
+    font: 14px/1.4 arial,FreeSans,Helvetica,sans-serif;
+    color: #ffffff;
+    border-top: 1px solid #D7D6B2;
+    padding: 4px 0 4px 25px;
+    margin: 0px;
+}
+
+h4 {
+    font: 16px arial,FreeSans,Helvetica,sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 4px 0 4px 25px;
+    margin: 10px;
+}
+
+#content {
+    width: 980px;
+    margin: 0 auto;
+}
+
+#footer {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#footer #waves {
+    background: url('../images/pie.png') no-repeat scroll center bottom #FFFFFF; 
+    height: 60px;
+}

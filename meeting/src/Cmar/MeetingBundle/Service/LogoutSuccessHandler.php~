@@ -1,0 +1,57 @@
+<?php 
+ 
+namespace Cmar\MeetingBundle\Service; 
+
+use Symfony\Component\HttpKernel\Log\LoggerInterface;
+ 
+use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface; 
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface; 
+use Symfony\Component\HttpFoundation\Request; 
+use Symfony\Component\HttpFoundation\RedirectResponse; 
+use Symfony\Bundle\FrameworkBundle\Routing\Router; 
+use Symfony\Component\Security\Core\SecurityContext;
+ 
+class LogoutSuccessHandler implements LogoutSuccessHandlerInterface 
+{ 
+   
+    protected $router;
+    protected $adoFactory;
+    protected $secContext;
+    protected $logger;
+   
+    public function __construct(AdoFactory $adoFactory, Router $router, SecurityContext $secContext, LoggerInterface $logger = null) 
+    { 
+        $this->router = $router;
+        $this->adoFactory = $adoFactory;
+        $this->secContext = $secContext;
+        $this->logger = $logger;
+    } 
+   
+    public function onLogoutSuccess(Request $request) 
+    { 
+        // redirect the user to where they were before the login process begun. 
+        //$referer_url = $request->headers->get('referer'); 
+
+        $this->logger->info('estamos en LogoutSuccess');
+        $this->logger->info($request->getSession()->get('ado_session'));
+
+        $session = $request->getSession()->get('ado_session');
+
+        $this->logger->info('COOKIE: ' . $request->cookies->has('PHPSESSID'));
+
+        //TODO no session
+
+        $ado = new Ado($this->adoFactory->getServer(), "", "", $this->logger, false);
+        $ado->setCookie($session);
+        $xml = $ado->logout($session);
+        $ado->setCookie(null);        
+
+        $session = $request->getSession()->remove('ado_session');
+
+        $this->logger->info($xml);
+           
+        $response = new RedirectResponse($request->getUriForPath('/'), 302);
+        return $response; 
+    } 
+   
+}

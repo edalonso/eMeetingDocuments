@@ -1,0 +1,22 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting
+{% endblock %}
+
+{% block body %}
+
+<h2 style="border-bottom: 4px solid #b19653; color: #b19653; font-weight: bold; font-size: 18px; margin-bottom: 5px; padding: 0px 0px 5px 10px; margin-bottom: 25px;">{{ meeting.title }}'s recordings</h2>
+
+<div class="np" style="margin: 20px">
+  {% for recording in meeting.recordings %}
+  <ul>
+    <li style="list-style-type: none;font-weight: bolder; text-shadow: 0 1px 0 black; color: #FFFFFF">
+      <a target="_blank" href="{{ path('index_public_recording', {'title': recording.title }) }}" style="color: #FFFFFF; text-decoration:none"> {{ recording.title }}</a>
+      <span style="font-size: 12px; font-style: italic; margin: 5px; padding-bottom: 5px; margin-left: 10px;text-shadow: none;"> at {{ recording.datecreated|date('Y-m-d H:i') }}</span>
+    </li>
+  </ul>
+  {% else %}
+    <center style="font-size: 25px; margin-bottom: 5px">No recordings at <br />"{{ meeting.title }}"</center>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting
+{% endblock %}
+
+{% block body %}
+
+Error User. Is possible that may not exist. 
+
+{% endblock %}

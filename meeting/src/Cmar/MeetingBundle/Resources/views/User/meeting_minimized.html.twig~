@@ -1,0 +1,26 @@
+<div class="np separator meetingrank" data-id="{{ meeting.id }}"  {% if meeting.public %} style="border-color: green; heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px; clear: both; text-align: center; position:relative;" {% elseif meeting.public == 0 %} style="border-color: red; heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px; clear: both; text-align: center; position:relative;" {% else %} style="border-color: orange; heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px; clear: both; text-align: center; position:relative;" {% endif %}>
+  <div class="info" style="float:right; width:200px; padding: 10px 20px; margin:10px 0px; border-left:1px solid">
+    <button id="opener-delete-{{ meeting.id }}" class="button red" {% if meeting.owner !=  user  %} disabled="true" {% endif %}><i class="icon-trash icon-white"></i> Delete</button>
+    <button id="opener-minimized-{{ meeting.id }}" class="button" style="margin-right: -55px" {% if meeting.owner !=  user  %} disabled="true" {% endif %}><i class="icon-download icon-white"></i></button>
+
+    <div style="float: left;" class="locked">
+      {% if meeting.isLocked %}
+      <div class="visible" id="capasuperior" style="width: 650px;">
+      </div>
+        <a  {% if user.id != meeting.owner.id %} href="javascript:plegardesplegar ('capasuperior');" {% else %} href="{{ path('locked_meeting', {'id': meeting.id, 'locked': 0}) }}" {% endif %}><button {% if user.id != meeting.owner.id %} disabled="true" {% endif %} class="button"><i class="icon-enabled icon-white"></i>Enable</button></a>
+      {% else %}
+        <a {% if user.id != meeting.owner.id %} href="#" {% else %} href="{{ path('locked_meeting', {'id': meeting.id, 'locked': 1}) }}" {% endif %}><button {% if user.id != meeting.owner.id %} disabled="true" {% endif %} class="button"><i class="icon-disabled icon-white"></i>Disable</button></a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="body" style="padding-right: 210px;">
+    <div style="float: right; margin-right: 15px">
+      {% if meeting.public %}
+        <a class="go" target="_blank" href="{{ path('index_room', {'salt': meeting.salt }) }}" style="text-decoration:none"><button style="padding: 20px 8px;" class="button green"><i class="icon-upload icon-white"></i> Join</button></a>
+      {% else %}
+        <a target="_blank" href="{{ path('index_secretroom', {'salt': meeting.secretsalt }) }}" style="text-decoration:none"><button style="padding: 20px 8px;" class="button green"><i class="icon-upload icon-white"></i> Join</button></a>
+      {% endif %}
+    </div>
+    <p class="expandable ClassTitle" style="font-size:45px; text-align: left; width: 560px;" title="{{ meeting.title }}">{{ meeting.title }}</p>  
+  </div>
+</div>

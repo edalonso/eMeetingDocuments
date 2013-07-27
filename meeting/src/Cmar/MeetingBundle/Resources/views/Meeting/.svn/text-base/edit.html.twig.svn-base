@@ -1,0 +1,66 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting Admin
+{% endblock %}
+
+{% block body %}
+
+<h1 style="color: black">Meeting edit</h1>
+
+{% if is_granted('ROLE_ADMIN') %}
+  <a href="{{ path('index') }}" style="text-decoration:none"><button class="button" style="margin: 0px 0px 5px 0px"><i class="icon-admin icon-black"></i> Index</button></a>
+{% endif %}
+
+<form action="{{ path('meeting_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <td> {{ form_widget(edit_form.title) }}</td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>{{ form_widget(edit_form.description) }}</td>
+  </tr>
+  <tr>
+    <th>Magic</th>
+    <td>{{ form_widget(edit_form.magic) }}</td>
+  </tr>
+  <tr>
+    <th>Public</th>
+    <td>{{ form_widget(edit_form.public) }}</td>
+  </tr>
+  <tr>
+    <td style="display: none">{{ form_widget(edit_form.users) }}</td>
+  </tr>
+  <tr>
+    <td style="display: none">{{ form_widget(edit_form.owner) }}</td>
+  </tr>
+  <tr>
+    <th>User</th>
+    <td>{{ entity.users|join(', ') }}</td>
+  </tr>
+  <tr>
+    <th>Owner</th>
+    <td>{{ entity.owner }}</td>
+  </tr>
+</table>
+    <p>
+        <button class="button_admin" type="submit">Edit</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('meeting') }}">
+            Back to the list
+        </a>
+    </li>
+    {#<li>
+        <form action="{{ path('meeting_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>#}
+</ul>
+{% endblock %}

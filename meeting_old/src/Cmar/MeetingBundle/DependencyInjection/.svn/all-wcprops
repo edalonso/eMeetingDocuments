@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/DependencyInjection
+END
+Configuration.php
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/DependencyInjection/Configuration.php
+END
+CmarMeetingExtension.php
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/DependencyInjection/CmarMeetingExtension.php
+END

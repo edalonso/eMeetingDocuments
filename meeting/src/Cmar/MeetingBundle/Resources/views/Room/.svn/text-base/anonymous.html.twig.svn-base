@@ -1,0 +1,175 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting
+{% endblock %}
+
+{% block body %}
+
+<h2 style="border-bottom:4px solid #b19653; color:#b19653; font-weight:bold; font-size:18px; margin-bottom: 5px; padding: 0px 0px 5px 10px; margin-bottom:25px;">Access Control</h2>
+
+<div class="np" style="height: 220px; margin: 10px; position: relative">
+  <p style="font-size:45px; text-align: left; margin: -20px 0px 15px -70px">{{ meeting.title }}</p>
+  <script type="text/javascript">
+      var pageContent = document.getElementById('pagecontent');
+      visibility(pageContent, "hidden");
+      function loginMeetingUser(){
+        if (document.contentForm.chooser.checked) {
+          document.getElementById("login-guest").click();
+        } else {
+          document.getElementById("login-button").click();
+        }
+      }
+    </script>
+    <form action="#" method="post" id="contentForm" name="contentForm">    
+      <input id="radio-button-sel" type="hidden" name="radio-button-sel" value="1">
+      <div id="login_guest" class="pod" style="left: 30px; top: 43px; width: 100%; visibility: visible; height: 20px;">
+	<div id="rad_guest" style="visibility: visible; float:left">
+	  <input id="radioguest" class="loginHelp" type="radio" onclick="javaScript:switchToGuest(true);" onfocus="javaScript:switchToGuest(true);" name="chooser" style="visibility: visible;">
+	</div>
+	<div for="radioguest">
+	  <h3>Enter as a Guest</h3>
+	</div>
+	<div id="guest_inputs" class="loginControls" style="text-align: left; visibility: visible; margin: 15px;">
+	  <div id="guest_button" class="loginControls" style="top: 13px; visibility: visible; width: 115px;"> </div>
+	  <table style="margin: 0px">
+	    <tbody>
+	      <tr>
+		<td style="padding: 3px" class="loginField" style="text-align:right;vertical-align:top">Name</td>
+		<td style="padding: 3px">
+		  <input id="guestName" class="textfield" type="text" value="" name="login" style="width: 215px;">
+		</td>
+	      </tr>
+	      <tr>
+		<td></td>
+		<td>
+		  <input id="login-guest" class="button otherblue" type="submit" value="Enter The Room">
+		</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+      </div>
+    </form>
+    
+    <form action="{{ path('login_check') }}" method="post" id="contentForm1" name="contentForm1" style="padding: 10px 0px;">
+      <div id="login_reg" class="pod" style="width: 450px; height: 260px; display: block;">
+	<div id="rad_reg" style="visibility: visible; float: left;">
+	  <input id="radioreg" class="loginHelp" type="radio" onclick="javaScript:switchToReg(true);" onfocus="javaScript:switchToReg(true);" name="chooser" style="visibility: visible;">
+	</div>
+	<h3>Enter as a DigiMar User</h3>
+	<div id="login_reg_hint" style="padding: 0px; width: 400px; display: none; visibility: hidden;">
+	</div>
+	<div id="login_reg_inputs" style="visibility: visible;">
+	  <table style="margin: 0px">
+	    <tbody>
+	      <tr>
+		<td class="loginField" style="text-align:right;">Email: &nbsp;</td>
+		<td style="padding: 0px">
+		  <input id="username" class="textfield" type="text" autocomplete="off" name="_username">
+		</td>
+	      </tr>
+	      <tr>
+		<td class="loginField" style="text-align:right; vertical-align:baseline;">Password: &nbsp;</td>
+		<td style="padding: 0px" class="loginControls" style="text-align:left;">
+		  <input id="password" class="textfield" type="password" autocomplete="off" name="_password">
+		  <input type="hidden" name="_target_path" value="{{ url }}" />
+		</td>
+	      </tr>
+	      <tr>
+		<td>&nbsp;</td>
+		<td style="padding-top: 5px"><a class="loginHelp" style="margin: 15px; font-size: 16px; color: #FFF; text-decoration: none" target="_self" href="{{ path('index_welcome') }}">Forgot your password?</a></td>
+	      </tr>
+	      <tr>
+		<td>&nbsp;</td>
+		<td style="padding-top:10px;">
+		  <input id="login-button" class="button otherblue" type="submit" name="login" value="Enter The Room">
+		</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	  <div id="reg_button" class="loginControls" style="width: 115px; left: 228px; top: 100px;"> </div>
+	</div>
+      </div>
+    </form>
+  <script type="text/javascript">
+    var regGuest = document.getElementById('guest');
+
+    var regRadioButton = document.getElementById('rad_reg');
+    var regLogin = document.getElementById('login_reg');
+    var regInputs = document.getElementById('login_reg_inputs');
+    var regButton = document.getElementById('reg_button');
+    var guestLogin = document.getElementById('login_guest');
+    var guestRadioButton = document.getElementById('rad_guest');
+    var guestInputs = document.getElementById('guest_inputs');
+    var guestButton = document.getElementById('guest_button');
+    var regHint = document.getElementById('login_reg_hint');
+    var helpLink = document.getElementById('helpLink');
+    var helpDiv = document.getElementById('helpDiv');
+    var privacyPolicy = document.getElementById('privacyPolicy');
+    var regTop;
+    var chooser = 0;
+    var TOP_UNSEL = 381;
+    var TOP_SELECT = 322; //pixels from top if reg button is selected
+    var BUTTON_OFFSET = 7; //pixels from top to add for radio button
+    var GUEST_POPUP = 200; //millis to wait to popup guest pod
+    var width, height; //window size
+    var headerh = 171;
+    var loaded = false;
+
+    visibility(guestRadioButton, "visible");
+    visibility(regRadioButton, "visible");
+    visibility(regInputs, "hidden");
+    if(regLogin != null) {
+      regHint.style.width = "400px";
+      regLogin.style.height = "50px";
+      regLogin.style.width = "450px";
+      regLogin.style.left = "30px";
+      regLogin.style.top = "260px";
+      regLogin.style.display = "block";
+      if(helpLink != null)
+      helpLink.style.top = "70px";
+      if(helpDiv != null)
+      helpDiv.style.top = "215px";
+      if(privacyPolicy != null)
+        privacyPolicy.style.top = "240px";
+    }
+    if(guestButton != null) {
+      guestButton.style.left = "300px";
+      guestButton.style.top = "350px";
+      guestButton.style.visibility = "visible";
+    }
+    visibility(pageContent, "visible");
+    el = document.getElementById('split');
+    visibility(el, "hidden");
+    if(guestLogin != null) {
+      guestInputs.style.marginTop = "0px";
+      guestLogin.style.left = "30px";
+      guestLogin.style.top = "43px";
+      guestLogin.style.width = "450px";
+      guestLogin.style.visibility = "visible";
+    }
+    //if previously logged in, set default to that
+    
+    {% if asGuest %}
+      switchToReg(false);
+      switchToGuest(true);
+      if (chooser == 0) {
+      document.contentForm.chooser.checked = true;
+      document.contentForm1.chooser.checked = false;
+      document.contentForm.username.focus();
+    }
+    {% else %}
+      switchToReg(false);
+      if (chooser == 0) {
+        document.contentForm1.chooser.checked = true;
+        document.contentForm.chooser.checked = false;
+        document.contentForm1.username.focus();
+      }
+    {% endif %}    
+  </script>
+  <div style="position: absolute; top: 100px; left: 550px">
+    <img align="right" src="{{ asset('bundles/cmarmeeting/images/emeeting.png') }}"></img>
+  </div>
+</div>
+
+{% endblock %}

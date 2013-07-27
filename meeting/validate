@@ -1,0 +1,316 @@
+src/Cmar/MeetingBundle/Service/MiddlewareService.php:        $errors = $this->validator->validate($user);
+src/Cmar/MeetingBundle/Service/MiddlewareService.php:        $errors = $this->validator->validate($user);
+src/Cmar/MeetingBundle/Service/MiddlewareService.php:        $errors = $this->validator->validate($group);
+src/Cmar/MeetingBundle/Service/MiddlewareService.php:        $errors = $this->validator->validate($group);
+src/Cmar/MeetingBundle/Service/.svn/text-base/MiddlewareService.php.svn-base:        $errors = $this->validator->validate($user);
+src/Cmar/MeetingBundle/Service/.svn/text-base/MiddlewareService.php.svn-base:        $errors = $this->validator->validate($user);
+src/Cmar/MeetingBundle/Service/.svn/text-base/MiddlewareService.php.svn-base:        $errors = $this->validator->validate($group);
+src/Cmar/MeetingBundle/Service/.svn/text-base/MiddlewareService.php.svn-base:        $errors = $this->validator->validate($group);
+vendor/doctrine/tests/Doctrine/Tests/ORM/Tools/SchemaValidatorTest.php:        $this->validator->validateMapping();
+vendor/doctrine/tests/Doctrine/Tests/ORM/Tools/SchemaValidatorTest.php:        $this->validator->validateMapping();
+vendor/doctrine/tests/Doctrine/Tests/ORM/Tools/SchemaValidatorTest.php:        $this->validator->validateMapping();
+vendor/doctrine/tests/Doctrine/Tests/ORM/Tools/SchemaValidatorTest.php:        $this->validator->validateMapping();
+vendor/doctrine/tests/Doctrine/Tests/ORM/Tools/SchemaValidatorTest.php:        $this->validator->validateMapping();
+vendor/doctrine/tests/Doctrine/Tests/ORM/Tools/SchemaValidatorTest.php:        $this->validator->validateMapping();
+vendor/doctrine/lib/Doctrine/ORM/Tools/Console/Command/ValidateSchemaCommand.php:        $errors = $validator->validateMapping();
+vendor/doctrine/lib/Doctrine/ORM/Tools/Console/Command/ValidateSchemaCommand.php:        if (!$validator->schemaInSyncWithMetadata()) {
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($form);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($form);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($form);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($parent);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Validator/DelegatingValidatorTest.php:        $this->validator->validate($form);
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Type/FieldTypeValidatorExtensionTest.php:        $this->validator->expects($this->once())
+vendor/symfony/tests/Symfony/Tests/Component/Form/Extension/Validator/Type/TypeTestCase.php:        $this->validator->expects($this->once())->method('getMetadataFactory')->will($this->returnValue($metadataFactory));
+vendor/symfony/tests/Symfony/Tests/Component/Form/FormTest.php:        $validator->expects($this->once())
+vendor/symfony/tests/Symfony/Tests/Component/Validator/ValidatorTest.php:        $this->assertEquals($violations, $this->validator->validate($entity));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/ValidatorTest.php:        $this->assertEquals($violations, $this->validator->validate($entity, 'Custom'));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/ValidatorTest.php:        $result = $this->validator->validate($entity, array('First', 'Second'));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/ValidatorTest.php:        $result = $this->validator->validateProperty($entity, 'firstName');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/ValidatorTest.php:        $result = $this->validator->validatePropertyValue(get_class($entity), 'firstName', 'Bernhard');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/ValidatorTest.php:        $result = $this->validator->validateValue('Bernhard', new FailingConstraint());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/ValidatorTest.php:            $this->validator->getMetadataFactory()
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotNullValidatorTest.php:        $this->assertTrue($this->validator->isValid($value, new NotNull()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotNullValidatorTest.php:        $this->assertFalse($this->validator->isValid(null, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotNullValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotNullValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->validator->initialize($this->context);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Callback(array('foo'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->assertTrue($this->validator->isValid($object, new Callback(array('validateOne'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->assertTrue($this->validator->isValid($object, new Callback(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->assertTrue($this->validator->isValid($object, new Callback(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->validator->isValid($object, new Callback('foobar'));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->validator->isValid($object, new Callback(array('foobar')));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CallbackValidatorTest.php:        $this->validator->isValid($object, new Callback(array(array('foo', 'bar'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NullValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Null()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NullValidatorTest.php:        $this->assertFalse($this->validator->isValid($value, new Null()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NullValidatorTest.php:        $this->assertFalse($this->validator->isValid(1, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NullValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NullValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Type(array('type' => 'integer'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Type(array('type' => 'string'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertFalse($this->validator->isValid('', new Type(array('type' => 'integer'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertTrue($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertFalse($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->validator->isValid(array(0 => "Test"), $constraint);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:            $this->validator->getMessageParameters(),
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTypeValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Url()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Url()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Url());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertTrue($this->validator->isValid($url, new Url()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertFalse($this->validator->isValid($url, new Url()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertTrue($this->validator->isValid($url, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/UrlValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Ip()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Ip()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Ip());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertTrue($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertTrue($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertTrue($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid($ip, new Ip(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/IpValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Max(array('limit' => 10))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxValidatorTest.php:        $this->assertTrue($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxValidatorTest.php:        $this->assertFalse($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxValidatorTest.php:        $this->assertFalse($this->validator->isValid(11, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new File()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new File()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->validator->isValid(new \stdClass(), new File());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertTrue($this->validator->isValid($this->path, new File()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertTrue($this->validator->isValid($file, new File()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->validator->isValid($this->path, $constraint);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertTrue($this->validator->isValid($file, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertFalse($this->validator->isValid($file, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertFalse($this->validator->isValid($file, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:        $this->assertEquals($this->validator->isValid($filename, $constraint), $valid);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/FileValidatorTest.php:            $this->assertEquals($this->validator->isValid(new FileObject($filename), $constraint), $valid);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Country()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Country()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Country());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->assertTrue($this->validator->isValid($date, new Country()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->assertFalse($this->validator->isValid($date, new Country()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CountryValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Email()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Email()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Email());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->assertTrue($this->validator->isValid($email, new Email()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->assertFalse($this->validator->isValid($email, new Email()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/EmailValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Date()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Date()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertTrue($this->validator->isValid(new \DateTime(), new Date()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Date());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertTrue($this->validator->isValid($date, new Date()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertFalse($this->validator->isValid($date, new Date()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->validator->initialize($this->context);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Collection(array('fields' => array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->validator->isValid(array('foo' => 'foobar'), new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->validator->isValid('foobar', new Collection(array('fields' => array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertTrue($this->validator->isValid($array, new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertTrue($this->validator->isValid($array, new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertFalse($this->validator->isValid($array, new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertTrue($this->validator->isValid($array, new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertTrue($this->validator->isValid($array, new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertFalse($this->validator->isValid(array(), new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->assertTrue($this->validator->isValid(array(), new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/CollectionValidatorTest.php:        $this->validator->isValid($value, new Collection(array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Regex(array('pattern' => '/^[0-9]+$/'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Regex(array('pattern' => '/^[0-9]+$/'))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Regex(array('pattern' => '/^[0-9]+$/')));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->assertTrue($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->assertFalse($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/RegexValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Min(array('limit' => 10))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinValidatorTest.php:        $this->assertTrue($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinValidatorTest.php:        $this->assertFalse($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinValidatorTest.php:        $this->assertFalse($this->validator->isValid(9, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new MaxLength(array('limit' => 5))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new MaxLength(array('limit' => 5))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:        $this->validator->isValid(new \stdClass(), new MaxLength(array('limit' => 5)));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:            $this->assertTrue($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:            $this->assertFalse($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:        $this->assertFalse($this->validator->isValid('123456', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MaxLengthValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Time()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Time()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertTrue($this->validator->isValid(new \DateTime(), new Time()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Time());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertTrue($this->validator->isValid($time, new Time()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertFalse($this->validator->isValid($time, new Time()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/TimeValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/BlankValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Blank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/BlankValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Blank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/BlankValidatorTest.php:        $this->assertFalse($this->validator->isValid($date, new Blank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/BlankValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/BlankValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/BlankValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertFalseValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new False()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertFalseValidatorTest.php:        $this->assertTrue($this->validator->isValid(false, new False()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertFalseValidatorTest.php:        $this->assertFalse($this->validator->isValid(true, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertFalseValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertFalseValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new DateTime()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new DateTime()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertTrue($this->validator->isValid(new \DateTime(), new DateTime()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->validator->isValid(new \stdClass(), new DateTime());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertTrue($this->validator->isValid($date, new DateTime()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertFalse($this->validator->isValid($date, new DateTime()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/DateTimeValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertTrue($this->validator->isValid($date, new NotBlank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertFalse($this->validator->isValid(null, new NotBlank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertFalse($this->validator->isValid('', new NotBlank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertFalse($this->validator->isValid(false, new NotBlank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertFalse($this->validator->isValid(array(), new NotBlank()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertFalse($this->validator->isValid('', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/NotBlankValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->validator->initialize($context);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->validator->isValid('asdf', $constraint);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Choice(array('choices' => array('foo', 'bar')))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->validator->isValid('foobar', new Choice());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->validator->isValid('foobar', new Choice(array('callback' => 'abcd')));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid('bar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid('bar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid('bar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid('bar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid('bar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid(array('baz', 'bar'), $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertFalse($this->validator->isValid('baz', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertFalse($this->validator->isValid(array('foo', 'baz'), $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertFalse($this->validator->isValid(array('foo'), $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertFalse($this->validator->isValid(array('foo', 'bar', 'moo'), $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid('2', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid(2, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid(2, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertFalse($this->validator->isValid('2', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertTrue($this->validator->isValid(array('2', 3), $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/ChoiceValidatorTest.php:        $this->assertFalse($this->validator->isValid(array(2, '3'), $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AllValidatorTest.php:        $this->validator->initialize($this->context);
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AllValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new All(new Min(4))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AllValidatorTest.php:        $this->validator->isValid('foobar', new All(new Min(4)));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AllValidatorTest.php:        $this->assertTrue($this->validator->isValid($array, new All($constraint)));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AllValidatorTest.php:        $this->assertTrue($this->validator->isValid($array, new All($constraints)));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Language()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Language()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Language());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->assertTrue($this->validator->isValid($date, new Language()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->assertFalse($this->validator->isValid($date, new Language()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LanguageValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTrueValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new True()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTrueValidatorTest.php:        $this->assertTrue($this->validator->isValid(true, new True()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTrueValidatorTest.php:        $this->assertFalse($this->validator->isValid(false, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTrueValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/AssertTrueValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new MinLength(array('limit' => 6))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new MinLength(array('limit' => 6))));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:        $this->validator->isValid(new \stdClass(), new MinLength(array('limit' => 5)));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:            $this->assertTrue($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:            $this->assertFalse($this->validator->isValid($value, $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:        $this->assertFalse($this->validator->isValid('1234', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/MinLengthValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->assertTrue($this->validator->isValid(null, new Locale()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->assertTrue($this->validator->isValid('', new Locale()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->validator->isValid(new \stdClass(), new Locale());
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->assertTrue($this->validator->isValid($date, new Locale()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->assertFalse($this->validator->isValid($date, new Locale()));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->assertFalse($this->validator->isValid('foobar', $constraint));
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->assertEquals($this->validator->getMessageTemplate(), 'myMessage');
+vendor/symfony/tests/Symfony/Tests/Component/Validator/Constraints/LocaleValidatorTest.php:        $this->assertEquals($this->validator->getMessageParameters(), array(
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($entity1);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($entity1);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($entity2);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($entity1);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($entity1);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($entity2);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($associated);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($associated2);
+vendor/symfony/tests/Symfony/Tests/Bridge/Doctrine/Validator/Constraints/UniqueValidatorTest.php:        $violationsList = $validator->validate($associated);
+vendor/symfony/src/Symfony/Component/Form/Form.php:            $validator->validate($this);
+vendor/symfony/src/Symfony/Component/Form/Extension/Validator/Validator/DelegatingValidator.php:                $violations = $this->validator->validateValue(
+vendor/symfony/src/Symfony/Component/Form/Extension/Validator/Validator/DelegatingValidator.php:            } elseif ($violations = $this->validator->validate($form)) {
+vendor/symfony/src/Symfony/Component/Form/Extension/Validator/ValidatorExtension.php:        $metadata = $this->validator->getMetadataFactory()->getClassMetadata('Symfony\Component\Form\Form');
+vendor/symfony/src/Symfony/Component/Form/Extension/Validator/ValidatorExtension.php:        return new ValidatorTypeGuesser($this->validator->getMetadataFactory());
+vendor/symfony/src/Symfony/Component/Validator/GraphWalker.php:        $validator->initialize($this->context);
+vendor/symfony/src/Symfony/Component/Validator/GraphWalker.php:        if (!$validator->isValid($value, $constraint)) {
+vendor/symfony/src/Symfony/Component/Validator/GraphWalker.php:                $validator->getMessageTemplate(),
+vendor/symfony/src/Symfony/Component/Validator/GraphWalker.php:                $validator->getMessageParameters(),
+vendor/symfony/src/Symfony/Component/Validator/README.md:    $violations = $validator->validateValue($input, $constraint);
+vendor/doctrine-dbal/tests/Doctrine/Tests/DBAL/Platforms/ReservedKeywordsValidatorTest.php:        $this->validator->acceptTable($table);
+vendor/doctrine-dbal/tests/Doctrine/Tests/DBAL/Platforms/ReservedKeywordsValidatorTest.php:            $this->validator->getViolations()
+vendor/doctrine-dbal/tests/Doctrine/Tests/DBAL/Platforms/ReservedKeywordsValidatorTest.php:        $this->validator->acceptColumn($table, $column);
+vendor/doctrine-dbal/tests/Doctrine/Tests/DBAL/Platforms/ReservedKeywordsValidatorTest.php:            $this->validator->getViolations()

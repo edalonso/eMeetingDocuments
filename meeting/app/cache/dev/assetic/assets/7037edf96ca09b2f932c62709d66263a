@@ -1,0 +1,1 @@
+$(function(){var a;var b=$("#message");var c=$(document);scroll_top(c,b);c.scroll(function(d){scroll_top(c,b)})});function scroll_top(d,a){var b=false;var c=$(document.body).children(0).position().top;if(d.scrollTop()<=c){b=false;a.css("display","none")}else{if(b==false){b=true;a.css("display","block")}}};

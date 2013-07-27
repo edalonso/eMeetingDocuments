@@ -1,0 +1,109 @@
+REQUISITOS
+-----------------------
+
+Servidor LAMP:
+
+- PHP >= 5.3.6
+- SVN y GIT
+- JAVA
+- Paquetes de PHP usados:
+    - sqlite3
+    - curl
+    - pdo_mysql
+    - ldap
+    - soap
+    - php53-mbstring.x86_64
+
+- Base de datos MySQL en utf8:
+    - Necesitas un host donde se aloja la base de datos, nombre de base de datos, usuario y contraseña
+
+- Base de datos MySQL en utf8 para test
+    - Necesitas un host donde se aloja la base de datos para test, nombre de base de datos, usuario y contraseña
+
+- Cuenta de administrador de adobe connect
+- Acceso a SVN en %SVN_IP%
+- Conexión a INTERNET para realizar la acción   ./bin/vendors install
+
+
+PASOS
+---------------------------------
+
+
+Entramos en la carpeta /var/www  si no existe la creamos, importante para el correcto funcionamiento de la aplicación.
+
+
+A continuación ejecutamos la siguiente instrucción, para obtener el código de la aplicación:
+
+    $ svn export https://%SVN_IP%/svn/cmar/MeetingApp/trunk/ cmar_meeting
+
+
+Instalamos paquetes de symfony2 necesarios:
+
+    $ cd cmar_meeting
+    $ ./bin/vendors install
+
+
+Modificamos los datos de MeetingApp para adecuarlo a la base de datos MySQL y el CAS de autenticación
+
+     - En el fichero /var/www/cmar_meeting/app/config/parameters.ini
+
+           [parameters]
+               database_driver   = driver de la BBDD, e.j. pdo_mysql
+               database_host     = IP de la BBDD
+               database_port     =
+               database_name     = Nombre de database para meeting
+               database_user     = Nombre de ususario para la BBDD
+               database_password = Password de la BBDD
+
+               mailer_host       = smtp-saliente.uvigo.es
+
+
+    - En el fichero /var/www/cmar_meeting/app/config/config.yml  modificamos:
+
+                sensio_cas:
+                    uri: La URI del servidor de autenticación CAS
+
+    - En el fichero /var/www/cmar_meeting/app/config/config_test.yml  modificamos:
+
+                doctrine:
+                     dbal:
+                         driver:   driver de la BBDD, pe.j. pdo_mysql
+                         dbname:   nombre de database en la BBDD
+                         user:     usuario para la database
+	                 password: password en la base de datos
+
+
+Habilitamos el mod_rewrite de apache:
+
+    $ a2enmod rewrite
+
+
+Copiamos el virtualhost de ejemplo para apache para acceder a MeetingApp, a partir del fichero meeting que acompaña a esta guia:
+
+    $ cp meeting /etc/apache2/sites-available/meeting
+    $ a2ensite meeting
+
+
+Reiniciamos el servidor apache:
+
+    $ /etc/init.d/apache2 restart
+
+
+Creamos las tablas en la base de datos para la parte de producción e instalamos los assets:
+
+    $ cd cmar_meeting
+    $ ./app/console doctrine:schema:create -env=test
+    $ ./app/console doctrine:schema:update --force
+    $ ./app/console cache:clear --env=prod --no-warmup
+    $ ./app/console doctrine:fixtures:load
+    $ ./app/console assetic:dump
+    $ ./app/console assets:install web
+
+Cambiamos los privilegios de acceso de los ficheros de la aplicación:
+
+    $ cd ..
+    $ chown -R www-data:www-data cmar_meeting
+
+Modificar el archivo middleware.wsdl para que la location apunte a la aplicación en el servidor
+
+Accedemos a través del browser:  %IP_ALOJAMIENTO%/meeting

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/2743/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security
+END
+recoverHashError.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/2626/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/recoverHashError.html.twig
+END
+recover.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/3511/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/recover.html.twig
+END
+login.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/3509/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/login.html.twig
+END
+help.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/2737/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/help.html.twig
+END
+recoverUpdate.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/2605/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/recoverUpdate.html.twig
+END
+welcome.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/2737/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/welcome.html.twig
+END
+mailSent.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/2737/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/mailSent.html.twig
+END
+recoverError.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/2626/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/Security/recoverError.html.twig
+END

@@ -1,0 +1,79 @@
+input[type=text],
+input[type=password],
+input[type=email],
+textarea {
+        background: #fafafa;
+        -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+        border: 1px solid #ddd;
+        color: #111;
+}
+
+
+.welcome {
+    margin: 50px 0px 150px;
+}
+
+.welcome h2 {
+    border-bottom:4px solid #b19653;
+    /*    text-transform:uppercase; */
+    color:#b19653;
+    font-weight:bold;
+    font-size:18px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    margin-bottom:25px;
+}
+
+.welcome h2  span.name {
+    color: #7F7F7F;
+}
+
+.welcome .np {
+    background: #6DAABC url(../images/bg_form.jpg) no-repeat 100% 100%;
+    color: #fff;
+    margin: 30px 0px 5px;
+    padding: 40px 120px;
+    font-weight: bolder;
+    text-shadow: 0px 1px 0px black
+}
+
+
+table{
+    width: 100%;
+}
+
+table td.label {
+    width: 300px;
+    text-align: right;
+}
+
+table label{
+    font-weight: bolder;
+    padding-right: 20px;
+}
+
+table .cambiar{
+    margin-top: 15px;
+    color: #ffffff;
+    background-color:#b19653;
+    font-size:18px;
+    border: 1px solid #7e6a39;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.error_password {
+    color: #b30000;
+    font-weight: bolder;
+}
+
+
+.help {
+    text-align: right;
+    font-style:italic;
+}

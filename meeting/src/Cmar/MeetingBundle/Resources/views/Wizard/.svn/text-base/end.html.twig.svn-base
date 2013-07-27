@@ -1,0 +1,21 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+End
+{% endblock %}
+
+{% block body %}
+Metadata &raquo; Data &raquo; Users &raquo; End
+
+END!!!!!
+
+<ul>
+<li>title: {{ meeting.title }}</li>
+<li>description: {{ meeting.description }}</li>
+<li>date: {{ meeting.date|date("F jS \\a\\t g:ia") }}</li>
+<li>duration: {{ meeting.duration }}</li>
+<li>public: {% if meeting.public %} public {% else %} private {% endif %}</li>
+</ul>
+
+<a href="{{ path('index') }}">Volver al menu</a>
+
+{% endblock %}

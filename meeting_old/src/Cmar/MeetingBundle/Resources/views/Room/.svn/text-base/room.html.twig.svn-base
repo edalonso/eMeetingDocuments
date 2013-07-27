@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>ROOM</title>
+        <style type="text/css">
+          html, body, div, iframe { margin:0; padding:0; height:100%; }
+          iframe { display:block; width:100%; border:none; }
+        </style>
+        <link rel="shortcut icon" href="{{ asset('cmar.png') }}" />
+    </head>
+    <body>
+      <iframe src="{{ url }}" {# TODO ?launcher=false #}
+	      name="iframe" 
+	      scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px"  >
+      </iframe>
+    </body>
+</html>

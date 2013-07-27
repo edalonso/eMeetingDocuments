@@ -1,0 +1,19 @@
+15 Concepto de Grupo
+
+El concepto de grupo en esta aplicación es muy importante, ya que está destino a que fácilmente, grupos de investigadores de las diferentes Universidades integradas en el Proyecto del Campus de Excelencia, Campus del Mar, puedan realizar una videoconferencia de forma rápida, sencilla y que englobe a componentes de un grupo que necesitarán este servicio de forma continuada a lo largo de su investigación.
+
+Iniciamos el proceso realizando un lógica para saber si hay más salas concurrentes de las disponibles que en este caso 10. No debemos saber el número total de salas en el intervalo de duración de la reunión, si no que debemos saber el número máximo de salas en cada instante de tiempo para dicho intervalo, es decir, a lo largo de la duración de la reunión, debemos comprobar si en algún momento el número de reuniones es mayor que el número de salas disponibles, para poder así reservar una sala para la nueva reunión, o devolver un mensaje al usuario de que no hay salas disponibles. También se introduce la lógica de número máximo de reuniones simultaneas para un usuario, de forma que un usuario no puede realizar más de una reunión de forma simultánea. Se solucionó un BUG en el cuál un usuario que no crea la reunión podía cancelarla si tenía acceso al enlace que cancela dicha reunión, sin aparecer el botón de cancelar en su perfil.
+
+En una primera versión, podemos crear una reunión personal de carácter público e invitar a los usuarios de la aplicación que queramos, de echo, el link de la reunión aparece en la lista de reuniones públicas de los demás usuarios para que puedan entrar a la reunión si lo desean. Sin embargo, las reuniones para los grupos son privadas y sólo se pueden acceder si se pertenece al grupo para el cuál se ha creado la reunión. Sólo se pueden crear reuniones de carácter inmediato y de una duración de 30, 60 o 90 minutos, para usuarios y grupos. Más adelante se implementará un “Wizard” que permitirá la reserva de salas de reunión en el futuro, con la posibilidad de determinar: duración, fecha y control de acceso, tanto para usuarios como para grupos. La lógica de la aplicación para usuario y grupo es muy próxima excepto por algunas sutiles diferencias que explicaremos.
+
+17 Página de Grupo
+
+La lógica de la página de grupo es muy similar a la de usuario salvo en pequeños detalles que hacen imposible a la hora de programar evitar crear el procesamiento de la información con los mismos conceptos. Por ejemplo, cuando creamos una reunión un usuario decide quienes participarán en la reunión, sin embargo el concepto de grupo del Campus del Mar obliga a programar una lógica en la cual los usuarios que formen parte del grupo reciban una invitación y se encuentren en disposición de participar en la reunión del grupo ya que la sala está reservada y preparada para la reunión. Del mismo modo el control de acceso para las salas de grupo es distinto que para las salas de usuario.
+
+
+
+Concepto de Sala para el Grupo
+
+Grupo: Pública: Entrada con Salt: Pueden entrar los usuarios que conozcan la sala del grupo ya que la url se construye con el nombre del grupo al que pertenece la sala. Entrada con SecretSalt: Pueden entrar todos los que conozcan la url generada con el SecretSalt de la sala. Privada: Entrada con Salt: Pueden entrar sólo los usuarios que pertenezcan al grupo, y serán automáticamente invitados. Entrada con SecretSalt: Pueden entrar todos los que conozcan la url generada con el SecretSalt de la sala.
+
+

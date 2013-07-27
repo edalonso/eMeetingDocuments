@@ -1,0 +1,13 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting
+{% endblock %}
+
+{% block body %}
+Admin:
+<ul>
+  <li><a href="{{ path('meeting') }}" style="color: #000">Admin Meeting</a></li>
+  <li><a href="{{ path('user') }}" style="color: #000">Admin User</a></li>
+  <li><a href="{{ path('group') }}" style="color: #000">Admin Group</a></li>
+</ul>
+{% endblock %}

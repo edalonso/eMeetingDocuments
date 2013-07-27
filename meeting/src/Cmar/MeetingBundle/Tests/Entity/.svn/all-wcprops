@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2594/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity
+END
+GroupTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/1726/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/GroupTest.php
+END
+RecordingTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/1507/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/RecordingTest.php
+END
+GroupRepositoryTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/1726/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/GroupRepositoryTest.php
+END
+RecordingRepositoryTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/1631/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/RecordingRepositoryTest.php
+END
+UserTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/1268/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/UserTest.php
+END
+UserRepositoryTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/1616/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/UserRepositoryTest.php
+END
+MeetingRepositoryTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/2579/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/MeetingRepositoryTest.php
+END
+MeetingTest.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/2594/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Tests/Entity/MeetingTest.php
+END

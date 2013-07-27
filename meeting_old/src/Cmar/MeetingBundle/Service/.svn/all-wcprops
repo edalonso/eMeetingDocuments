@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2680/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service
+END
+MeetingService.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/2766/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/MeetingService.php
+END
+AdoFactory.php
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/AdoFactory.php
+END
+AdoAdmin.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/2766/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/AdoAdmin.php
+END
+AdoAdminInterface.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/2626/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/AdoAdminInterface.php
+END
+MiddlewareService.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/2293/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/MiddlewareService.php
+END
+AccountChecker.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/AccountChecker.php
+END
+EntityListener.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/2629/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/EntityListener.php
+END
+Ado.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/1719/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Service/Ado.php
+END

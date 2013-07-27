@@ -1,0 +1,154 @@
+<?php
+
+namespace Cmar\MeetingBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Cmar\MeetingBundle\Entity\Meeting
+ *
+ * @ORM\Table(name="NickName")
+ * @ORM\Entity(repositoryClass="Cmar\MeetingBundle\Entity\NickNameRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class NickName
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $nickname
+     *
+     * @Assert\NotBlank()
+     * @ORM\Column(name="nickname", type="string", length=255, nullable=false)
+     */
+    private $nickname;
+
+    /**
+     * @var text $description
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var integer $meeting_id
+     *
+     * @ORM\Column(name="meeting_id", type="integer")
+     */
+    private $meeting_id = 0;
+    /**
+     * @var integer $user_id
+     *
+     * @ORM\Column(name="user_id", type="integer")
+     */
+    private $user_id = 0;
+
+    public function __construct(Nick $nickname = null)
+    {
+        $this->nickname = $nickname;
+    }
+
+    public function __toString()
+    {
+        return $this->nickname;
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nickname
+     *
+     * @param string $nickname
+     */
+    public function setNickName($nickname)
+    {
+        $this->nickname = $nickname;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getnickName()
+    {
+        return $this->nickname;
+    }
+
+    /**
+     * Set description
+     *
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return text 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set meeting_id
+     *
+     * @param integer $meeting_id
+     */
+    public function setMeetingId($meeting_id)
+    {
+        $this->meeting_id = $meeting_id;
+    }
+
+    /**
+     * Get meeting_id
+     *
+     * @return integer 
+     */
+    public function getMeetingId()
+    {
+        return $this->meeting_id;
+    }
+
+    /**
+     * Set user_id
+     *
+     * @param integer $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+}

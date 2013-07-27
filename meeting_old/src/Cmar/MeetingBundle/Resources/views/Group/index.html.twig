@@ -1,0 +1,143 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+VidMeet (Video Meeting)
+{% endblock %}
+
+{% block body %}
+
+<h1 style="font-size: 32px; background-color: #D7E6EB; color: #32515E; border: none">
+<div class="primero">
+{% if meetings_now is empty %}
+    Status: "Free Meeting"
+{% else %}
+    Status: "Open Meeting"
+{% endif %}
+</div>
+<span>Room:</span> {{ group }}
+</h1>
+
+
+{% if meetings_now is not empty %}
+
+<h4>Current meetings for {{ group }}:</h4>
+<ul>
+  {% for meeting in meetings_now %}
+  <li>
+    {{ meeting.title }}
+    <span>at "{{ meeting.date|date('Y-m-d H:i') }}" duration: "{{ meeting.duration }}" min</span>
+    <div>
+      {% if meeting.public %}
+        <a target="_blank" href="{{ path('index_room', {'salt': meeting.salt }) }}"><button>Go</button></a>
+      {% else %}
+        <a target="_blank" href="{{ path('index_secretroom', {'salt': meeting.secretsalt }) }}"><button>Go</button></a>
+      {% endif %}
+      <a href="{{ path('indexgroup_cancel', {'id': meeting.id }) }}"><button>cancel</button></a>
+      <a href="{{ path('indexincrement_room', {'id': meeting.id }) }}"><button>+ 30'</button></a>
+      <script language="JavaScript">
+	TargetDate = "{{ meeting.finishdate|date('m/d/Y H:i') }}";
+	BackColor = "white";
+	ForeColor = "dark";
+	CountActive = true;
+	CountStepper = -1;
+	LeadingZero = true;
+	DisplayFormat = "Time to Finish: %%H%% h. %%M%% m. %%S%% s.";
+	FinishMessage = "The meeting has finished.";
+      </script>
+      <script language="JavaScript" src="{{ asset('bundles/cmarmeeting/js/countdown.js') }}"></script>
+      <div>
+        <h4>Invite partners:</h4>
+        {% if meeting.public %}
+          <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 50%" onclick="this.select()" value="{{ url('index_room', {'salt': meeting.salt}) }}">
+        {% else %}
+          <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 50%" onclick="this.select()" value="{{ url('index_secretroom', {'salt': meeting.secretsalt}) }}">
+        {% endif %}
+      </div>
+    </div>
+  </li>
+</ul>
+{#<td>
+  Available Rooms:
+</td>#}
+
+{% endfor %}
+{% endif %}
+
+
+<div style="overflow: hidden; {% if meetings_now is not empty %} color:grey {% endif %}">
+  <div class="segundo">
+    <h4>Open Immediate Meeting for {{ group }}:</h4>
+    <form action="{{ path('indexgroup_immediate', {'key': group.key}) }}" method="get" >
+      <div id="form">
+        <label for="form_Public" class="required" {% if meetings_now == null %} style="color:black" {% endif %}> Permission: </label>
+        <select id="form_Public" name="public" {% if meetings_now is not empty %} disabled="true" {% endif %}>
+          <option value="public">public</option>
+          <option value="private">private</option>
+        </select>
+        <label for="form_Duration" class="required" {% if meetings_now == null %} style="color:black" {% endif %}> Duration: </label>
+          <select id="form_Duration" name="duration" {% if meetings_now is not empty %} disabled="true" {% endif %}>
+            <option value="30">30 min</option>
+            <option value="60">60 min</option>
+            <option value="90">90 min</option>
+          </select>
+	  <input type="submit" {% if meetings_now is not empty %} disabled="true" {% endif %} value="Reserve"/>
+      </div>
+    </form>
+  </div>
+  <div class="segundo">
+    <h4>Open Future Meeting for {{ group }}:</h4>
+    <form action="{{ path('indexgroup_immediate', {'key': group.key}) }}" method="get" >
+      <div id="form">
+        <label for="form_Public" class="required" style="color:grey"> Permission: </label>
+        <select id="form_Public" name="public" disabled="true" {% if meetings_now is not empty %} disabled="true" {% endif %}>
+          <option value="public">public</option>
+          <option value="private">private</option>
+        </select>
+        <label for="form_Duration" class="required" style="color:grey"> Duration: </label>
+        <select id="form_Duration" name="duration" disabled="true" {% if meetings_now is not empty %} disabled="true" {% endif %}>
+          <option value="30">30 min</option>
+          <option value="60">60 min</option>
+          <option value="90">90 min</option>
+        </select>
+	<input type="submit" {% if meetings_now is not empty %} disabled="true" {% endif %} value="Reserve" disabled="true"/>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+{#<h4>Other public current meetings:</h4>
+<ul>
+  {% for meeting in other_meetings_now %}
+  <li>
+    {{ meeting.title}}
+    <span>at "{{ meeting.date|date('Y-m-d H:i') }}" duration: "{{meeting.duration}}" min</span> 
+    <a target="_blank" href="{{ path('index_room', {'id': meeting.id }) }}"><button>Go</button></a>
+    <!-- Edit and delete actual meetings -->
+    {% else %}
+  <li> Do not have meetings now </li>
+  {% endfor %}
+</ul>#}
+
+
+{#<h4>Next meetings for {{ group }}:</h4>
+<ul>
+{% for meeting in meetings_scheduled %}
+  <li>
+    {{ meeting.title}} 
+    <span>at "{{ meeting.date|date('Y-m-d H:i') }}" duration: "{{meeting.duration}}" min</span> 
+    <a href="{{ path('indexgroup_edit', {'id': meeting.id }) }}">edit</a> - 
+    <a href="{{ path('indexgroup_delete', {'id': meeting.id }) }}">delete</a></li>
+{% else %}
+  <li> Do not have future meetings </li>
+{% endfor %}
+</ul>#}
+
+<div class="banner">
+  <ul>
+    <li><a href="{{ path('indexgroup_historical', {'key': group.key}) }}">Achievement Files for {{ group }} </a></li>
+    {% if is_granted('ROLE_ADMIN') %}
+    <li><a href="{{ path('admin') }}">Admin</a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endblock %}

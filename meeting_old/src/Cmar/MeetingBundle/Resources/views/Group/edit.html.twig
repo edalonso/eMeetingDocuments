@@ -1,0 +1,21 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+Meeting edit
+{% endblock %}
+
+{% block body %}
+<form action="{{ path('index_update', { 'id': meeting.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <p>
+        <button type="submit">Edit</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('index') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".menu > li").click(function(c){var b=c.target.id;$(".menu li.active").removeClass("active");$(".menu #"+b).addClass("active");$(".content").css("display","none");$("."+b).fadeIn();$("#selected_tag").val(b)})});

@@ -1,0 +1,115 @@
+<li style="list-style-type: none;">
+  <div class="np" style="heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px">
+    <font size="7">{{ meeting.title }}</font>
+    <div class="info" style="float:right; width:200px; padding: 10px 20px;margin:10px 0px;border-left:1px solid">
+      <div>
+  	{% if meeting.public %}
+  	<a class="go" target="_blank" href="{{ path('index_room', {'salt': meeting.salt }) }}" style="text-decoration:none"><button style="padding: 10px 20px">Go</button></a>
+  	{% else %}
+  	<a target="_blank" href="{{ path('index_secretroom', {'salt': meeting.secretsalt }) }}" style="text-decoration:none"><button style="padding: 10px 20px">Go</button></a>
+  	{% endif %}
+  	<a href="{{ path('index_cancel', {'id': meeting.id }) }}" style="text-decoration:none"><button {% if meeting.owner !=  user  %} disabled="true" {% endif %}>Delete</button></a>
+      </div>
+      <div style="padding-top: 10px">
+        <span style="font-weight: bolder; font-size: 13px">Start Date: </span>
+	<span style="font-size: 13px; font-style: italic">{{ meeting.date|date('Y-m-d H:i') }}</span>
+      </div>
+      <div>
+        <span style="font-weight: bolder; font-size: 13px">Type: </span>
+	<span style="font-size: 13px; font-style: italic">{% if (meeting.public == 1) %} Public {% else %} Private {% endif %}</span>
+      </div>
+      <div>
+        <span style="font-weight: bolder; font-size: 13px">Number of participants: </span>
+	<span style="font-size: 13px; font-style: italic"> {{ (meeting.users|length +1 ) }} </span>
+	<script>
+	  $(function() {
+             $( "#dialog:ui-dialog" ).dialog( "destroy" );
+             $( "#dialog-modal-{{ meeting.id }}" ).dialog({
+                dialogClass: 'dialogWithShadow',
+                hide: "highlight",
+                autoOpen: false,
+                modal: true,
+                minHeight: 200,
+                minWidth: 315
+             });
+	     $( "#opener-{{ meeting.id }}" ).click(function() {
+               $( "#dialog-modal-{{ meeting.id }}" ).dialog( "open" );
+               return false;
+  	     });
+             $("#remove-{{ meeting.id }}").click(function() {
+                return !$('#AddUsers-{{ meeting.id }} option:selected').remove().appendTo();
+             });
+
+             function log( message ) {
+          
+             }
+
+             $( "#users-{{ meeting.id }}" ).autocomplete({
+	       source: '/u_list',
+               minLength: 1,
+               select: function( event, ui ) {
+                   $( "<option/>" ).text( ui.item.value ).prependTo( "#AddUsers-{{ meeting.id }}" );
+                   $( "#AddUsers-{{ meeting.id }}" ).scrollTop( 0 );      
+               }
+             });
+	  });
+	</script>
+	<button id="opener-{{ meeting.id }}">+ Users</button>
+
+
+	<div id="dialog-modal-{{ meeting.id }}" title="Add Users">
+	  <form action="{{ path('addusers_meeting') }}" method="get" onsubmit="selectall('AddUsers-{{ meeting.id }}')" >
+            <input type="hidden" name="id" value="{{ meeting.id }}" />
+	    <div class="wrapper">
+	      <div id="container {{ meeting.id }}">
+		<span class="clear"></span>
+		<div class="content all_users" style="height: 50%">
+		  <div class="ui-widget">
+		    <input id="users-{{ meeting.id }}" placeholder="Introduce a User ..."/>
+		  </div>
+		  <div class="container">
+		    <select style="width: 250px" name="AddUsers[]" id="AddUsers-{{ meeting.id }}" multiple="multiple">
+		      {% for user in meeting.users %}
+		        <option>{{ user.nameAndEmail }}</option>
+		      {% endfor %}
+		    </select>
+		    <input style="text-align: center" id="remove-{{ meeting.id }}" value="Remove" type="button">
+		  </div>
+		</div>
+		<input style="margin-top: 25px" type="submit" value="Add Users"/>
+	      </div>
+	    </div>
+	  </form>
+	</div>
+
+
+      </div>
+    </div>
+    <div class="body" style="padding-right:210px;">
+      <div style="float: rigth; padding: 5px;">
+	<div>
+  	  <b>Description</b>
+  	  <p style="margin-top: 0px">{{ meeting.description }} Texto de prueba para description</p>
+	</div>
+        <p style="margin: 10px; margin-bottom: 0px">Invite partners:</p>
+        {% if meeting.public %}
+        <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 70%; margin:10px;  margin-top: 0px" onclick="this.select()" value="{{ url('index_room', {'salt': meeting.salt}) }}">
+        {% else %}
+        <ul>
+  	  <li style="list-style-type: none; margin: 10px; margin-bottom: 0px;">
+  	    <h5 style="margin-bottom: 1px; margin-top: 5px;">Public Link:</h5>
+    	    <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 70%; margin:10px;  margin-top: 0px;" onclick="this.select()" value="{{ url('index_room', {'salt': meeting.salt}) }}">
+  	  </li>
+  	  <li style="list-style-type: none; margin: 10px; margin-bottom: 0px">
+  	    <h5 style="margin-bottom: 1px; margin-top: 5px;">Secret Link:</h5>
+  	    <input type="text" readonly="readonly" style="border: 1px solid #ccc; width: 70%; margin:10px;  margin-top: 0px" onclick="this.select()" value="{{ url('index_secretroom', {'salt': meeting.secretsalt}) }}">
+  	  </li>
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</li>
+{#<td>
+  Available Rooms: 
+</td>#}

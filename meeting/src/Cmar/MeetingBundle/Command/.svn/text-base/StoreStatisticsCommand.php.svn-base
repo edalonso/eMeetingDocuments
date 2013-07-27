@@ -1,0 +1,79 @@
+<?php
+
+namespace Cmar\MeetingBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
+use Cmar\MeetingBundle\Entity\Meeting;
+use Cmar\MeetingBundle\Entity\Log;
+use Cmar\MeetingBundle\Entity\Log_Total;
+
+/**
+ * Dumps pumukit user info.
+ *
+ * @author Eduardo Alonso <edu.edalonso@gmail.com>
+ */
+class StoreStatisticsCommand extends ContainerAwareCommand
+{
+  /**
+   * @see Command
+   */
+  protected function configure()
+  {
+      $this
+	  ->setName('cmar:sync:storestat')
+	  ->setDefinition(array(
+				))
+	  ->setDescription('CMar Store Statistics ADO command')
+	  ->setHelp(<<<EOF
+		    The <info>cmar:store statistics</info> command ..:
+
+		    <info>./app/console cmar:sync:storestat</info>
+EOF
+		    );
+  }
+
+
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function execute(InputInterface $input, OutputInterface $output)
+  {
+      $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+      $ado = $this->getContainer()->get('cmar_meeting.ado_admin');
+
+      $log_total = new Log_Total;
+      $xmls = $ado->get('report-active-meetings');
+      $fecha_actual = new \DateTime('NOW');
+
+      $total_emeetings = count($xmls->{'report-active-meetings'}->{'sco'});
+      $total_participants = 0;
+
+      if ($xmls != null) {
+          foreach ($xmls->{'report-active-meetings'}->{'sco'} as $reportActiveMeetings) {
+              $log = new Log;
+              $log->setDatetime($fecha_actual);
+              $total_participants = $total_participants + (integer) $reportActiveMeetings->attributes()->{'active-participants'};
+              $log->setScoId((integer) $reportActiveMeetings->attributes()->{'sco-id'});
+              $log->setParticipants((integer) $reportActiveMeetings->attributes()->{'active-participants'});
+              $log->setLengthMinutes((integer) $reportActiveMeetings->attributes()->{'length-minutes'});
+              $em->persist($log);
+          }
+          $log_total->setDatetime($fecha_actual);
+          $log_total->setParticipants($total_participants);
+          $log_total->setActiveRooms($total_emeetings);
+          $em->persist($log_total);
+      } else {
+          $log_total->setdatetime($fecha_actual);
+          $log_total->setParticipants($total_participants);
+          $log_total->setActiveRooms($total_emeetings);
+          $em->persist($log_total);
+      }
+      $em->flush();
+  }
+}

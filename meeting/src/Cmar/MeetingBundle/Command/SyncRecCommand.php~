@@ -1,0 +1,67 @@
+<?php
+
+namespace Cmar\MeetingBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
+use Cmar\MeetingBundle\Entity\User;
+
+/**
+ * Dumps pumukit user info.
+ *
+ * @author Ruben Gonzalez <rubenrua@teltek.es>
+ */
+class SyncRecCommand extends ContainerAwareCommand
+{
+  /**
+   * @see Command
+   */
+  protected function configure()
+  {
+        $this
+	  ->setName('cmar:sync:rec')
+	  ->setDefinition(array(
+				))
+	  ->setDescription('CMar Sync Recordings command')
+	  ->setHelp(<<<EOF
+		    The <info>cmar:import user</info> command ..:
+
+		    <info>./app/console cmar:sync:rec</info>
+EOF
+		    );
+  }
+
+
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function execute(InputInterface $input, OutputInterface $output)
+  {
+    $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+    $ado = $this->getContainer()->get('cmar_meeting.ado_admin');    
+
+    $meetings = $em->getRepository('CmarMeetingBundle:Meeting')->findAll();
+
+    foreach ($meetings as $meeting){
+        $xml = $ado->get('sco-expanded-contents', array('sco-id' => $sco_id, 'filter-icon' => 'archive', 'sort-date-begin' => 'desc'));
+        if ($xml->{'expanded-scos'}->{'sco'}->{'name'} != ''){//Si hay grabaciones                                                                                                                                                            
+            foreach($xml->{'expanded-scos'}->{'sco'} as $a) {
+            }
+        }
+    }
+
+    //desde el em  get repository
+    //desde repo get meeting
+    //foreach meetings aas meeting update rec usanso ado
+
+
+  }
+
+
+  
+}

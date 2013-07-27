@@ -1,0 +1,23 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting
+{% endblock %}
+
+{% block body %}
+
+<div class="welcome">
+  <h2>Error Meeting Room</h2>
+</div>
+
+{% if is_granted('ROLE_ADMIN') %}
+<left style="margin: 10px;">
+  <a href="{{ path('admin') }}" style="text-decoration:none"><button class="button"><i class="icon-admin icon-white"></i> Admin</button></a>
+</left>
+{% endif %}
+<div class="welcome" style="margin: 10px;">
+  <div class="np">
+    {{ error_type }}
+    <p style="padding: 20px 0px 10px 0px">Contact the administrator: &nbsp;<a href="mailto:support@campusdomar.es" style="color: white">support@campusdomar.es</a> &nbsp;or &nbsp;Tel.: +34 986130013</p>
+  </div>
+</div>
+{% endblock %}

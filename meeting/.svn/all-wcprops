@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/1985/cmar/MeetingApp/trunk
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/LICENSE
+END
+deps.lock
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/2634/cmar/MeetingApp/trunk/deps.lock
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1275/cmar/MeetingApp/trunk/TODO
+END
+deps
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2634/cmar/MeetingApp/trunk/deps
+END
+README.md
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/README.md
+END

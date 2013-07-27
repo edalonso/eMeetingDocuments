@@ -1,0 +1,55 @@
+<div {% if meeting.owner != user %} class="Invited np separator meetingrank {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public %} class="Public np separator meetingrank {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public == 0 %} class="Private np separator meetingrank {% if meeting.magic %} Magic {% endif %}" {% else %} class="np separator meetingrank {% if meeting.magic %} Magic {% endif %}" {% endif %} data-id="{{ meeting.id }}"  {% if meeting.owner != user %} style="border-color: #C68005; heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px; clear: both; text-align: center; position:relative;" {% elseif meeting.public %} style="border-color: #10911E; heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px; clear: both; text-align: center; position:relative;" {% elseif meeting.public == 0 %} style="border-color: #D41314; heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px; clear: both; text-align: center; position:relative;" {% else %} style="border-color: orange; heigth: 100%; border-radius: 10px; background-color: #6DAABC; margin: 15px; padding: 10px; clear: both; text-align: center; position:relative;" {% endif %}>
+  <div {% if meeting.owner != user %} class="Invited info {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public %} class="Public info {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public == 0 %} class="Private info {% if meeting.magic %} Magic {% endif %}" {% else %} class="info {% if meeting.magic %} Magic {% endif %}" {% endif %} style="float:right; width:200px; padding: 10px 20px; margin:10px 0px; border-left:1px solid">
+    <button id="opener-delete-{{ meeting.id }}" class="button red" {% if meeting.owner !=  user  %} disabled="true" {% endif %}><i class="icon-trash icon-white"></i> Delete</button>
+    <a href="{{ path('minimized_meeting', {'id_meeting': meeting.id, 'id_user': user.id , 'minimized': 0 }) }}"><button class="button ClassTitle" title="Button to minimized the meeting room" style="margin-right: -55px"><i class="icon-download icon-white"></i></button></a>
+    <div style="float: left;" {% if meeting.owner != user %} class="Invited locked {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public %} class="Public locked {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public == 0 %} class="Private locked {% if meeting.magic %} Magic {% endif %}" {% else %} class="locked" {% endif %}>
+      {% if meeting.isLocked %}
+      <div {% if meeting.owner != user %} class="Invited visible {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public %} class="Public visible {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public == 0 %} class="Private visible {% if meeting.magic %} Magic {% endif %}" {% else %} class="visible {% if meeting.magic %} Magic {% endif %}" {% endif %} id="capasuperior" style="width: 650px;">
+      </div>
+        <a  {% if user.id != meeting.owner.id %} href="javascript:plegardesplegar ('capasuperior');" {% else %} href="{{ path('locked_meeting', {'id': meeting.id, 'locked': 0}) }}" {% endif %}><button {% if user.id != meeting.owner.id %} disabled="true" {% endif %} class="button"><i class="icon-enabled icon-white"></i>Enable</button></a>
+      {% else %}
+        <a {% if user.id != meeting.owner.id %} href="#" {% else %} href="{{ path('locked_meeting', {'id': meeting.id, 'locked': 1}) }}" {% endif %}><button {% if user.id != meeting.owner.id %} disabled="true" {% endif %} class="button"><i class="icon-disabled icon-white"></i>Disable</button></a>
+      {% endif %}
+    </div>
+  </div>
+  <div {% if meeting.owner != user %} class="Invited body {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public %} class="Public body {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public == 0 %} class="Private body {% if meeting.magic %} Magic {% endif %}" {% else %} class="body {% if meeting.magic %} Magic {% endif %}" {% endif %} style="padding-right: 210px;">
+    <div {% if meeting.owner != user %} class="Invited {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public %} class="Public {% if meeting.magic %} Magic {% endif %}" {% elseif meeting.public == 0 %} class="Private {% if meeting.magic %} Magic {% endif %}" {% else %} {% endif %} style="float: right; margin-right: 15px">
+      {% if meeting.public %}
+        <a class="go" target="_blank" href="{{ path('index_room', {'salt': meeting.salt }) }}" style="text-decoration:none"><button style="padding: 20px 8px;" class="button green"><i class="icon-upload icon-white"></i> Join</button></a>
+      {% else %}
+        <a target="_blank" href="{{ path('index_secretroom', {'salt': meeting.secretsalt }) }}" style="text-decoration:none"><button style="padding: 20px 8px;" class="button green"><i class="icon-upload icon-white"></i> Join</button></a>
+      {% endif %}
+    </div>
+    <a href="{{ path('minimized_meeting', {'id_meeting': meeting.id, 'id_user': user.id , 'minimized': 0 }) }}" style="text-decoration: none; color:#FFF"><p class="expandable ClassTitle" style="font-size:45px; text-align: left; width: 560px;" title="{{ meeting.title }}">{{ meeting.title }}</p></a>
+  </div>
+</div>
+
+<div id="dialog-modal-delete-{{ meeting.id }}" class="dialog-modal" title="Delete meeting: '{{ meeting.title }}'" style="overflow:auto">
+  <div align="center" style="padding: 40px" class="np">
+    <div style="margin-bottom: 25px">
+      <font size="4">Are you sure?</font>
+    </div>
+    <a href="{{ path('index') }}" style="text-decoration:none"><button class="button otherblue">No way!</button></a>
+    <a href="{{ path('index_cancel', {'id': meeting.id }) }}" style="text-decoration:none"><button class="button red"><i class="icon-trash icon-white"></i>Yes, I'm sure</button></a>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    $( ".dialog-modal" ).dialog({
+    dialogClass: 'dialogWithShadow',
+    hide: "highlight",
+    autoOpen: false,
+    modal: true,
+    minWidth: 565,
+    minHeith: 144,
+    position: [700, 250]
+    });
+
+    $( "#dialog:ui-dialog" ).dialog( "destroy" );
+    $( "#opener-delete-{{ meeting.id }}" ).click(function() {
+      $( "#dialog-modal-delete-{{ meeting.id }}" ).dialog( "open" );
+      return false;
+    });
+  });
+</script>

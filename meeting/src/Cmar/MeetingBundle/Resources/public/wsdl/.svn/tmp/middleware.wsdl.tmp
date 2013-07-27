@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<definitions targetNamespace="urn:middleware.campusdomar.es" xmlns:tns="urn:middleware.campusdomar.es"
+	     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	     xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types> 
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:middleware.campusdomar.es">
+      <xsd:complexType name="NewUser">
+	<xsd:sequence>
+	  <xsd:element name="id" type="xsd:string" />
+	  <xsd:element name="login" type="xsd:string" />
+	  <xsd:element name="password" type="xsd:string" />
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="surname1" type="xsd:string" />
+	  <xsd:element name="surname2" type="xsd:string" />
+	  <xsd:element name="photo" type="xsd:string" />
+	  <xsd:element name="mail" type="xsd:string" />
+	  <xsd:element name="phoneNumber" type="xsd:string" />
+	  <xsd:element name="url" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	  <xsd:element name="organization" type="xsd:string" />
+	  <xsd:element name="mentor" type="xsd:string" />
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PersistentUser">
+	<xsd:all>
+	  <xsd:element name="id" type="xsd:int" />
+	  <xsd:element name="login" type="xsd:string" />
+	  <xsd:element name="password" type="xsd:string" />
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="surname1" type="xsd:string" />
+	  <xsd:element name="surname2" type="xsd:string" />
+	  <xsd:element name="photo" type="xsd:string" />
+	  <xsd:element name="mail" type="xsd:string" />
+	  <xsd:element name="phoneNumber" type="xsd:string" />
+	  <xsd:element name="url" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	  <xsd:element name="organization" type="xsd:string" />
+	  <xsd:element name="mentor" type="xsd:string" />
+	</xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="IdUser">
+	<xsd:sequence>
+	  <xsd:element name="id" type="xsd:string">
+	  </xsd:element>
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfUser">
+	<xsd:complexContent>
+	  <xsd:restriction base="soapenc:Array">
+	    <xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="tns:PersistentUser[]" />
+	  </xsd:restriction>
+	</xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="NewGroup">
+	<xsd:sequence>
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="description" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PersistentGroup">
+	<xsd:all>
+	  <xsd:element name="id" type="xsd:int" />
+	  <xsd:element name="name" type="xsd:string" />
+	  <xsd:element name="description" type="xsd:string" />
+	  <xsd:element name="type" type="xsd:string" />
+	</xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="IdGroup">
+	<xsd:sequence>
+	  <xsd:element name="id" type="xsd:string">
+	  </xsd:element>
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOfGroup">
+	<xsd:complexContent>
+	  <xsd:restriction base="soapenc:Array">
+	    <xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="tns:PersistentGroup[]" />
+	  </xsd:restriction>
+	</xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="StatusQuo">
+	<xsd:all>
+	  <xsd:element name="output" type="xsd:string" />
+	</xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SystemMaintenance">
+	<xsd:sequence>
+	  <xsd:element name="SysMessage" type="xsd:string" />
+	  <xsd:element name="RetryInMinutes" type="xsd:int" />
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DBUnavailableFault">
+	<xsd:sequence>
+	  <xsd:element name="DBMessage" type="xsd:string" />
+	  <xsd:element name="RetryInMinutes" type="xsd:int" />
+	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="Result">
+	<xsd:sequence>
+	  <xsd:element name="result" type="xsd:boolean">
+	  </xsd:element>
+	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema> 
+  </types>
+  <message name="UserParamsMessage">
+    <part name="newUser" type="tns:NewUser" />
+  </message>
+  <message name="UserPersistentMessage">
+    <part name="aUserUpdate" type="tns:PersistentUser" />
+  </message>
+  <message name="IdUserMessage">
+    <part name="idOfUser" type="tns:IdUser" />
+  </message>
+  <message name="AllUserMessage">
+    <part name="allUsers" type="tns:ArrayOfUser" />
+  </message>
+  <message name="GroupParamsMessage">
+    <part name="newGroup" type="tns:NewGroup" />
+  </message>
+  <message name="GroupPersistentMessage">
+    <part name="aGroupUpdate" type="tns:PersistentGroup" />
+  </message>
+  <message name="IdGroupMessage">
+    <part name="idOfGroup" type="tns:IdGroup" />
+  </message>
+  <message name="AllGroupMessage">
+    <part name="allGroups" type="tns:ArrayOfGroup" />
+  </message>
+  <message name="UserGroupMessage">
+    <part name="anUser" type="tns:PersistentUser" />
+    <part name="aGroup" type="tns:PersistentGroup" />
+  </message>
+  <message name="UserGroupRoleMessage">
+    <part name="anUser" type="tns:PersistentUser" />
+    <part name="aGroup" type="tns:PersistentGroup" />
+    <part name="role"   type="xsd:string" />
+  </message>
+  <message name="OperationResultMessage">
+	<part name="aResult" type="tns:Result" />
+  </message>  
+  <message name="StatusMessage">
+    <part name="statusUo" type="tns:StatusQuo" />
+  </message>
+  <!-- Fault Messages -->
+  <message name="DBUnavailableFault">
+    <part name="DBUnavailableFault" type="tns:DBUnavailableFault" />
+  </message>
+  <message name="SystemMaintenance">
+    <part name="SystemMaintenance" type="tns:SystemMaintenance" />
+  </message>
+  <portType name="ServicesPortType">
+    <operation name="createUser">
+      <input message="tns:UserParamsMessage" />
+      <output message="tns:UserPersistentMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+    <operation name="updateUser">
+      <input message="tns:UserPersistentMessage" />
+      <output message="tns:UserPersistentMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+    <operation name="deleteUser">
+      <input message="tns:UserPersistentMessage" />
+      <output message="tns:StatusMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+    <operation name="createGroup">
+      <input message="tns:GroupParamsMessage" />
+      <output message="tns:GroupPersistentMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+    <operation name="updateGroup">
+      <input message="tns:GroupPersistentMessage" />
+      <output message="tns:GroupPersistentMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+    <operation name="deleteGroup">
+      <input message="tns:GroupPersistentMessage" />
+      <output message="tns:StatusMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+    <operation name="joinGroup">
+      <input message="tns:UserGroupRoleMessage" />
+      <output message="tns:OperationResultMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+    <operation name="leaveGroup">
+      <input message="tns:UserGroupMessage" />
+      <output message="tns:OperationResultMessage" />
+      <fault name="nodb" message="tns:DBUnavailableFault" />
+      <fault name="sysmaint" message="tns:SystemMaintenance" />
+    </operation>
+  </portType>
+  <binding name="ServicesBinding" type="tns:ServicesPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="createUser">
+      <soap:operation soapAction="createUserAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+    <operation name="updateUser">
+      <soap:operation soapAction="updateUserAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+    <operation name="deleteUser">
+      <soap:operation soapAction="deleteUserAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+    <operation name="createGroup">
+      <soap:operation soapAction="createGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+    <operation name="updateGroup">
+      <soap:operation soapAction="updateGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+    <operation name="deleteGroup">
+      <soap:operation soapAction="deleteGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+    <operation name="joinGroup">
+      <soap:operation soapAction="joinGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+    <operation name="leaveGroup">
+      <soap:operation soapAction="leaveGroupAction" />
+      <input>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </input>
+      <output>
+	<soap:body namespace="urn:middleware.campusdomar.es" use="literal" />
+      </output>
+      <fault name="nodb">
+	<soap:fault name="nodb" use="literal" />
+      </fault>
+      <fault name="sysmaint">
+	<soap:fault name="sysmaint" use="literal" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="Services">
+    <port name="ServicesPort" binding="tns:ServicesBinding">
+      <soap:address location="./meeting/middleware" />
+    </port>
+  </service>
+</definitions>

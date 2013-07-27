@@ -1,0 +1,75 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        Cmar\MeetingBundle\Entity\User: plaintext
+
+    factories:
+        - "%kernel.root_dir%/../vendor/bundles/Sensio/CasBundle/Resources/config/security_factories.xml"
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        entity:
+            entity: { class: CmarMeetingBundle:User, property: login }
+        #in_memory:
+        #    users:
+        #        user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+        #        admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        middleware:
+            pattern:  ^/middleware
+            security: false
+
+        #secured_area_room:
+        #    pattern:    ^/room
+        #    context:    meeting
+        #    anonymous:  ~
+        #    http_basic:
+        #        realm:  "Secured Demo Area"
+
+        #secured_area:
+        #    pattern:    ^/
+        #    context:    meeting
+        #    http_basic:
+        #        realm:  "Secured Demo Area"
+        #        provider: entity
+
+<<<<<<< .mine
+        #room_firewall:
+        #     pattern:  ^/room
+        #     anonymous: ~
+        #     cas:
+        #         provider: entity
+
+        cas_firewall:
+             pattern:  ^/
+             cas:
+                 provider: entity
+=======
+        secured_area_room:
+            pattern:    ^/room
+            context:    meeting
+            anonymous:  ~
+            cas:        ~
+>>>>>>> .r1970
+
+        secured_area:
+            pattern:  ^/
+            context:    meeting
+            cas:      ~
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_ADMIN }
+        - { path: ^/group, roles: ROLE_ADMIN }
+        - { path: ^/meeting, roles: ROLE_ADMIN }
+        - { path: ^/recording, roles: ROLE_ADMIN }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

@@ -1,0 +1,140 @@
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        Cmar\MeetingBundle\Entity\User: plaintext
+
+    factories:
+        - "%kernel.root_dir%/../vendor/bundles/Sensio/CasBundle/Resources/config/security_factories.xml"
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        entity:
+            entity: { class: CmarMeetingBundle:User, property: email }
+        #in_memory:
+        #    users:
+        #        user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+        #        admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        middleware:
+            pattern:  ^/middleware
+            security: false
+
+        login_firewall:
+            pattern:    ^/login$
+            anonymous:  ~
+        
+        welcome_firewall:
+            pattern:    ^/welcome
+            security: false
+
+        recover_firewall:
+            pattern:    ^/recover
+            security: false
+
+        mail_firewall:
+            pattern:    ^/mail
+            security: false
+
+        recording_list:
+            pattern:    ^/r_public_list
+            security: false
+
+        view_recording_list:
+            pattern:    ^/recording_public
+            security: false
+
+        #secured_area_room:
+        #    pattern:    ^/room
+        #    context:    meeting
+        #    anonymous:  ~
+        #    http_basic:
+        #        realm:  "Secured Meeting Area"
+
+        #secured_area_secretroom:
+        #    pattern:    ^/secretroom
+        #    context:    meeting
+        #    anonymous:  ~
+        #    http_basic:
+        #        realm:  "Secured Meeting Area"
+
+        #secured_area:
+        #    pattern:    ^/
+        #    context:    meeting
+        #    http_basic:
+        #        realm:  "Secured Meeting Area"
+        #        provider: entity
+
+        secured_area_room:
+            pattern:    ^/room
+            context:    meeting
+            anonymous:  ~
+            form_login:
+                login_path:  /login
+                check_path:  /room
+
+                default_target_path:            /room
+                target_path_parameter:          _target_path
+            logout:
+                path:   /logout
+                target: /room
+
+        secured_area_secretroom:
+            pattern:    ^/secretroom
+            context:    meeting
+            anonymous:  ~
+            form_login:
+                login_path:  /login
+                check_path:  /secretroom
+
+                default_target_path:            /secretroom
+                target_path_parameter:          _target_path
+            logout:
+                path:   /logout
+                target: /secretroom
+
+        secured_area:
+            pattern:    ^/
+            context:    meeting
+            form_login:
+                login_path:  /login
+                check_path:  /
+
+                default_target_path:            /
+                target_path_parameter:          _target_path
+            logout:
+                path:   /logout
+                target: /
+
+        #secured_area_room:
+        #    pattern:    ^/room
+        #    context:    meeting
+        #    anonymous:  ~
+        #    cas:        ~
+
+        #secured_area_secretroom:
+        #    pattern:    ^/secretroom
+        #    context:    meeting
+        #    anonymous:  ~
+        #    cas:        ~
+
+        #secured_area:
+        #    pattern:  ^/
+        #    context:    meeting
+        #    cas:      ~
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/useradmin, roles: ROLE_ADMIN }
+        - { path: ^/groupadmin, roles: ROLE_ADMIN }
+        - { path: ^/meeting, roles: ROLE_ADMIN }
+        #- { path: ^/recording, roles: ROLE_ADMIN }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

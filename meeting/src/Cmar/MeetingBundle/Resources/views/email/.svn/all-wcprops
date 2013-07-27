@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3406/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/email
+END
+email_exceed_participants.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/3530/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/email/email_exceed_participants.html.twig
+END
+email.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3530/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/email/email.html.twig
+END
+email_exceed_meeting.txt.twig
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/3406/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/email/email_exceed_meeting.txt.twig
+END
+email_exceed_meeting.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/3530/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/email/email_exceed_meeting.html.twig
+END
+email_exceed_participants.txt.twig
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/3440/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/email/email_exceed_participants.txt.twig
+END
+email.txt.twig
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/3406/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/email/email.txt.twig
+END

@@ -1,0 +1,13 @@
+Dear {{ user.name }},
+
+This message is to inform you that your email address has been validated and you may now proceed to set your password for your Digimar account.
+
+Please click on the link below within 24 hours to set your password. 
+
+{{ url }}
+
+If your company's mail server does not allow HTML email messages, you can paste the necessary URL into your browser to complete the process.
+
+--
+Digimar
+Campus Digital do Mar

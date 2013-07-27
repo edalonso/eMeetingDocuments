@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2773/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity
+END
+Group.php
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/1745/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/Group.php
+END
+GroupRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/1510/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/GroupRepository.php
+END
+Recording.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/2955/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/Recording.php
+END
+RecordingRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/2773/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/RecordingRepository.php
+END
+User.php
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2678/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/User.php
+END
+UserRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/2357/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/UserRepository.php
+END
+Log.php
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/2861/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/Log.php
+END
+Log_Total.php
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/2861/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/Log_Total.php
+END
+NickName.php
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3584/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/NickName.php
+END
+NickNameRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/3584/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/NickNameRepository.php
+END
+Meeting.php
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/3574/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/Meeting.php
+END
+MeetingRepository.php
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3510/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Entity/MeetingRepository.php
+END

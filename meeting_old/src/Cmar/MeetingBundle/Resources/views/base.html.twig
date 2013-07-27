@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+          <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/reset.css') }} "/>
+          <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/cmar.css') }} "/>
+          <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/meeting.css') }} "/>
+          <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/tipTip.css') }} "/>
+          <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/token-input.css') }} "/>
+	{% endblock %}
+        <link rel="shortcut icon" href="{{ asset('cmar.png') }}" />
+        {% block javascripts %}
+           <script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/js.js') }}"></script>
+           <script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/jquery-1.7.1.min.js') }}"></script>
+        {% endblock %}
+    </head>
+    <body onload="updateClock(); setInterval('updateClock()', 1000 )">
+      <div id="content" style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);-moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);">
+        <div style="font-size: 12px; background: url({{ asset('bundles/cmarmeeting/images/sprite.png')}}) repeat-x scroll 0 0 transparent; padding-top: 2px; padding-bottom: 4px;">
+	  <div style="margin: 10px 10px 10px 14px; line-height: 0.8;">
+            <span id="clock">&nbsp;</span>
+            <span style="float: right; font-weight: bold; margin-right: 1%">{{ app.user ? app.user.username : 'Anonymous' }} - <a href="{{ path('logout') }}" style="font-weight: normal;">Logout</a></span>
+	  </div>
+        </div>
+        <div id="hear">
+	  <div style="float:right;">
+	  </div>
+          <div>
+	    <img alter="CAMPUSDOMAR" src="{{ asset('bundles/cmarmeeting/images/banner_emeeting.png') }}"/>
+	  </div> 
+
+        </div>
+
+        {% if app.session.hasFlash('notice') %}
+        <div id="mbox-cont" class="mbox-cont">
+          {{ app.session.flash('notice') }}
+        </div>  
+	<script type="text/javascript">
+           setTimeout(function(){$("#mbox-cont").fadeOut(5000);}, 5000);
+	</script>
+        {% endif %}
+
+        {% if app.session.hasFlash('error') %}
+          <div id="mbox-cont1" class="mbox-cont" style="color:red">
+            {{ app.session.flash('error') }}
+          </div>
+	<script type="text/javascript">
+           setTimeout(function(){$("#mbox-cont1").fadeOut(5000);}, 5000);
+	</script>
+        {% endif %}
+        
+        <div style="margin: 0px; position: relative">
+          {% block body %}{% endblock %}
+        </div>
+        
+        <div id="footer">
+          <div id="waves"></div>
+          <div style="padding: 10px 0; background-color: #333333; color: #929292">
+            <div>
+              <img src="{{ asset('bundles/cmarmeeting/images/logos-pie.png') }}" alt="patrocinadores">
+              <p style="font-size: 12px">
+                Proxecto financiado polo Ministerio de Educaci&oacute;n no marco do programa Campus de Excelencia Internacional
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>

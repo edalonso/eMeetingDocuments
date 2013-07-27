@@ -1,0 +1,67 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting Admin
+{% endblock %}
+
+{% block body %}
+{% if is_granted('ROLE_ADMIN') %}
+  <a href="{{ path('index') }}" style="text-decoration:none"><button class="button" style="margin: 0px 0px 5px 0px"><i class="icon-admin icon-black"></i> Index</button></a>
+{% endif %}
+
+<h1 style="color: black">Meeting list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Owner</th>
+            <th>URL</th>
+            <th>State</th>
+            <th>Magic</th>
+            <th>Public</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('meeting_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.title }}</td>
+            <td>{{ entity.owner }}</td>
+            <td>{{ entity.url }}</td>
+            <td>
+	      {% if entity.state == 0  %} STATE NEW
+	      {% elseif entity.state == 1 %} STATE NOW
+	      {% elseif entity.state == 2 %} STATE FINISHED
+	      {% elseif entity.state == 3 %} STATE SCHEDULED
+	      {% elseif entity.state == 4 %} STATE CANCELLED
+	      {% elseif entity.state == 0 %} STATE LOCKED
+	      {% endif %}
+	    </td>
+            <td>{% if entity.magic %} &nbsp;&nbsp;&nbsp;&times; {% endif %}</td>
+            <td>{% if entity.public %} &nbsp;&nbsp;&nbsp;&times; {% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('meeting_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('meeting_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{#<ul>
+    <li>
+        <a href="{{ path('meeting_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>#}
+{% endblock %}
+

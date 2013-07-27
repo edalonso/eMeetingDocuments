@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/1971/cmar/MeetingApp/trunk/app/config
+END
+parameters.ini
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2462/cmar/MeetingApp/trunk/app/config/parameters.ini
+END
+config_dev.yml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/app/config/config_dev.yml
+END
+config_test.yml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2462/cmar/MeetingApp/trunk/app/config/config_test.yml
+END
+config.yml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2461/cmar/MeetingApp/trunk/app/config/config.yml
+END
+routing_dev.yml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/app/config/routing_dev.yml
+END
+routing.yml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2196/cmar/MeetingApp/trunk/app/config/routing.yml
+END
+security.yml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2284/cmar/MeetingApp/trunk/app/config/security.yml
+END
+config_prod.yml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/app/config/config_prod.yml
+END

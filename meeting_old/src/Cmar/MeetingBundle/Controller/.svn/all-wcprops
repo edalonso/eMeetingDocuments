@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2696/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller
+END
+GroupAdminController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/2190/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/GroupAdminController.php
+END
+UserAdminController.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/2190/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/UserAdminController.php
+END
+SecurityController.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/2235/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/SecurityController.php
+END
+MeetingController.php
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/1242/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/MeetingController.php
+END
+GroupController.php
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/2190/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/GroupController.php
+END
+RecordingController.php
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/1490/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/RecordingController.php
+END
+RoomController.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/2773/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/RoomController.php
+END
+MiddlewareController.php
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/1568/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/MiddlewareController.php
+END
+UserController.php
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/2806/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/UserController.php
+END
+WizardController.php
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/1463/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/WizardController.php
+END
+PersonalController.php
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/2190/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Controller/PersonalController.php
+END

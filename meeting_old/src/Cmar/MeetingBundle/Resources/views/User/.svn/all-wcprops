@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/2716/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User
+END
+edit.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/2626/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/edit.html.twig
+END
+index.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/2825/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/index.html.twig
+END
+recordingPublicList.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/2773/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/recordingPublicList.html.twig
+END
+admin.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/2680/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/admin.html.twig
+END
+meeting.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/2821/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/meeting.html.twig
+END
+recordingList.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/2773/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/recordingList.html.twig
+END
+historical.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/2825/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/historical.html.twig
+END
+userForm.html.twig
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/2737/cmar/MeetingApp/trunk/src/Cmar/MeetingBundle/Resources/views/User/userForm.html.twig
+END

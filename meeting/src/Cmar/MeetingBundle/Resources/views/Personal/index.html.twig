@@ -1,0 +1,80 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+VidMeet (Video Meeting)
+{% endblock %}
+
+{% block body %}
+
+
+<ul style="font-size: 32px; color: #32515E; list-style-type: none; padding:0px;">
+  <div class="np">
+    <li>
+      <div class="primero">
+	{% if meetings_now_user is empty %}
+        <a class="button green"></a>
+	{% else %}
+	<a class="button red"></a>
+	{% endif %}
+      </div>
+      <a target="_blank" href="{{ path('index') }}">Room: {{ user }}</a>
+      
+      {% if meetings_now_user is not empty %}
+        {% for meeting in meetings_now_user %}
+          <span style="font-size: 15px; font-style: italic">Meeting at "{{ meeting.date|date('Y-m-d H:i') }}" duration: "{{ meeting.duration }}" min</span>
+          {% if meeting.public %}
+	    <a target="_blank" href="{{ path('index_room', {'salt': meeting.salt }) }}"><button>Go</button></a>
+	  {% else %}
+	    <a target="_blank" href="{{ path('index_secretroom', {'salt': meeting.secretsalt }) }}"><button>Go</button></a>
+	  {% endif %}
+	{% endfor %}
+      {% endif %}
+    </li>
+
+    {% for group in groups %}
+    <li>
+      {% if meetings_now_group is empty %}
+
+      <div class="primero">
+	{% if meetings_now_group is not empty %}
+          {% if meeting.group == group %}
+            <a class="button red"></a>
+          {% else %}
+            <a class="button green"></a>
+          {% endif %}
+        {% else %}
+	  <a class="button green"></a>
+        {% endif %}
+      </div>
+      <a target="_blank" href="{{ path('indexgroup', {'key': group.key }) }}">Room: {{ group }}</a>
+      {% else %}
+
+      {% for meeting in meetings_now_group %}
+        <div class="primero">
+	  {% if meetings_now_group is not empty %}
+	    {% if meeting.group == group %}
+	      <a class="button red"></a>
+	    {% else %}
+	      <a class="button green"></a>
+	    {% endif %}
+	  {% else %}
+	      <a class="button green"></a>
+	  {% endif %}
+	</div>
+  
+	<a target="_blank" href="{{ path('indexgroup', {'key': group.key }) }}">Room: {{ group }}</a>
+
+	{% if meeting.group == group %}
+	  <span style="font-size: 15px; font-style: italic">Meeting at "{{ meeting.date|date('Y-m-d H:i') }}" duration: "{{ meeting.duration }}" min</span>
+	  {% if meeting.public %}
+            <a target="_blank" href="{{ path('index_room', {'salt': meeting.salt }) }}"><button>Go</button></a>
+	  {% else %}
+            <a target="_blank" href="{{ path('index_secretroom', {'salt': meeting.secretsalt }) }}"><button>Go</button></a>
+	  {% endif %}
+	{% endif %}
+       {% endfor %}
+    {% endif %}  
+  </li>
+  {% endfor %}
+</div>
+</ul>
+{% endblock %}

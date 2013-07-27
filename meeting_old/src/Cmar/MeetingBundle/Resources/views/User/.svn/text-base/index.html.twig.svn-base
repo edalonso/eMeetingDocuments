@@ -1,0 +1,137 @@
+{% extends "CmarMeetingBundle::base.html.twig" %}
+{% block title %}
+eMeeting
+{% endblock %}
+
+{% block body %}
+
+<div id="dialog-modal1" title="Create an eMeeting">
+<div style="margin: 10px" style="position: relative">
+  <form action="{{ path('index_immediate') }}" method="get" >
+    <input type="hidden" name="selected_tag" value="common_users" id="selected_tag"/>
+    <div id="form">
+      <ul>
+	<li style="list-style-type: none; overflow: hidden; font-size: 18px; margin-bottom: 5px;">
+          <label for="form_Name" class="required"> Title: </label>
+          <input style="width: 80%" id="form_Name" name="meeting_name" type="text;" value="{{ user.login }}'s Immediate eMeeting"></input>
+	</li>
+	<li style="list-style-type: none; overflow: hidden; font-size: 18px">
+          <label for="form_NickName" class="required"> Nick Name: </label>
+          <input style="width: 64%" id="form_NickName" name="Nick_name" type="text;" value="{{ user.name }} {{user.surname}}"></input>
+	</li>
+	<li style="list-style-type: none; float: left; margin-top: 10px; margin-bottom: 10px; font-size: 18px">
+          <label for="form_Public" class="required"> Permission: </label>
+          <select id="form_Public" name="public">
+	    <option value="public">public</option>
+	    <option value="private">private</option>
+          </select>
+	</li>
+	<li style="list-style-type: none; float: left; font-size: 20px;">
+	  <div class="content common_users">
+	    <h2 style="margin-top: 0px; margin-bottom: 5px" align="center">Description</h2>
+            <textarea id="form_Dedcription" style="border-radius: 4px; margin: 7px; width: 301px" name="meeting_description" cols="31" rows="6" placeholder="Introduce a Description ..."></textarea>
+	  </div>
+	</li>
+	{#<li style="list-style-type: none; float: left;">
+	  <div class="wrapper">
+	    <div id="container">
+	      <span class="clear"></span>
+	      <div class="content common_users">
+		<div class="ui-widget">
+		  <h2 style="color: #000; margin-top: 0px; margin-bottom: 5px" align="center">Add Users</h2>
+		  <input style="margin-bottom: 4px; margin-left: 7px;" id="users" placeholder="Introduce a User ..."/>
+		</div>
+		<div class="container">
+		  <select style="width: 307px; margin-left: 7px" name="AddCommonUsers[]" id="AddCommonUsers" multiple="multiple"></select>
+		  <input style="text-align: center; font-size: 12px; margin-top: 5px; margin-left: 5px" id="remove" value="Remove" type="button" class="button red">
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</li>#}
+	<input style="font-size: 14px; float: left; border-radius: 4px; margin: 10px; margin-left: 10%" type="submit" value="Create" class="button green"/>
+	<a href="{{ path('index') }}" style="float: right; text-decoration: none; margin: 10px 5%;" id="cancel" class="button"/>Cancel</a>
+      </ul>
+    </div>
+  </form>
+</div>
+</div>
+
+<div id="dialog-modal" style="background: none;" title="Adobe Connect Test">
+  <iframe width="760px" height="196px" border-radius="4px" frameborder="0" src="https://ado.campusdomar.es/common/intro/test.swf">
+  </iframe>
+<div style="position: absolute; z-index: 3000; right: 25px">
+  <a href="{{ path('index') }}" style="text-decoration: none; cursor: default; top: 140px;"/><img src="{{ asset('bundles/cmarmeeting/images/boton.png') }}"></img></a>
+</div>
+</div>
+
+<div id="dialog-modal-achievement" class="dialog-modal" data-ajax="true" data-url="{{ path('index_historical') }}" title="Achievement Files" style="overflow:auto">
+</div>
+
+<left style="margin-left: 2%">
+  <button id="opener2" class="button"><i class="icon-achievement icon-black"></i> Achievement Files</button>
+  <button id="opener" class="button"><i class="icon-indef icon-black"></i> Adobe Connect Test</button>
+  <a href="http://help.campusdomar.es/display/help/eMeeting+-+help" style="text-decoration: none" target="_blank"><button class="button"><i class="icon-help icon-black"></i> eMeeting Help</button></a>
+  {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin') }}" style="text-decoration:none"><button class="button"><i class="icon-admin icon-black"></i> Admin</button></a>
+  {% endif %}
+</left>
+
+<button style="float: right; margin-right: 2%" id="opener1" class="button"><i class="icon-plus icon-black"></i> eMeetings</button>
+
+{% if meetings_now is not empty %}
+
+{#<h4>{{ user.login }}'s Open eMeetings:</h4>#}
+<ul id="sortable">
+  {% for meeting in meetings_now %}
+  <li class="ui-state-default" style="list-style-type: none;">
+    {% include('CmarMeetingBundle:User:meeting.html.twig') %}
+  </li>
+  {% endfor %}
+</ul>
+
+{% else %}
+{#<h4>{{ user.login }}'s Open eMeetings:</h4>#}
+<img src="{{ asset('bundles/cmarmeeting/images/flecha.png') }}" class="arrow-up"></img>
+<div class="np" style="border-radius: 10px; background-color: #6DAABC; margin: 50px 15px 30px 50px; padding: 10px;">
+  <p style="margin: 48px 225px; font-size: 22px">To create an eMeeting press button</p>
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/js.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/jquery-1.7.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/jquery-ui-1.8.18.custom.min.js') }}"></script>  
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/jquery.tipTip.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/tabla.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/addbox.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/autocomplete.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/modal_dialog.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/desplegable.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js/jquery.tokeninput.js') }}"></script>
+<script type="text/javascript">
+$(function() { 
+    var array_expandable = $('.expandable');
+    $.map(array_expandable, truncar);
+});
+</script>
+<script type="text/javascript">
+  $(function(){
+    $(".ClassTitle").tipTip({defaultPosition: "left", edgeOffset: 1});
+  });
+</script>
+<script type="text/javascript">
+  $(function() {
+    $( "#sortable" ).sortable({
+      update: function(event, ui) {
+          var info = $('.meetingrank').map(function(o,e){return $(e).data('id')});
+          $.post("{{ path('update_rank') }}", "data=" + $.makeArray(info).join(",") );
+      }
+    });
+  });
+</script>
+{% endblock %}

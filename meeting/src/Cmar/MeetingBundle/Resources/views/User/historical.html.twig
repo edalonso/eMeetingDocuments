@@ -1,0 +1,42 @@
+{% block body %}
+<select id="selectmonth" style="margin: 10px; margin-bottom: 0px;">
+  {% for num_meeting in num_meetings %}
+  <option value="{{ num_meeting.MES }}"
+          {%  if ( num_meeting.MES == string_month ) %}
+	    selected="selected" 
+          {% endif %}
+	  data-url="{{ url('index_month', { 'string_month': num_meeting.MES }) }}">
+    {{ num_meeting.MES }}, {{ num_meeting.NUMMEETING }} meeting,  {{ num_meeting.NUMRECORD }} recording
+  </option>
+  {% endfor %}
+</select>
+<script type="text/javascript">
+  var lista = document.getElementById('selectmonth');
+  lista.onchange = function () {
+    var url = lista.options[lista.selectedIndex].getAttribute('data-url');
+    $('#dialog-modal-achievement').load(url);
+  };
+</script>
+
+<div class="np" style="padding: 15px 0px 0px 40px">
+  <ul>
+    {% for meeting in meetings_finished %}
+    <li style="margin: 5px">
+      {{ meeting.title }} 
+      {% for recording in meeting.recordings %}
+      <ul>
+	<li>
+	  <a style="color: #FFFFFF; text-decoration: none" target="_blank" href="{{ path('index_recording', {'id': recording.id }) }}"> Recording: {{ recording.title }}</a>
+	    <span style="font-size: 11px; font-style: italic">at {{ recording.datecreated|date('Y-m-d H:i') }}</span> 
+	</li>
+      </ul>
+      {% endfor %}
+    </li>
+    
+    {% else%}
+      <center style="font-size: 30px; margin: 30px; margin-bottom: 5px">No achievement files yet</center>
+    {% endfor %}
+  </ul>
+  <a href="{{ path('index') }}" style="border-radius: 4px; margin: 10px; margin-left: 70%; text-decoration: none" id="cancel" class="button">Cancel</a>
+</div>
+{% endblock %}

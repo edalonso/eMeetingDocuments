@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <link rel="shortcut icon" href="{{ asset('cmar.png') }}" />
+  <title>eMeeting</title>
+  <script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js_group/2-js.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('bundles/cmarmeeting/js_group/0-jquery-1.7.1.min.js') }}"></script>
+  <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/0-reset.css') }} "/>
+  <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/2-login.css') }} "/>
+  <link rel="STYLESHEET" type="text/css" href="{{ asset('bundles/cmarmeeting/css/1-meeting.css') }} "/>	  
+</head>
+
+<body id="login">
+  <div id="wrappertop"></div>
+  
+  <div id="wrapper">
+    <div id="content">
+      <div id="header">
+	<h1><a target="_blank" href="http://www.campusdomar.es"><img style="display: block; margin-left: auto; margin-right: auto;" alt="Campus do Mar" src="{{ asset('bundles/cmarmeeting/images/campusdomar_logo.gif') }} "></a></h1>
+      </div>
+      <div id="darkbanner" class="banner320">
+	<h2>Login</h2>
+      </div>
+      <div id="darkbannerwrap"> </div>
+      {% if error %}
+        {% if (error.message | trans != "Your session has timed-out, or you have disabled cookies.") %}
+          <div id="mbox-cont" class="mbox-cont" style="color: red">{{ error.message | trans }}</div>
+          <script type="text/javascript">
+            setTimeout(function(){$("#mbox-cont").fadeOut(5000);}, 5000);
+          </script>
+        {% endif %}
+      {% endif %}      
+      <form action="{{ path('login_check') }}" method="post">
+	<fieldset class="form">
+	  <label for="username">Email:</label>
+	  <input style="height: 20px" type="text" id="username" name="_username" value="{{ last_username }}" />
+	  
+	  <label for="password">Password:</label>
+	  <input style="height: 20px" type="password" id="password" name="_password" />
+	  
+	  {#
+	  If you want to control the URL the user is redirected to on success (more details below)
+	  <input type="hidden" name="_target_path" value="/account" />
+	  #}
+	  <ul id="forgottenpassword">
+	    <li>
+	      <input style="width: 80px; font-size: 15px; background: url({{ asset('bundles/cmarmeeting/images/key.png') }}) no-repeat 0 0 transparent; background-position: 4px 6px; background-color: #FFFFFF; margin-left: 80px" type="submit" name="login" value="Login"/>
+	    </li>
+	
+	    <li class="boldtext">|</li>
+	    <li>
+	      <a href="{{ path('index_welcome') }}">Forgotten it?</a>
+	    </li>
+	  </ul>
+	</fieldset>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

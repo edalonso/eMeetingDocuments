@@ -1,0 +1,28 @@
+<form action="{{ path('addusers_meeting') }}" method="get" onsubmit="selectall('token-input-pre-populated-{{ meeting.id }}')">
+  <input type="hidden" name="id" value="{{ meeting.id }}" />
+  <div style="height: 140%; margin: 14px 0px 0px 35px" id="container-{{ meeting.id }}">
+    <input id="token-input-pre-populated-{{ meeting.id }}" type="text" autocomplete="off" style="outline: medium none; width: 30px;" name="pre-populated">
+    <input style="margin: 25px; margin-left: 15%; margin-bottom: 10px; font-size: 12px;" type="submit" class="button" value="Save"/>
+    <a href="{{ path('index') }}" style="margin-top: 25px; margin-bottom: 10px; float: right; margin-right: 25%; font-size: 12px; text-decoration: none" class="button" >Cancel</a>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#token-input-pre-populated-{{ meeting.id }}").tokenInput("{{ path('user_list') }}", {
+      minChars: 3,
+      hintText: "Type in a DigiMar User",
+      preventDuplicates: true,
+      onReady: function(){
+        $('#token-input-pre-populated-{{ meeting.id }}').focus();
+      },
+      prePopulate: [
+          {id: {{ meeting.owner.id }}, name: "{{ meeting.owner.name }} {{meeting.owner.surname}} &lt{{meeting.owner.email}}&gt"},
+        {% for user in meeting.users %}
+          {id: {{ user.id }}, name: "{{ user.name }} {{ user.surname }} &lt{{ user.email }}&gt"},
+        {% endfor %}
+       ]
+  });
+
+});
+</script>

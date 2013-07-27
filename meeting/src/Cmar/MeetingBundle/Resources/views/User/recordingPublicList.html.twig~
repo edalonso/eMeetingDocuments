@@ -1,0 +1,7 @@
+{% for recording in meeting.recordings %}
+  <ul>
+    <li style="list-style-type: none;font-weight: bolder; text-shadow: 0 1px 0 black; color: #FFFFFF"><a target="_blank" href="{{ path('index_recording', {'id': recording.id }) }}" style="color: #FFFFFF; text-decoration:none"> {{ recording.title }}</a><span style="font-size: 12px; font-style: italic; margin: 5px; padding-bottom: 5px; margin-left: 10px;text-shadow: none;"> at {{ recording.datecreated|date('Y-m-d H:i') }}</span></li>
+  </ul>
+{% else %}
+  <center style="font-size: 25px; margin-bottom: 5px">No recordings at <br />"{{ meeting.title }}"</center>
+{% endfor %}

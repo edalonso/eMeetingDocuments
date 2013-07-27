@@ -1,0 +1,37 @@
+<div id="container {{ meeting.id }}" class="np" style="padding: 0px 20px; padding-bottom: 10px;">
+<br />
+    <div class="np" style="margin: 0px 0px 45px 25px; padding: 0px; background: none">
+      <label style="margin: 0px; font-size: 16px;">URL to recordings <a href="#" class="showr" title="URL to view the recordings of this meeting."><i class="icon-help icon-white"></i></a></label>
+      <input style="width: 280px" type="text" readonly="readonly" onclick="this.select()" value="{{ url('recording_public_list', {'secretsalt': meeting.secretsalt}) }}"/>
+    </div>
+    {% for recording in meeting.recordings %}
+      <ul>
+        <li style="font-weight: bolder; text-shadow: 0 1px 0 black; color: #FFFFFF">
+	  {% if recording.state ==  0 %}
+	    <a target="_blank" href="{{ path('index_recording', {'id': recording.id }) }}" style="color: #FFFFFF; text-decoration:none"> {{ recording.title }}</a>
+	  {% else %}
+	    <a id="title_recording" href="#" onclick="return false" style="color: grey; text-shadow: none; text-decoration:none"> {{ recording.title }}</a>
+	  {% endif %}
+	  <span style="font-size: 12px; font-style: italic; margin: 5px 0px 5px 10px; padding-bottom: 5px; text-shadow: none;"> at {{ recording.datecreated|date('Y-m-d H:i') }}</span>
+	  <a href="#" {% if user.id == meeting.owner.id %} onclick="$('#dialog-modal-recordings-{{ meeting.id }}').load('{{ path('locked_recording', {'id': recording.id, 'locked': 1}) }}')" {% endif %}>
+	    <button {% if user.id != meeting.owner.id %} disabled="true" {% endif %} class="button" style="padding: 0px; width: 18px; height: 20px;">
+	      <i class="icon-pause icon-black"></i>
+	    </button>
+	  </a>
+	</li>
+      </ul>
+    {% else %}
+      <center style="font-size: 25px; margin-bottom: 5px">No recordings at <br />"{{ meeting.title }}"</center>
+    {% endfor %}
+    <div style="margin-left: 75%; margin-bottom: 10px">
+      <a href="{{ path('index') }}" style="margin-top: 25px; font-size: 12px; text-decoration: none" class="button">Cancel</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+  function change()
+  {
+    document.getElementById(title_recording).style.color="#7F8080";
+    
+  }
+</script>
