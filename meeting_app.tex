@@ -79,6 +79,9 @@ morekeywords={*,...}
 \usepackage{subfig}
 \makeatother
 
+% Evitar título y subtítulo en página vacía antes de capítulo
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+
 \begin{document}
 \fancyhead[L]{Departamento \\ Enxeñería Telemática}
 \fancyhead[R]{{\textit{\nouppercase{\leftmark}}}}
@@ -96,18 +99,161 @@ web para la gestión de salas virtuales de videoconferencia \textit{Adobe Connect
 
 \maketitle
 
+\newpage{}
+\thispagestyle{empty}
+\section*{\centering{Proyecto Fin de Carrera}}
+\vspace{1 cm}
+\subsection*{\centering{Diseño, desarrollo y puesta en servicio de una aplicación web para la gestión de salas virtuales de videoconferencia \textit{Adobe Connect}}}
+
+\vspace{2 cm}
+\begin{description}
+
+\item [{Autor:}] Eduardo Alonso Gil.
+\item [{Tutores:}] Yolanda Blanco Fernández, Vicente Goyanes de Miguel.
+\end{description}
+
+\vspace{1 cm}
+El tribunal nombrado para juzgar el proyecto fin de carrera arriba citado, compuesto por los miembros:
+\begin{description}
+\item [{Presidente:}] 
+\item [{Secretario:}] 
+\item [{Vocal:}]
+\end{description}
+
+\vspace{1 cm}
+\centerline{Acuerda otorgarle la calificación de:}
+
+\vspace{2 cm}
+
+\centerline{El Presidente\hspace{3 cm}El Secretario\hspace{3 cm}El Vocal}
+
+\vspace{2.5 cm}
+
+
+
+
+
+
+\centerline{En Vigo, a.........de................de 2013.}
+
+\newpage{}
+\thispagestyle{empty}
 \lyxrightaddress{\vspace{6cm}
 }
 
 
 \lyxrightaddress{A mi familia}
 
+\newpage{}
+\pagenumbering{roman}
+\subsection*{\centering{Resumen}}
+
+\section*{Objetivos}
+
+Los mecanismos de comunicación por videoconferencia siempre han sido
+una herramienta esencial para el correcto desarrollo empresarial,
+ya que el aprendizaje y comunicación entre sedes alejadas territorialmente,
+ya sea de la misma empresa o de empresas del mismo sector, son sin
+duda fundamentales para el desarrollo ágil y la búsqueda de soluciones.
+También en el ámbito universitario nos encontramos con colaboraciones
+entre universidades situadas en diferentes comunidades autónomas o
+países, con una gran demanda de mecanismos de comunicación, tanto
+para ampliar sus grupos de investigación como para poder conpartir
+sus hallazgos con la creciente y globalizada comunidad científica.
+Estos escenarios nos ofrecen múltiples roles de usuarios altamente
+diferenciados, pero con una necesidad común.
+
+\medskip{}
+
+
+El presente proyecto surge de la necesidad de abastecer de una plataforma
+de videoconferencia a usuarios de múltiples roles y diferentes ámbitos
+de conociemiento abarcando así un mayor mercado. Se busca una relación
+de compromiso entre manejo y complejidad para que cualquier tipo de
+usuario pueda disfrutar de la aplicación de una manera intuitiva.
+Se buscará un proyecto modular para facilitar futuras ampliaciones
+y adaptaciones a los perfiles de usuarios de organizaciones con funcionalidades
+específicas.
+
+\medskip{}
+
+
+Para realizar esta aplicación haremos uso del \textit{framework} específico
+para PHP Symfony en su segunda versión revisada, una potente herramienta
+que simplificará nuestro trabajo a la hora de diseñar la aplicación.
+Nos aportará un escenario excelente para poder ampliar el proyecto
+en caso de ser necesario y como toda plataforma de software libre,
+cuenta con una gran comunidad que lo respalda, lo cual nos ayudará
+a una rápida resolución de errores. Hemos elegido PHP 5 porque
+puede ser desplegado en la mayoría de los servidores web y en casi
+todos los sistemas operativos y plataformas sin costo alguno.
+
+\medskip{}
+
+
+Como motor de videoconferencia utilizaremos el Software propietario
+Adobe Connect\textsuperscript{®} que posee un interfaz perfecto
+para multitud de comunicaciones, ya sea a nivel académico o profesional.
+Este software también posee una potente API que nos permitirá sacar
+el mayor partido a las funciones de Adobe Connect Profesional\textsuperscript{®}
+y controlarlas desde nuestra aplicación\@. La experiencia nos hace
+saber que el uso de Adobe Connect Profesional\textsuperscript{®}
+es complejo para cualquier usuario que no posea un perfil tÃ©cnico
+y la multitud de opciones disponibles hace que su interfaz sea poco
+intuitivo.
+
+\medskip{}
+
+
+Para almacenar toda la información de nuestra aplicación, tanto de
+los usuarios como de sus reuniones de videoconferencia, utilizaremos
+MySQL 5.5, ya que su velocidad, característica importante para aplicaciones
+web, es ideal. Siguiendo con la filosofía de software libre, se
+acotarÃ¡ enormemente el tiempo de búsqueda de soluciones ante errores
+que puedan surgir durante la fase de desarrollo.
+
+\medskip{}
+
+
+Uno de los mayores objetivos de este proyecto es ofrecer un interfaz
+intuitivo que haga popular el servicio sin necesidad de conocimientos
+tÃ©cnicos o lecturas extensas. Para ello usaremos la biblioteca
+de Javascript jQuery. Su gran capacidad para personalizar el diseño
+de nuestra pÃ¡gina y la facilidad para crear funcionalidades y animaciones
+avanzadas nos proporcionará unos magníficos resultados. Las interacciones
+AJAX son otro punto a tener en cuenta a la hora de utilizar jQuery
+ya que simplifica enormemente su utilización y nos da la capacidad
+de disminuir el ancho de banda utilizado, así como de reducir la velocidad
+de acceso a la aplicación.
+
+\medskip{}
+
+
+Hoy día es muy importante que las aplicaciones puedan estar en contacto
+con otras, para obtener datos o simplemente sincronizar información
+relevante. Un ejemplo sencillo sería comunicar una agenda con nuestra
+aplicación, de este modo si se agenda una reunión de videoconferencia
+nuestra aplicación reservará una sala que se encontrará disponible
+en nuestro perfil. Para ello debemos dotar a la aplicación de las
+funciones necesarias para comunicarse con otras, o con un servidor
+que centralice todas las peticiones de sincronización.
+
+\medskip{}
+
+
+Otra funcionalidad será la visualización de un historial de utilización,
+de este modo obtendremos, en tiempo real, información para predecir
+la saturación de las salas disponibles o cuáles son los días de mayor
+carga de peticiones. Para ello usaremos los datos proporcionados
+por la API de Adobe Connect\textsuperscript{®} y los visualizaremos
+haciendo uso de la librería karmicgraphs de jQuery.
+
 \pagebreak{}
 
 \tableofcontents{}
 
 \pagebreak{}
-
+\pagenumbering{arabic}
 
 \chapter{Introducción\label{chap:Introducci=0000F3n}}
 
@@ -150,7 +296,7 @@ lo general 128 kbits/s) para vídeo comprimido y transmisión de audio\@.
 
 
 \begin{figure}
-\hspace{4cm}\includegraphics[scale=0.6]{Diseño/comunciacion_modif}
+\hspace{4cm}\includegraphics[scale=0.6]{Diseno/comunciacion_modif}
 
 \caption{Diagrama de comunicación}
 \label{comunicacion}
@@ -860,7 +1006,7 @@ a los errores del código \cite{key-10}\@.
 
 
 \begin{figure}
-\hspace{5cm}\includegraphics[scale=0.6]{Diseño/PHP_arq}
+\hspace{5cm}\includegraphics[scale=0.6]{Diseno/PHP_arq}
 
 \caption{Procesos que describen PHP}
 \end{figure}
@@ -915,7 +1061,7 @@ de referencia para el diseño y evaluación de otros servidores web\@.
 Pero en la actualidad está incrementando su utilización para uso comercial\@.
 
 \begin{wrapfigure}{L}{0.4\columnwidth}%
-\hspace{1.3cm}\includegraphics[scale=0.5]{Diseño/apache_estruc}
+\hspace{1.3cm}\includegraphics[scale=0.5]{Diseno/apache_estruc}
 
 \caption{Arquitectura de directorios de Apache}
 
@@ -1387,7 +1533,7 @@ y donde les resulte más conveniente\@.
 
 \end{enumerate}
 \begin{figure}
-\hspace{3.4cm}\includegraphics[scale=0.3]{Diseño/RelacionUsuarioAdobeFlashPlayer}
+\hspace{3.4cm}\includegraphics[scale=0.3]{Diseno/RelacionUsuarioAdobeFlashPlayer}
 
 \caption{Utilización de Adobe Flash Player}
 \end{figure}
@@ -1686,7 +1832,7 @@ descarga de un \textit{plugin}, y 4 servidores que pasamos a describir
 a continuación\@.
 
 \begin{figure}
-\hspace{1.8cm}\includegraphics[scale=0.5]{Diseño/Esquema_aplicación}
+\hspace{1.8cm}\includegraphics[scale=0.5]{Diseno/Esquema_aplicacion}
 
 \caption{Diagrama estructural de la aplicación}
 \label{Estruc_aplicacion}
@@ -2083,7 +2229,7 @@ A continuación se describen las entidas y sus respectivos repositorios\@.
 
 
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/Meeting\string".png}
+\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Meeting\string".png}
 
 \caption{Tabla para almacenar datos de reuniones}
 \label{Tabla_eMeeting}
@@ -2768,7 +2914,7 @@ o dar acceso a las reuniones\@.
 \end{itemize}
 \end{itemize}
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/User\string".png}
+\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/User\string".png}
 
 \caption{Tabla para Usuarios}
 \label{Tabla_usuario}
@@ -2806,7 +2952,7 @@ de forma única\@.
 
 \end{itemize}
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/Recording\string".png}
+\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Recording\string".png}
 
 \caption{Tabla para grabaciones}
 \label{Tabla_grabaciones}
@@ -2861,7 +3007,7 @@ reunión se visualice como minimizada\@.
 \end{itemize}
 \end{itemize}
 \begin{figure}[h]
-\hspace{3cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/Log\string".png}
+\hspace{3cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Log\string".png}
 
 \caption{Tabla para almacenar datos estadísticos parciales}
 \label{Log}
@@ -2935,7 +3081,7 @@ del sistema para advertirle de tal situación\@.
 
 
 \begin{figure}[h]
-\hspace{3cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/Log_Total\string".png}
+\hspace{3cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Log_Total\string".png}
 
 \caption{Tabla para almacenar datos estadísticos totales}
 \label{Log_total}
@@ -2965,7 +3111,7 @@ sin más que realizar las instrucciones:
 
 
 \begin{figure}[h]
-\hspace{3.5cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/Meeting_user\string".png}
+\hspace{3.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Meeting_user\string".png}
 
 \caption{Tabla de cruce de las tablas meeting y user}
 \label{meeting_user}
@@ -2982,7 +3128,7 @@ por el servidor\@. Estas y otras útiles funcionalidades se encuentran
 disponibles gracias a esta tabla\@.
 
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/Staff\string".png}
+\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Staff\string".png}
 
 \caption{Tabla para grupos}
 \label{Tabla_grupos}
@@ -2997,7 +3143,7 @@ en la versión en producción de la lógica para grupos diseñada en primera
 instancia\@.
 
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseño/Imagenes base de datos/Users_staffs\string".png}
+\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Users_staffs\string".png}
 
 \caption{Tabla para el cruce de datos entre grupos y usuarios}
 \end{figure}
@@ -3188,7 +3334,7 @@ el boceto de diseño de las primeras versiones de interfaz se ha utilizado
 la herramienta \textit{Mockups} de \textit{Balsamiq} \cite{key-19}\@.
 
 \begin{figure}[H]
-\hspace{3cm}\includegraphics[scale=0.4]{Diseño/boceto}
+\hspace{3cm}\includegraphics[scale=0.4]{Diseno/boceto}
 
 \caption{Maqueta de la primera versión}
 \label{wrap:maqueta_1_version}
@@ -3208,7 +3354,7 @@ Este mensaje se desvanece progresivamente gracias a una funcionalidad
 de \textit{jQuery UI} \cite{key-13}\@.
 
 \begin{figure}[H]
-\hspace{3cm}\includegraphics[scale=0.3]{Diseño/versión_1}
+\hspace{3cm}\includegraphics[scale=0.3]{Diseno/version_1}
 
 \caption{Primer interfaz de usuario visualizado en el explorador}
 \label{interfaz1}
@@ -3465,7 +3611,7 @@ describir a continuación\@.
 
 
 \begin{figure}[H]
-\hspace{4cm}\includegraphics[scale=0.35]{Diseño/achievement_files}
+\hspace{4cm}\includegraphics[scale=0.35]{Diseno/achievement_files}
 
 \caption{Ventana emergente para \textit{All recordings}}
 \label{achievement_files}
@@ -4007,7 +4153,7 @@ pinchando en el botón \textit{Save}\@.
 
 
 \begin{figure}[H]
-\hspace{3.5cm}\includegraphics[scale=0.4]{Diseño/InviteDigiMarPartners}
+\hspace{3.5cm}\includegraphics[scale=0.4]{Diseno/InviteDigiMarPartners}
 
 \caption{Ventana emergente al pinchar en el botón \textit{Invite DigiMar Partners}}
 \end{figure}
@@ -4556,7 +4702,7 @@ es la posibilidad de registrarse a través de un servidor CAS, que
 pasamos a describir\@.
 
 \begin{table}[H]
-\hspace{2cm}\includegraphics[width=12cm,height=7cm]{Diseño/CAS}
+\hspace{2cm}\includegraphics[width=12cm,height=7cm]{Diseno/CAS}
 
 \caption{Servidor CAS}
 \label{Servidor_CAS}
@@ -4599,7 +4745,7 @@ o no puede hacer ese usuario en función de sus roles\@.
 
 \label{LoginFormCAS}}
 
-\hspace{5cm}\subfloat[Formulario de acceso con diseño ``Campus do Mar'']{\includegraphics[scale=0.35]{Diseño/login}\hspace{0.8cm}
+\hspace{5cm}\subfloat[Formulario de acceso con diseño ``Campus do Mar'']{\includegraphics[scale=0.35]{Diseno/login}\hspace{0.8cm}
 
 
 
