@@ -1,0 +1,2644 @@
+\documentclass[spanisheDIVcalc,twoside,parskip-,pointlessnumbers,final]{scrbook}
+\usepackage[b5paper]{geometry}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage[smaller]{acronym}
+\usepackage{url}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{pxfonts}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{pspicture}
+\usepackage{scrpage2}
+\usepackage{subfigure}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{lettrine}
+\usepackage[Sonny]{fncychap}
+\usepackage[small,normal,bf,up]{caption2}
+\usepackage{typearea}
+\selectfont
+%\typearea[current]{calc}
+
+\selectspanish
+\bibpunct{(}{)}{;}{a}{,}{,}
+\deactivatetilden
+\spanishdeactivate{~}
+% Evitar título y subtítulo en página vacía antes de capítulo
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+
+
+\begin{document}
+
+
+\title{Diseño de un servicio para el ahorro energético en ordenadores de
+sobremesa mediante virtualización}
+
+
+\author{Autor: Miguel Bernárdez Curra\and Tutor: Miguel Rodríguez Pérez}
+
+
+\date{Julio 2013}
+\maketitle
+\newpage{}
+\section*{\centering{Proyecto Fin de Carrera}}
+
+\subsection*{\centering{Diseño de un servicio para el ahorro energético en ordenadores de                                                                                                                                                                       sobremesa mediante virtualización}}
+
+\begin{description}
+
+\item [{Autor:}] Miguel Bernárdez Curra.
+\item [{Tutor:}] Miguel Rodríguez Pérez.
+\end{description}
+
+El tribunal nombrado para juzgar el proyecto fin de carrera arriba citado, compuesto por los miembros:
+\begin{description}
+\item [{Presidente:}] 
+\item [{Secretario:}] 
+\item [{Vocal:}]
+\end{description}
+
+\vspace{1 cm}
+\centerline{Acuerda otorgarle la calificación de:}
+
+\vspace{1.5 cm}
+
+\centerline{El Presidente\hspace{3 cm}El Secretario\hspace{3 cm}El Vocal}
+
+\vspace{2.5 cm}
+
+
+
+
+
+
+\centerline{En Vigo, a.........de................de 2013.}
+
+\newpage{}
+\thispagestyle{empty}
+\mbox{}
+\newpage{}
+\section*{\centering{Diseño de un servicio para el ahorro energético en ordenadores de                                                                                                                                                                    sobremesa mediante virtualización}}
+
+%\begin{description}
+ \centerline{{Autor:} Miguel Bernárdez Curra.}
+ \centerline{{Tutor:} Miguel Rodríguez Pérez.}
+%\end{description}
+\subsection*{\centering{Resumen}}
+El presente proyecto está orientado a la reducción del consumo energético
+provocado por las estaciones de trabajo que pueda haber en una determinada
+institución mediante soluciones de virtualización.
+
+La virtualización se basa en la emulación mediante software de algún
+recurso hardware. El software que crea una capa de abstracción entre
+una máquina física y una virtual se conoce como hypervisor. Median
+un hypervisor podemos emular completamente un dispositivo hardware
+como pudiera ser una computadora y todos sus recursos: CPU, memoria,
+disco duro, dispositivos de red u otros dispositivos.
+
+La virtualización es muy común actualmente en el mundo de los servidores
+y además de muchas otras ventajas nos encontramos con un mejor aprovechamiento
+de los recursos, debido a que en una misma máquina física pueden coexistir
+varias máquinas virtuales.
+
+Este proyecto se centra en aprovechar estás ventajas de la virtualización
+pero aplicadas al ahorro energético en estaciones de trabajo. Los
+ordenadores personales o estaciones de trabajo pasan a veces mucho
+tiempo encendidos debido a una necesidad de conexión a la red permanente,
+bien para conectarnos remotamente o bien debido a la presencia de
+un pequeño servidor. Por lo tanto, estas estaciones de trabajo están
+encendidas permanentemente aunque su utilización sea esporádica.
+
+El proyecto consiste en la realización de una arquitectura cliente-servidor
+de máquinas virtuales, de forma que las estaciones de trabajo utilicen
+un sistema virtualizado que pueda ser transferido al servidor cuando
+acabamos de trabajar y así apagar la estación de trabajo con el consiguiente
+ahorro energético. Las máquinas virtuales permanecerán activas y conectadas
+a la red en el servidor, de forma que serán igualmente accesibles
+y sus servicios disponibles.
+
+\begin{description}
+\item [{Palabras clave:}] Ahorro Energético, Virtualización, Libvirt, KVM, SPICE.
+\end{description}
+
+
+
+\frontmatter
+
+\tableofcontents{}
+\clearemptydoublepage
+
+\listoffigures
+
+\mainmatter
+\newpage{}
+
+\clearemptydoublepage
+\chapter{Introducción}
+
+Debido al auge de las Tecnologías de la Información y Comunicación
+(TIC), observamos un aumento de consumo energético en este sector
+provocado por la creciente cantidad de equipos electrónicos conectados
+permanentemente a la red. Se estima que este consumo energético es
+de un 2\% del consumo energético global. De este 2\%, el 40\% se corresponde
+al consumo de ordenadores personales y monitores.
+
+La reducción del consumo energético en ordenadores personales es cada
+vez más importante debido al aumento del coste de la energía y a la
+protección del medio ambiente.
+
+Muchos de los ordenadores personales o estaciones de trabajo que pueda
+haber en una determinada institución están permanentemente encendidos
+aun cuando el usuario no está presente, lo que implica un aumento
+del consumo energético y en un impacto negativo en el medio ambiente.
+Aunque algunos equipos puedan simplemente apagarse o suspenderse,
+otros necesitan estar permanentemente encendidos y conectados a la
+red, bien para poder conectarse remotamente a ellos o bien porque
+alojan un determinado servicio que deba estar disponible, aun cuando
+su uso sea esporádico. Debido a esta situación la eficiencia energética
+es bastante baja, ya que la mayor parte del consumo energético de
+un ordenador personal es el correspondiente a mantener el equipo encendido.
+Por lo tanto sería conveniente aglutinar estos servicios en menos
+equipos cuando su uso es bajo.
+
+
+\section{Solución propuesta}
+
+La solución que se propone en este proyecto es proporcionar a los
+usuarios de las estaciones de trabajo una máquina virtualizada que
+pueda ejecutarse tanto en un equipo dedicado como en un servidor conjuntamente
+con las máquinas de otros usuarios. Es decir, la máquina virtual se
+ejecuta en el equipo dedicado cuando su uso es elevado y se migra
+al servidor, donde también se ejecutan otras máquinas, cuando su uso
+es reducido.
+
+La solución propuesta utiliza técnicas de virtualización. La virtualización
+se basa en la emulación mediante software de algún recurso hardware.
+El software que crea una capa de abstracción entre una máquina física
+y una virtual se conoce como hipervisor. Mediante un hipervisor podemos
+emular completamente un dispositivo hardware como pudiera ser una
+computadora y todos sus recursos: CPU, memoria, disco duro, dispositivos
+de red y otros dispositivos. La virtualización es muy común actualmente
+en el mundo de los servidores ya que, entre otras ventajas, nos aporta
+un mejor aprovechamiento de recursos y eficiencia energética al poder
+coexistir muchas máquinas virtuales en una sola máquina física. Estas
+máquinas virtuales se pueden mover además entre diferentes máquinas
+físicas lo cual nos provee de una gran versatilidad.
+
+El presente proyecto consiste en la realización de una arquitectura
+cliente-servidor de máquinas virtuales, de forma que las estaciones
+de trabajo utilicen un escritorio virtualizado, que pueda ser transferido
+al servidor cuando terminamos de trabajar con el consiguiente ahorro
+energético. La máquina virtual continua activa ejecutándose en el
+servidor, con lo que es accesible y sus servicios gozan de disponibilidad.
+
+El ahorro energético es obvio. El coste de mantener la estación de
+trabajo encendida es bastante más elevado que el de agregar una nueva
+máquina virtual en el servidor.
+
+
+\section{Objetivos}
+
+Los objetivos de este proyecto son conseguir una solución fácil de
+administrar y eficiente. También se busca la comodidad del usuario
+proporcionando una solución lo más fácil de usar posible. Para esto
+es necesario conseguir que el rendimiento de la máquina virtualizada
+sea lo más parecido al rendimiento de la máquina física dedicada en
+la que se va a ejecutar cuando no lo está haciendo en el servidor.
+También es importante que el uso de está solución sea lo más transparente
+posible de forma que el usuario perciba que está utilizando su ordenador
+con un sistema nativo y no virtualizado, pudiendo interactuar con
+él de forma normal.
+
+\clearemptydoublepage
+\chapter{Tecnologías utilizadas}
+
+Para la realización de la solución propuesta se han utilizados diversas
+tecnologías de virtualización que serán descritas en este capitulo.
+En capítulos posteriores se explica como son utilizadas estas tecnologías.
+
+
+\section{Virtualización}
+
+La virtualización es un método para alejar las aplicaciones de su
+dependencia con el hardware y presentarle en su lugar una vista lógica
+de esos recursos. Los principales objetivos de la virtualización son
+la escalabilidad, la fiabilidad y la disponibilidad, así como la agilidad
+a la hora de disponer de nuevos equipos y también la seguridad y la
+facilidad de administración de sistemas más unificados. La virtualización
+es la emulación mediante software de un sistema hardware real con
+todos sus recursos. La máquina física sobre la que se emula este sistema
+se conoce como \emph{anfitrión} mientras que la máquina que se ejecuta
+en el sistema virtualizado se conoce como \emph{huésped.}%
+\footnote{En inglés \emph{host }y \emph{guest.}%
+} La capa de abstracción entre el equipo físico y las máquinas virtuales
+la proporciona el software que se encarga de la virtualización, de
+emular la máquina física, y que se conoce como hipervisor.
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=1\textwidth]{images/VIRT-Y-NO-VIRT}
+\par\end{centering}
+
+\centering{}\caption{Sistema sin virtualizar y sistema virtualizado.}
+\label{Virtualizacion vs sin virtualizacion}
+\end{figure}
+
+
+La virtualización, figura \ref{Virtualizacion vs sin virtualizacion},
+divide los recursos de una máquina física entre múltiples entornos
+de ejecución destinados a las máquinas virtuales, y puede hacer una
+asignación dinámica de dichos recursos según que máquina virtual tenga
+más necesidad de los mismos. Debido a esto, conseguimos un mejor aprovechamiento
+de los recursos de la máquina física como es el caso de la consolidación
+de cargas de trabajo de varios servidores infrautilizados en un único
+servidor mediante la utilización de máquinas virtuales. Utilizando
+servidores físicos, el factor de utilización de estos ronda habitualmente
+el 10\% mientras que utilizando servidores virtualizados, el factor
+de utilización de los mismo servidores físicos ronda el 80\%. Esto
+se debe a que normalmente no se hacen coexistir diferentes servicios
+o aplicaciones en una misma máquina o sistema operativo por razones
+de seguridad o estabilidad, así como para conseguir una independencia
+de unos servicios con respecto a otros. 
+
+Por lo tanto, con la consolidación de servidores conseguida mediante
+la virtualización logramos una reducción del coste material de los
+servidores así como del coste energético. Al no haber una dependencia
+directa del hardware, las máquinas virtuales pueden migrarse entre
+servidores físicos y seguir ejecutándose en caso de fallo de un servidor,
+apagado por motivos de mantenimiento, balanceo de cargas, etc... sin
+perder la disponibilidad de los servicios ofrecidos.
+
+La virtualización nos ofrece una gran cantidad de ventajas, como la
+emulación de una configuración hardware de la que no disponemos (múltiples
+núcleos, dispositivos SCSI,%
+\footnote{SCSI: Small Computer System Interface. %
+} etc), entornos de ejecución aislados donde poder testear aplicaciones
+en las que no confiamos de forma segura, hacer más fácil en general
+la gestión de estas máquinas mediante copias de seguridad o migración.%
+\footnote{La migración consiste en transladar una máquina virtual a otra máquina
+física diferente para continuar en ésta su ejecución.%
+} La virtualización nos aporta una centralización de las tareas administrativas
+y una maximización de la utilización de los recursos hardware. La
+virtualización también facilita la instalación de nuevos servidores
+a partir de plantillas de máquinas virtuales con sistemas operativos
+ya instalados y preconfigurados, así como la creación de copias de
+seguridad del estado completo de una máquina virtual en un instante
+determinado, pudiendo volver posteriormente a ese estado previo.
+
+
+\subsection{El hipervisor}
+
+El hipervisor es el encargado de emular y ejecutar las máquinas virtuales,
+de forma que a través del hipervisor los diferentes sistemas operativos
+instalados en dichas máquinas virtuales puedan hacer uso de los recursos
+virtualizados del sistema. Se pueden clasificar en los siguientes
+tipos, figura \ref{hipervisor tipo 1 vs hipervisor tipo2}:
+\begin{itemize}
+\item Tipo 1 (Bare Metal o Nativo): Este tipo de hipervisor se ejecuta directamente
+sobre el hardware del sistema físico desde donde controla la gestión
+de las máquinas virtuales que se ejecutan en un segundo nivel, directamente
+por encima del hipervisor. Técnicamente este tipo de hipervisores
+están integrados en un sistema operativo dedicado exclusivamente a
+tareas de virtualización, o lo que es lo mismo, el sistema operativo
+es el hipervisor. Este tipo de hipervisores son más eficientes y también
+más seguros limitando el acceso al hipervisor (incorporado en el sistema
+operativo) al administrador, evitando así que los usuarios o las aplicaciones
+de usuario puedan interferir en el hipervisor. El hipervisor gestiona
+los recursos hardware del sistema directamente.%
+\footnote{Los hipervisores actuales de tipo 1 no gestionan la entrada y salida
+de dispositivos, se ayudan de una máquina virtual (por ejemplo, el
+Dominio 0, en Xen) encargada de gestionar los controladores de dispositivos
+y el acceso a los mismos por parte del resto de máquinas virtuales.%
+}Algunos hipervisores de este tipo son: Oracle VM Server (para arquitectura
+SPARC y x86), Citrix XenServer, VMware ESX/ESXi, KVM,%
+\footnote{No hay un consenso en cuanto a la clasificación de KVM. Si bien se
+ejecuta sobre un sistema operativo normal con lo que podría considerarse
+de tipo 2, opera a nivel del núcleo de dicho sistema operativo teniendo
+acceso directo al hardware y convirtiendo de esta forma al núcleo
+de Linux en un hipervisor de tipo 1. Con lo que se encuentra entre
+el tipo 1 y el tipo 2. Sin embargo, también es considerado un hipervisor
+de tipo 0, lo que sería un hipervisor de tipo 1 ideal que también
+gestiona los controladores y la entrada y salida.%
+} y Microsoft Hyper-V.
+\item Tipo 2 (Hosted): Este tipo de hipervisores se ejecutan sobre un sistema
+operativo de propósito general (GNU+Linux, Windows, FreeBSD...), y
+las máquinas virtuales se ejecutan sobre éste, con lo que los sistemas
+operativos instalados en las máquinas virtuales se ejecuta en un nivel
+3 con respecto al hardware. Los sistemas operativos instalados en
+las máquinas virtuales provocan una degradación en el rendimiento
+del sistema operativo sobre el cual está instalado el hipervisor.
+Este tipo de hipervisores son débiles en cuanto a seguridad y fiabilidad.
+Los hipervisores de tipo 2 se comportan como un proceso más ejecutándose
+dentro del sistema operativo con lo que no tienen acceso directo al
+hardware sino a través del sistema operativo. Algunos hipervisores
+de este tipo son: Qemu, VMware Workstation o VirtualBox. 
+\item Tipo 0: Existe un tipo especial de hipervisor denominado tipo 0 y
+que es un caso concreto de hipervisor de tipo 1 ideal o mejorado en
+el que dicho hipervisor, además de ejecutarse directamente sobre el
+hardware, se hace cargo de las operaciones de entrada y salida así
+como de los controladores de los dispositivos. 
+\end{itemize}
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=1\textwidth]{images/hipervisor-tipos}
+\par\end{centering}
+
+\caption{Hipervisor Tipo 1 e Hipervisor Tipo 2.}
+\label{hipervisor tipo 1 vs hipervisor tipo2}
+\end{figure}
+
+
+El hipervisor de tipo 1 es más eficiente ya que se ejecuta directamente
+sobre el hardware. El hipervisor se convierte en sistema operativo
+gestionando los recursos del sistema para ofrecerselos a las máquinas
+virtuales. Desde el punto de vista de la virtualización de servidores
+esto es más seguro ya que se busca minimizar el sitema operativo base
+que se encarga de la gestión de los recursos para evitar fallos en
+el sistema que puedan afectar a todas las máquinas virtuales alojadas. 
+
+El hipervisor de tipo 2 se ejecuta sobre un sistema operativo normal
+y comparte recursos con las aplicaciones normales del sistema como
+pueden ser navegadores web, o cualquier tipo de aplicación de usuario.
+Esto puede verse como una ventaja para un usuario individual que quiera
+probar distintos sistemas operativos o hacer todo tipo de pruebas
+sobre éste (como ejecutar aplicaciones potencialmente peligrosas en
+un entorno controlado) mientras puede usar sus aplicaciones habituales
+sin necesidad de disponer de una máquina física adicional dedicada
+a ejecutar dichas máquinas virtuales. Otra ventaja habitual de los
+hipervisores de tipo 2 es que al ejecutarse sobre sistemas operativos
+más comunes y de propósito general soportan gran variedad de dispositivos
+y este soporte se traslada a las máquinas virtuales.
+
+
+\subsection{Virtualización Clásica: Popek y Goldberg}
+
+Popek y Goldberg establecieron en 1974 [\cite{Popek:1974:FRV:361011.361073}] tres características
+esenciales que debe poseer una aplicación software de virtualización
+para considerarse un hipervisor o monitor de máquinas virtuales:
+\begin{enumerate}
+\item Fidelidad: El software que se ejecuta sobre el hipervisor se debe
+ejecutar exáctamente igual a como lo haría en una máquina real. Exceptuando
+los posibles retardos.
+\item Rendimiento: La mayor parte de las instrucciones del sistema operativo
+instalado en la máquina virtual se ejecutan directamente sobre el
+hardware sin intervención del hipervisor.
+\item Seguridad: El hipervisor controla todos los recursos hardware.
+\end{enumerate}
+La virtualización clásica se lleva a cabo mediante el método de \emph{interrupción
+y emulación, }el cual permite ejecutar el sistema operativo virtualizado
+directamente en el microprocesador pero con una reducción de privilegios,
+es decir, se ejecuta en modo usuario. Esto es posible ya que el hipervisor
+se encarga de la emulación de las instrucciones privilegiadas que
+necesitan ejecutarse en modo administrador o de superusuario en el
+microprocesador. Cuando el microprocesador detecta una instrucción
+privilegiada que no proviene del sistema operativo lanza una interrupción
+y el hipervisor se encarga de procesarla y devolverle el resultado
+al sistema operativo virtualizado. Este tipo de virtualización no
+estuvo soportado inicialmente en la arquitectura x86.
+
+La virtualización clásica intentó mejorarse siguiendo dos caminos
+diferentes:
+\begin{itemize}
+\item Por una lado añadiendo una interfaz entre el hipervisor y el sistema
+operativo instalado en la máquina virtual, mediante la modificación
+de dicho sistema operativo para hacer uso de esa interfaz optimizada,
+dando lugar a lo que se conocería como paravirtualización. Éste tipo
+de virtualización no cumple los requisitos de Popek y Goldberg de
+\emph{virtualización clásica} ya que se necesita modificar el sistema
+operativo huésped. 
+\item Por otro lado, modificar el hardware, concretamente los microprocesadores,
+para dotarlo de un nuevo modo de ejecución que reduzca el número de
+interrupciones y conseguir una virtualización más eficiente sin la
+necesidad de modificar el sistema operativo huésped y así cumplir
+los requisitos de la \emph{virtualización clásica}.
+\end{itemize}
+
+\subsection{La virtualización de IBM}
+
+La historia de la virtualización data de finales de los años 60 y
+principios de los 70. La virtualización asistida por hardware fue
+introducida por primera vez por IBM en el \emph{IBM System/370} destinado
+a ejecutar al sistema operativo \emph{VM/370}, desarrollado específicamente
+para servir de hipervisor sobre el que instalar las máquinas virtuales
+con sistema operativo \emph{CMS}. Es todavía ampliamente utilizado
+en su nueva versión \emph{z/VM (System z)} como una de las soluciones
+de virtualización completa en el mercado de los mainframes.
+
+\emph{VM/370} utilizaba la técnica \emph{interrupción y emulación}
+para emular aquellas instrucciones privilegiadas que provocaban una
+interrupción al tratar de ejecutarse en modo usuario, que es el modo
+en el que se ejecutaba el hipervisor. Debido al abuso de esta técnica,
+la cual provoca una sobrecarga, IBM desarrolló el \emph{370-XA} que
+incorporaba extensiones en el microprocesador que reemplazaban funciones
+comunes con un elevado coste de emulación. Esto dio lugar a un nuevo
+modo de ejecución \emph{(interpretive execution) }que permitía a las
+máquinas virtuales ejecutar instrucciones privilegiadas. El hipervisor
+detectaba dichas instrucciones para posteriormente activar el modo
+de ejecución \emph{interpretive execution }y así poder ejecutarlas
+directamente en el microprocesador. Esto evitaba la sobrecarga producida
+por el gran número de interrupciones existentes.
+
+El modo \emph{interpretive execution }sigue provocando interrupciones
+debido a la ejecución de instrucciones de E/S,%
+\footnote{E/S Instrucciones de Entrada y Salida para comunicarse con los dispositivos,
+en inglés I/O.%
+} sin embargo, el \emph{370-XA} contaba además con el modo \emph{preferred-machine
+assist }el cual permitía a una de las máquinas virtuales ejecutar
+además instrucciones de E/S, así como manejar sus propias interrupciones.
+
+Posteriormente aparece \emph{VM/ESA} (\emph{Virtual Machine Enterprise
+System Architecture}), arquitectura que incluye MDF (\emph{Muliple
+Domain Facility}) que establece zonas para soportar múltiples máquinas
+virtuales en \emph{preferred mode.} Además mediante el modo \emph{preferred-machine
+assist} se tiene acceso al modo \emph{preferred storage }que posibilita
+el acceso a disco directo sin necesidad de convertir direcciones físicas
+en direcciones virtuales.
+
+En la época de los mainframes la virtualización era muy importante
+de cara a la consolidación de servidores. A finales de los 70 y con
+el auge de los minicomputadores los esfuerzos en virtualización disminuyeron.
+
+El interés por la virtualización vuelve a estar en auge en la última
+década debido a la expansión de la arquitectura x86 tanto en ordenadores
+personales como servidores y debido a una necesidad de consolidación
+de cargas de trabajo en servidores así como por razones de seguridad,
+aislamiento, o para el uso de máquinas virtuales como platataforma
+de pruebas, etc. La arquitectura x86 no cumplía inicialmente los 3
+requisitos de Popek y Goldberg para llevar a cabo la virtualización
+clásica.
+
+
+\subsection{Virtualización en la arquitectura x86}
+
+A finales de la década de los 90, la virtualización de la arquitectura
+x86 se consigue mediante complejas técnicas software debido a la falta
+de soporte para virtualización en los microprocesadores de arquitectura
+x86. Una de los principales problemas de las arquitectura x86 era
+la falta de interrupciones cuando instrucciones privilegiadas eran
+ejecutadas en modo usuario. 
+
+Hasta la incorporación, en el año 2006, de las extensiones de virtualización
+VT-x y AMD-V en los microprocesadores de Intel y AMD respectivamente,
+no era posible la virtualización clásica utilizando la técnica de
+\emph{interrupción y emulación }por lo que se recurría a la \emph{conversión
+binaria }de las instrucciones del kernel del sistema operativo virtualizado.
+Con la incorporación de las extensiones VT-x y AMD-V se dispone de
+nuevas instrucciones que permiten entrar en un nuevo modo de ejecución
+en el que se pueden ejecutar las máquinas virtuales directamente,
+incluidas instrucciones privilegiadas, dando lugar a una virtualización
+clásica. Las nuevas instrucciones permiten entrar y salir de dicho
+modo de ejecución y aparecen nuevas estructuras en memoria donde almacenar
+los estados de ejecución de las máquinas virtuales.
+
+El rendimiento utilizando este método es mayor cuando hay menos cambios
+de un modo de ejecución a otro, llegando a ser un rendimiento cercano
+al nativo cuando no hay dichos cambios de modo de ejecución. Pero,
+aunque este método permite la ejecución directa de instrucciones privilegiadas,
+como ocurre también en otras arquitecturas, no permite la ejecución
+de operaciones de entrada y salida, ni tampoco virtualiza la unidad
+de gestión de memoria, con lo cual, el hipervisor tiene que intervenir
+ante cada fallo de página o instrucción de entrada y salida provocando
+así un cambio en el modo de ejecución y reduciendo la eficiencia.
+
+Para virtualizar la unidad de gestión de memoria se recurre a la técnica
+\emph{shadow page tables }mediante la cual el hipervisor mantiene
+una correspondencia entre las direcciones de memoria de las máquinas
+virtuales y las direcciones físicas donde almacena dicha memoria.
+Esta técnica provoca sobrecarga al tener que estar actualizando constantemente
+esa correspondencia.
+
+En una segunda generación de soporte para virtualización por hardware,
+y para mejorar la eficiencia de ésta, Intel y AMD también introducen
+la tecnología VT-d y AMD-Vi que permiten asignar dispositivos hardware
+directamente a una máquina virtual mediante ADM,%
+\footnote{Acceso Directo a Memoria, en inglés DMA.%
+} evitando así las interrupciones debidas a la ejecución de instrucciones
+de entrada y salida. Sin embargo, esta tecnología, actualmente solo
+permite la asignación de dispositivos a máquinas virtuales, pero no
+permite compartir dispositivos entre las mismas,
+además de dificultar la migración de máquinas asociadas a un disposito
+real concreto.
+
+Otra de las mejoras en la virtualización de la arquitectura x86 es
+la incorporación en los microprocesadores de Intel de la técnología
+EPT%
+\footnote{Tablas de Memoria Extendidas, en inglés Extented Page Tables.%
+} para evitar el problema que provoca la tecnología \emph{shadow page
+tables }ante fallos de página en las máquinas virtuales, ya que estos
+tenían que ser resueltos por el hipervisor, lo que implicaba más interrupciones
+y cambios de contexto.
+
+Llegado a este punto, la arquitectura x86 consigue una virtualización
+clásica del nivel proporcionado por IBM en los años 70 con el 370-XA.
+
+\begin{table}[htpb]
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+\textbf{IBM} & \textbf{Intel VT-x}\tabularnewline
+\hline 
+\hline 
+Interpretive execution & VMX non-root mode\tabularnewline
+\hline 
+State Description & VMCS\tabularnewline
+\hline 
+Shadow Page Tables & Shadow Page Tables\tabularnewline
+\hline 
+2-level page tables & Extended Page Tables\tabularnewline
+\hline 
+\end{tabular}
+\par\end{centering}
+
+\caption{Comparación entre el soporte de virtualización asistido por hardware
+de IBM e Intel.}
+\label{IBM virt VS Intel virt}
+\end{table}
+
+
+En el cuadro \ref{IBM virt VS Intel virt} se compara el estado de
+la virtualización de Intel e IBM. Mientras IBM tiene el modo de ejecución
+\emph{Interpretive Execution} destinado a ejecutar máquinas virtuales
+en modo privilegiado, Intel posee el \emph{VMX non-root mode} que
+permite ejecutar el sistema operativo de las máquinas virtuales en
+el anillo 0.%
+\footnote{La arquitectura x86 posee 4 anillos de ejecución correspondientes
+a diferentes niveles de permisos, aunque normalmente solo se utilizan
+el anillo 0 (el más privilegiado) destinado al sistema operativo y
+el anillo 3 (menos privilegiado) destinado a las aplicaciones.%
+} Intel también posee una estructura para almacenar el estado de ejecución
+de las máquinas virtuales pero adaptado a la arquitectura x86. Tanto
+IBM como Intel recurrieron a soluciones hardware para evitar el problema
+que provocaba el uso de la técnología \emph{shadow page tables }ante
+los fallos de página.
+
+
+\subsection{Tipos de virtualización}
+
+Existen diferentes tipos de virtualización:
+\begin{itemize}
+\item Virtualización Completa (\emph{Full Virtualization}): El hipervisor
+simula el hardware completamente de forma que puede ejecutar sistemas
+operativos soportados por la arquitectura virtualizada sin tener que
+ser modificados. Se basa en técnicas de virtualización como la conversión
+binaria (\emph{binary translation}) de las instrucciones del procesador
+o la técnica de \emph{interrupción y emulación }(\emph{trap and emulate}).
+Ambas técnicas de virtualización pueden generar una gran sobrecarga.
+Este tipo de virtualización permite emular arquitecturas diferentes
+a las de la máquina anfitrión.
+\item Virtualización Completa asistida por hardware (\emph{Hardware-assisted
+Full Virtualization}): Es una virtualización completa que hace uso
+de determinadas extensiones de los microprocesadores modernos para conseguir lo
+que se conoce como virtualización acelerada. El sistema virtualizado
+debe usar el mismo conjunto de instrucciones que el microprocesador del anfitrión.
+A través de estas extensiones se accede a un nuevo modo de ejecución
+en el microprocesador (\emph{interpretive mode}%
+\footnote{Si bien permite ejecutar directamente instrucciones privilegiadas
+directamente en el microprocesador, no permite, en general, la ejecución
+de instrucciones de entrada y salida E/S o el manejo de las interrupciones
+propias, con lo cual, en estos caso se sigue utilizando la técnica
+\emph{interrupción y emulación.}%
+}\emph{)} que nos permite ejecutar instrucciones privilegiadas directamente
+en el microprocesador de la máquina física. Los procesadores de arquitectura
+x86 con extensiones VT-x (Intel) y AMD-V (AMD) incorporan soporte
+para virtualización asistida por hardware.
+\item Paravirtualización: Es una técnica mediante la cual el hipervisor
+proporciona una interfaz software a las máquinas virtuales en lugar
+de hacer una emulación del hardware presente. De esta forma se evita
+la costosa emulación de dicho hardware. Para que el sistema operativo
+huésped pueda hacer uso de esta interfaz su núcleo debe ser modificado.
+Utilizando este tipo de virtualización, el huésped sabe que está siendo
+virtualizado y no ejecutándose en una máquina física directamente. 
+\item Virtualización del sistema operativo (\emph{Operative System-level
+Virtualization}): En este tipo de virtualización el núcleo del sistema
+operativo de la máquina física permite múltiples espacios de usuario
+aislados entre sí. Estos espacios de usuario se conocen como contenedores
+y pueden dar lugar a consolidación de servidores instalando servicios
+que estabán en diferentes servidores en uno mismo pero en diferentes
+contenedores. El núcleo provee los mecanismos necesarios para el aislamiento
+de los contenedores así como para minimizar el impacto que las actividades
+de diferentes contenedores puedieran tener entre ellos. Su uso es
+bastante común en \emph{virtual hosting}. Este sistema es poco fléxible
+en cuando a variedad de sistemas operativos que se pueden instalar
+ya que todos tienen que compartir el mismo núcleo.
+\end{itemize}
+Si bien la virtualización asistida por hardware reduce la sobrecarga
+producida por la paravirtualización, tiene el inconveniente de generar
+muchas interrupciones cuando se utiliza virtualización completa asistida
+por hardware debido a las instrucciones de E/S. Por esta razón suele
+utilizarse en conjunto con controladores paravirtualizados dando lugar
+a lo que se conoce como \emph{Virtualización Híbrida}.
+
+ 
+
+
+\section{KVM}
+
+KVM%
+\footnote{Kernel-based Virtual Machine.%
+} es un hipervisor que implementa una virtualización completa acelerada
+por hardware que está ganando popularidad en los últimos años. Sin
+embargo, no es un hipervisor por sí mismo, sino más bien una parte
+de una solución más grande. KVM está implementado como una serie de
+módulos en el núcleo de Linux que convierten a éste en un hipervisor
+de tipo 1 cuando estos módulos son cargados. Por lo tanto, KVM, tiene
+la misma licencia libre, GPL,%
+\footnote{Licencia General Pública.%
+} que el núcleo de Linux, ya que forma parte de éste. KVM está incluido
+en el núcleo de Linux desde la versión 2.6.20 y soporta las arquitecturas
+i686, x86-64, IA64, PPC y S390.
+
+
+\subsection{Características}
+
+KVM fue diseñado e implementado posteriormente al desarrollo de las
+extensiones de virtualización asistida por hardware incluidas en los
+procesadores de arquitectura x86 y optimizado para hacer uso de las
+mismas. Debido a esto, KVM requiere que dichas extensiones estén presentes
+y activadas en los microprocesadores de la máquina anfitrión.
+
+Al convertir el núcleo de Linux en hipervisor, KVM puede hacer uso
+de los mecanismos de gestión de memoria y del planificador de tareas
+existentes en lugar de desarrollar unos nuevos evitando así la redundancia
+y acelerando los tiempos de ejecución.
+
+KVM está diseñado de forma que cada nueva máquina virtual en ejecución,
+aparece desde el punto de vista del anfitrión, como un nuevo proceso
+que será tratado en cuanto a gestión, planificación y seguridad, como
+cualquier otro proceso estándar de Linux.
+
+Para almacenar las imágenes de disco de las máquinas virtuales se
+puede utilizar cualquier tipo de almacenamiento soportado por Linux,
+incluyendo discos locales, SCSI, o almacenamiento en red como NFS%
+\footnote{Sistema de Ficheros de Red, en inglés \emph{Network File System.}%
+} o SAN.%
+\footnote{Red de Área de Almacenamiento, en inglés \emph{Storage Area Network.}%
+}
+
+KVM permite la migración de máquinas virtuales entre anfitriones físicos
+sin pérdida de servicio, es decir, mientras las máquinas virtuales
+continúan ejecutándose. Así como la creación de copias completas del
+estado de una máquina en un instante determinado, más conocidas como
+\emph{snapshots.}
+
+Para la emulación de dispositivos como la BIOS, bus PCI, bus USB,
+controladores de disco o red, KVM utiliza una versión modificada de
+Qemu.%
+\footnote{Qemu es un emulador de código abierto y libre que permite la virtualización
+hardware mediante conversión binaria.%
+}
+
+Un proceso de Linux tiene dos modos de ejecución posibles: núcleo
+y usuario. KVM añade un tercer modo de ejecución, modo huésped, en
+el que se ejecutan las máquinas virtuales y que tiene a su vez sus
+propios modos de ejecución núcleo y usuario.
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics{images/kvm}
+\par\end{centering}
+
+\caption{Representación KVM.}
+\label{Representaci=0000F3n de KVM}
+\end{figure}
+
+
+En la figura \ref{Representaci=0000F3n de KVM} podemos observar la
+representación de KVM. La virtualización con KVM se realiza a través
+de dos componentes principales:
+\begin{enumerate}
+\item Módulos de KVM en el núcleo de Linux:
+
+\begin{itemize}
+\item \emph{kvm.ko}, proporciona el núcleo de la infraestructura de virtualización.
+\item \emph{kvm-intel.ko} ó \emph{kvm-amd.ko}, módulos específicos para
+usar las extensiones de virtualización proporcionadas por los microprocesadores
+de Intel o AMD respectivamente.
+\end{itemize}
+\item Espacio de usuario proporcionado por Qemu.
+\end{enumerate}
+Al cargar los módulos se exporta el dispositivo \emph{/dev/kvm} que
+controla la virtualización hardware y activa el modo huésped. A través
+del dispositivo \emph{/dev/kvm} las máquinas virtuales acceden a su
+propio espacio de direccionamiento separado del espacio de direccionamiento
+del anfitrión y de otras máquinas virtuales. Normalmente los dispositivos
+bajo el árbol \emph{/dev} son comunes a los espacios de usuario de
+cada proceso, sin embargo \emph{/dev/kvm} muestra un mapa de memoria
+diferente para cada proceso que lo abre. De esta forma proporciona
+aislamiento entre las distintas máquinas virtuales.
+
+KVM permite la ejecución de las máquinas virtuales en el \emph{modo
+huésped }a la vez que captura aquellas instrucciones de entrada y
+salida de dispositivos para emularlas utilizando una versión modificada
+de Qemu.
+
+El hipervisor KVM suporta una gran variedad de sistemas operativos
+huésped, incluyendo distribuciones de Linux, Microsoft Windows, y
+otros sistemas operativos como OpenBSD, FreeBSD, Solaris...
+
+
+\subsection{Gestión de CPU}
+
+KVM está basado en el núcleo de Linux y cada sistema operativo huésped
+es un nuevo proceso con múltiples hilos para el hipervisor. Linux
+permite además la multitarea, por lo tanto Linux puede cambiar la
+ejecución de un proceso a otro y también ejecutar múltiples procesos
+a la vez haciendo uso del multiproceso simultáneo SPM \emph{(Simultaneous
+Multi-Processing}) si está disponible en la CPU. 
+
+KVM puede utilizar estas características para hacer un sobreasignamiento
+de los recursos de un procesador. De esta forma se pueden asignar
+más núcleos o procesadores de los que están disponibles físicamente
+en el anfitrión. Un sobreasignamiento muy elevado puede provocar una
+gran cantidad de cambios de contexto lo que cual penaliza el rendimiento,
+con lo que es recomendable asignar el número de CPUs que se necesiten.
+
+El sobreasignamiento funciona mejor cuando asignamos un único procesador
+virtual (VCPU) por huésped. El planificador de Linux trabaja bien
+con este tipo de carga de trabajo. No se deben asignar más VCPUs por
+huésped que núcleos tiene el microprocesador físico.
+
+KVM también permite una técnica conocida como \emph{processor pinning
+} [\cite{VirtOverview}] que consiste en asociar procesadores virtuales a un
+procesador en concreto, pero también a un núcleo de un procesador
+o a un socket en concreto o a un grupo de procesadores. Normalmente
+se configura para que un procesador virtual con un determinado número
+de núcleos se asocie con una serie de núcleos físicos de la máquina
+que comparten la misma memoria caché y así mejorar la computación
+multihilo al encontrarse en la caché instrucciones comunes a dichos
+hilos.
+
+
+\subsection{Gestión de memoria}
+
+La mayoría de sistemas operativos, no usan el 100\% de la memoria
+que tienen asignada constantemente. KVM aprovecha este hecho para
+permitir un sobreasignamiento de memoria a las máquinas virtuales.
+Es decir, podemos asignar más memoria a todas las máquinas virtuales
+en conjunto que memoria tiene la máquina física en la que se ejecutan.
+KVM hace, por lo tanto, un asignamiento dinámico de memoria en lugar
+de reservar una parte de memoria fija a una determinada máquina virtual.
+Esto es posible ya que las máquinas virtuales son como procesos estándar
+de sistema, y a los procesos se les puede asignar memoria de forma
+dinámica. 
+
+Hay tres tecnologías principales para permitir el sobreasignamiento
+de memoria: intercambio de páginas, \emph{ballooning,} y \emph{swapping.}
+\begin{itemize}
+\item \emph{swapping}
+
+
+Al ser las máquinas virtuales como un proceso Linux cualquiera, las
+páginas de memoria también pueden ser almacenadas en la memoria de
+intercambio en caso de necesidad y la máquina anfitrión es la encargada
+de esta tarea. Esto puede suponer una disminución del rendimiento.
+Para evitar el uso de la memoria de intercambio,%
+\footnote{La \emph{memoria de intercambio }o \emph{memoria swap, }en inglés,
+se almacena normalmente en una partición en disco, y su velocidad
+de acceso de lectura y escritura es bastante más lento que en el de
+la memoria RAM.%
+} se utilizan otras técnicas como el \emph{ballooning} o el intercambio
+de páginas.
+
+\item Intercambio de páginas
+
+
+KVM también proporciona la tecnología KSM,%
+\footnote{Kernel Samepage Merging.%
+}que permite aglutinar varias páginas de memoria idénticas de diferentes
+huéspedes en una única página de memoria de solo lectura eliminando
+duplicados y por lo tanto ahorrando espacio en memoria. En el caso
+de que un huésped intente escribir en una de estas páginas, se crea
+una copia de dicha página con permisos de escritura destinada a ese
+huésped. Esta tecnología funciona mejor cuando los huéspedes ejecutan
+el mismo sistema operativo y aplicaciones similares para maximizar
+así el número de páginas idénticas en memoria. El uso de KSM es independiente
+del sistema operativo. 
+
+\item \emph{ballooning}
+
+
+El \emph{balloning }es una técnica que requiere controladores de dispositivo
+paravirtualizados y que será explicada en el apartado \ref{sub:Principales-controladores-VirtIO}.
+
+\end{itemize}
+
+\subsection{Gestión de almacenamiento}
+
+KVM permite utilizar tanto dispositivos de bloque como ficheros para
+el almacenamiento, aunque el rendimiento es mayor cuando se utilizan
+dispositivos de bloque. Sin embargo, cuando el rendimiento del acceso
+a disco no es crítico, se suelen utilizar ficheros debido a las ventajas
+que poseen a la hora de hacer copias de seguridad, así como para lograr
+un mejor aprovechamiento del espacio en disco.
+
+KVM permite asociar hasta 32 discos a cada máquina virtual. Estos
+discos pueden ser una combinación de dispositivos de bloques y ficheros
+de imagen de disco que aparecen en el sistema operativo huésped como
+dispositivos de almacenamiento masivo locales como si de discos reales
+se tratase, con lo que podemos utilizar las herramientas de particionado
+y formateo estándar.
+
+
+\subsubsection*{Dispositivos de bloques}
+
+El uso de dispositivos de bloque proporciona un mayor ancho de banda
+de lectura y escritura así como una menor latencia.
+
+KVM soporta diferentes tipos de dispositivos de bloque como discos
+duros, particiones, volúmenes lógicos LVM, etc...
+
+Las operaciones de lectura y escritura a disco son operaciones de
+entrada y salida por lo que es el hipervisor el encargado de realizarlas
+y no la máquina virtual directamente.
+
+
+\subsubsection*{Imágenes de disco}
+
+Un fichero de imágen de disco es un fichero que representa un disco
+duro local para el sistema operativo huésped y que se conoce como
+\emph{disco duro virtual.}
+
+Estos ficheros están situados fuera de la máquina virtual, normalmente
+en el sistema de ficheros del hipervisor aunque también pueden encontrare
+a través de una conexión de red remota mediante un protocolo como
+NFS. El tamaño de dichas imágenes de disco viene determinado por el
+tamaño máximo de fichero que soporta el sistema de ficheros en el
+que se encuentra almacenada.
+
+Una de las razones por las que el uso de ficheros de imagen de disco
+es menos eficiente es el hecho de tener que utilizar dos sistemas
+de ficheros: el del disco virtual y el sistema de ficheros donde está
+almacenado el mismo. Sin embargo el uso de imágenes nos proporciona
+otras ventajas:
+\begin{itemize}
+\item Consolidación: Múltiples ficheros de imagen de disco pueden almacenarse
+en una misma unidad de almacenamiento: disco duro, partición, volumen
+lógico, etc, con lo que se consigue aumentar el factor de utilización
+del almacenamiento.
+\item Movilidad: Es sencillo copiar ficheros de una unidad de almacenamiento
+a otra.
+\item Clonado: Es fácil copiar ficheros de imagen de disco para la creación
+de nuevas máquinas virtuales o para hacer copias de seguridad.
+\item Accesibilidad remota: Es fácil acceder a las imágenes de disco a través
+de un sistema de ficheros de red como NFS, lo que facilita la migración
+de máquinas virtuales.
+\item Ahorro de espacio en disco: Algunos sistemas de ficheros como Ext3%
+\footnote{Third Extended file system.%
+} soportan \emph{ficheros dispersos}.%
+\footnote{Son un tipo de ficheros que utilizan una serie de metadatos para representar
+el espacio vacío que están ocupando con lo que se obtiene un ahorro
+de espacio en disco en ficheros que no están utilizando todo el espacio
+que les fue asignado.%
+} Normalmente las imágenes de disco ocupan en el sistema de ficheros
+en el que están almacenadas el 100\% del tamaño del disco virtual
+que se crea. Es decir, si se crea un disco virtual de 100GB, el fichero
+imagen de disco ocupa 100GB aunque no se estén utilizando. Sin embargo,
+con un fichero disperso la imagen de disco crece dinámicamente a medida
+que se escribe en ella hasta alcanzar el máximo para el cual fue creada.
+Utilizando ficheros dispersos se puede hacer un sobreasignamiento
+de espacio en disco. Es decir, asignar más espacio de almacenamiento
+a las máquinas virtuales del que en realidad se dispone.
+\end{itemize}
+Los sistemas operativos suelen utilizar una caché de página, y los
+sistemas de ficheros utilizan un alineamiento de páginas de un determinado
+tamaño%
+\footnote{En Linux, el tamaño de página es de 4 KB.%
+}. Al particionar ficheros de imágen de disco como si de un disco duro
+se tratase, se debe procurar que el sistema de ficheros de la imágen
+de disco esté alineado con el sistema de ficheros donde reside dicha
+imagen. En caso contrario, la lectura de una página de memoria en
+el sistema de ficheros del huésped implicaría la lectura de dos páginas
+del sistema de ficheros del anfitrión, lo que reduce el rendimiento
+al provocar una sobrecarga de operaciones de entrada y salida.
+
+La versión modificada de Qemu incluida en KVM soporta particiones
+\emph{raw}%
+\footnote{Copia exacta binaria de una disco.%
+}\emph{ }así como imágenes \emph{qcow2}.%
+\footnote{Qemu Copy-On-Write versión 2.%
+} Es recomendable el uso de particiones \emph{raw }ya que ofrecen un
+mayor rendimiento, sin embargo también se puede considerar el uso
+de \emph{qcow2 }cuando son necesarias algunas de sus propiedades como
+la creación de \emph{snapshots}, cifrado o compresión utilizando \emph{zlib} con la cual se
+obtienen imágenes más pequeñas en sistemas de ficheros que no soportan
+ficheros dispersos.
+
+Es importante destacar el soporte de ficheros de formato \emph{copy-on-write}
+(copiar al escribir). Mediante el uso de imágenes \emph{copy-on-write}
+los huéspedes utilizan una imágen de disco básica que pueden compartir
+entre todos mientras que los cambios que cada huésped hace son escritos
+a otro fichero. Este mecanismo reduce drásticamente el espacio en
+disco además de facilitar la creación de \emph{copias de la máquina
+completa.}%
+\footnote{En inglés, \emph{snapshots}.%
+}Utilizando este método también se puede mejorar el rendimiento almacenando
+las lecturas de disco en memoria de forma que estén accesibles para
+otras máquinas virtuales.
+
+
+\subsubsection*{Modos de caché para los huéspedes}
+
+Los sistemas operativos mantienen una \emph{caché de página} en memoria
+para hacer más eficiente el acceso a disco. De esta forma las operaciones
+de escritura se consediran como terminadas cuando los datos son escritos
+en la caché de página y las operaciones de lecturas son también más
+rápidas si los datos que se quieren leer ya se encuentran en la dicha
+caché. 
+
+Además los discos duros cuentan con su propia caché de escritura.
+Si la caché de escritura del disco está activada, las operaciones
+de escritura a disco se consideran terminadas cuando los datos llegan
+a dicha caché aunque no estén todavía almacenadas en el disco. Esto
+resulta en un mejor rendimiento, sin embargo, el uso de dicha caché
+puede provocar inconsistencias o problemas de integridad en los datos
+ante una pérdida de energía si los datos en la caché no fueron escritos
+en el disco (A no ser que el disco cuente con una batería de seguridad).
+
+Al utilizar KVM, tanto el sistema operativo anfitrión como el huésped
+mantienen su propia caché de página, resultando en dos copias de datos
+en memoria. En general es recomemdable evitar, bien en el anfitrión
+o en el huésped, una de las cachés de página. KVM cuenta con diferentes
+modos de caché para configurar los huéspedes:
+\begin{itemize}
+\item \emph{writethrough}
+
+
+Es el modo recomendado y que viene establecido por defecto. Con este
+modo se activa el uso de la caché de página del anfitrión y se desactiva
+la caché de escritura en disco para el huésped. Proporciona una mayor
+integridad de los datos. Como la caché está activada en el anfitrión,
+las operaciones de lectura suelen tener mejor rendimiento. Sin embargo
+las operaciones de escritura pueden empeorar debido a que la caché
+de escritura está desactivada.
+
+\item \emph{writeback}
+
+
+En este modo la caché de página está activada en el anfitrión y la
+caché de disco en el huésped. Por lo tanto las operaciones de entrada
+y salida en el huésped son eficientes, pero los datos no están protegidos
+ante un fallo energético. Con lo cual no es un método recomendado.
+
+\item \emph{none}
+
+
+En este modo, la caché de página del anfitrión se desactiva pero la
+caché de escritura en disco está activada en el huésped. Por lo tanto
+las operaciones de escritura son óptimas al evitar la caché de página
+del anfitrión y dirigirse directamente a la caché de disco. Al no
+estár activa la caché de página en el anfitrión, las operaciones de
+lectura serán más lentas que en los modos descritos anteriormente.
+Éste es el método recomendado cuando se utiliza NFS para almacenar
+las imágenes de disco.
+
+\item \emph{unsafe}
+
+
+Este modo ignora la caché completamente y es, como su propio nombre
+indica, inseguro y debería ser utilizado solo en casos en los que la
+pérdida de datos no sea importante. Se utiliza habitualmente para
+acelerar la instalación de huéspedes cambiando posteriormente a otro
+modo más seguro.
+
+\end{itemize}
+
+\subsection{Gestión de red}
+
+Para proveer de conexión de red a los húespedes, se pueden utilizar
+las opciones de red de Qemu o bien \emph{PCI pass-through.}
+
+Qemu proporciona diferentes modos de conexión: \emph{User, Socket,
+Tap.} Los dos primeros modos son más aislados y proporcionan servicios
+básicos de red como DHCP, TFTP, SMB, DNS, etc... a través de Qemu.
+Estas redes están aisladas y una conexión a estos huéspedes pasa necesariamente
+por Qemu, que podría, si es así configurado, redireccionar paquetes
+de un puerto determinado del anfitrión al huésped y viceversa. Sin
+embargo, el modo Tap, permite conectar la pila de red de los huéspedes
+a un dispositivo TAP%
+\footnote{Un dispositivo TAP es un dispositivo de la capa de enlace y opera
+con paquetes de la capa 2 como paquetes Ethernet.%
+} en el anfitrión mediante el cual se virtualiza un enlace de nivel
+2 como el proporcionado por un switch.
+
+Utilizando Tap, se dota a los huéspedes de capacidades de red completas.
+El anfitrión puede enviar paquetes recibidos a un huésped concreto,
+o recibir paquetes de un huésped y enviarlos a través de su interfaz
+de red. Para esto, el anfitrión utiliza el soporte para puentes del
+que dispone Linux. Los huéspedes que estén conectados a un mismo puente,
+pueden además comunicarse entre ellos. Con lo cual definiendo diferentes
+puentes se tienen diferentes subredes.
+
+\emph{PCI pass-through }nos permite asignar un dispositivo físico
+de red directamente a una máquina virtual. Esta opción es la más eficiente,
+pero a la vez la menos escalable, ya que ese dispositivo de red no
+podrá ser utilizado por otras máquina virtuales ni tampoco por la
+máquina anfitrión.
+
+
+\subsection{VirtIO}
+
+Utilizando virtualización completa el hipervisor tiene que emular
+dispositivos físicos como tarjetas de red, discos, etc. Esta emulación
+es una implementación software del hardware emulado y es por lo tanto,
+complicada y costosa en términos de eficiencia. Comparado con la emulación
+de dispositivos, los dispositivos paravirtualizados ofrecen una menor
+latencia y un mayor ancho de banda de entrada y salida. KVM incluye
+la librería VirtIO para dispositivos paravirtualizados.
+
+Utilizando dispositivos paravirtualizados, el hipervisor y el húesped
+utilizan una interfaz de E/S optimizada para comunicarse de la forma
+más rápida y eficiente que sea posible. La paravirtualización requiere
+modificaciones en el sistema operativo huésped, sin embargo, cuando
+solo se utilizan dispositivos paravirtualizados, es suficiente la
+instalación de un controlador para dichos dispositivos. 
+
+Además de un mayor ancho de banda y eficiencia, los dispositivos paravirtualizados
+hacen un menor uso del procesador que la emulación de dispositivos.
+
+
+\subsubsection*{Principales controladores VirtIO:\label{sub:Principales-controladores-VirtIO}}
+\begin{itemize}
+\item \emph{virtio\_blk}
+
+
+Proporciona una alta eficiencia en el acceso a dispositivos de bloques.
+Por ejemplo, en una prueba de escritura aleatoria a disco utilizando
+un dispositivo IDE emulado se consiguen tasas de escritura de 19.0
+MB/s mientras que utilizando controlador virtio\_blk las tasas de
+escritura alcanzan los 85.8 Mb/s [\cite{KVMBestPractices}].
+
+\item \emph{virtio\_net}
+
+
+Incrementa el rendimiento en dispositivos de red. 
+
+\item \emph{virtio\_balloon}
+
+
+Proporciona una virtualización de los recursos de memoria del sistema.
+Este controlador proporciona un canal de comunicación cooperativo
+entre el hipervisor y el sistema operativo huésped. El hipervisor
+utiliza este canal para permitir sobreasignamiento de memoria. Esto
+es, asignar más memoria a las máquinas virtuales que memoria tiene
+la máquina física. El hipervisor puede comunicarse con el sistema
+operativo huésped para exigir que le devuelva memoria que no está
+utilizando para poder destinar esa memoria a otras máquinas virtuales
+que la necesiten en ese momento.
+
+
+Esta técnica se conoce como \emph{ballooning}. Consiste en un proceso
+que se está ejecutando en el huésped y que utiliza más o menos memoria
+según el hipervisor le indique de forma implícita (cuando el hipervisor
+lo requiere) o explícita (cuando el administrador lo requiere). Este
+proceso no se puede matar ni enviar a la memoria de intercambio con
+lo que siempre está en memoria.
+
+\end{itemize}
+El controlador \emph{virtio\_net} se comunica con Qemu, sin embargo,
+Linux cuenta con el módulo \emph{vhost\_net }que hace una emulación
+del dispositivo de red virtio directamente en el núcleo del anfitrión.
+Con este modulo cargado el rendimiento de red es incluso mejor debido
+a que ya no es necesaria la comunicación con el espacio de usuario
+que proporciona Qemu, que requiere a su vez un cambio de contexto.
+
+La arquitectura \emph{vhost }cuenta además con los módulos \emph{vhost-scsi
+}y \emph{vhost-blk }todavía en desarrollo y que emularían el dispositivo
+de bloques virtio directamente en el núcleo del anfitrión como ya
+hace \emph{vhost\_net.}
+
+
+\subsection{Seguridad}
+
+Debido que con KVM las máquinas virtuales se muestran como un proceso
+cualquiera de Linux, se pueden usar las medidas de seguridad estándar
+de Linux para aislar las máquinas virtuales así como para proveer
+de un sistema de control de los recursos. 
+
+El núcleo de Linux incluye SELinux para proporcionar este aislamiento.
+Además se pueden crear grupos de control (cgroups) para restringir
+a un grupo de tareas al uso de un grupo determinado de recursos.
+
+El aislaminto de la red del anfitrión también puede ser llevada a
+cabo asignándole un dispositivo de red diferente al que va a ser usado
+por las máquinas virtuales, de esta manera la gestión del anfitrión
+sera accesible desde una subred diferente aumentando así el aislamiento
+entre anfitrión y huéspedes. 
+
+KVM exporta por defecto una conexión VNC para poder acceder a la consola
+gráfica de las máquinas virtuales. Por defecto, solo se aceptan conexiones
+desde el anfitrión.
+
+
+\section{Libvirt}
+
+Libvirt es una API%
+\footnote{API, Interfaz de programación de aplicaciones, en inglés, Application
+Programming Interface.%
+} escrita en C para interactuar con los sistemas de virtualización
+que tienen las nuevas versiones de Linux y otros sistemas operativos.
+Libvirt tiene una licencia libre LGPL.
+
+Libvirt proporciona una capa para gestionar plataformas de virtualización:
+creación de máquinas virtuales y control de las mismas, así como monitorización
+y migración. Libvirt soporta la gestión local o remota de distintos
+nodos%
+\footnote{Un nodo se corresponde con una máquina física dedicada a la virtualización
+de sistemas.%
+} que pueden a su vez utilizar distintos sistemas de virtualización,
+desde hipervisores (KVM, Xen,...) hasta sistemas de virtualización
+de sistema operativo (OpenVZ, LXC,...) pasando por sistemas de virtualización
+de redes o almacenamiento.
+
+
+\subsection{Arquitectura de Libvirt}
+
+
+\subsubsection{Terminología}
+
+Para entender el funcionamiento de la arquitectura de Libvirt es necesario
+tener claros los siguientes términos representados en la figura \ref{Terminologia Libvirt}:
+\begin{description}
+\item [{Nodo:}] Es una única máquina física.
+\item [{Hipervisor:}] Es la capa software que permite virtualizar un nodo
+para así poder ejecutar en él un conjunto de máquinas virtuales.
+\item [{Dominio:}] Es una instancia de un sistema operativo (o subsistema
+en el caso de utilizar contenedores) que se ejecuta en una máquina
+virtualizada proporcionada por el hipervisor.
+\end{description}
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=0.35\paperwidth]{images/terminologia}
+\par\end{centering}
+
+\caption{Terminología.}
+\label{Terminologia Libvirt}
+\end{figure}
+
+
+
+\subsubsection{API}
+
+La API de Libvirt proporciona las funciones necesarias para la creación,
+modificación, monitorización, control y migración de máquinas virtuales,
+siempre sujeto a las limitaciones del hipervisor que se esté usando
+en cada caso. Libvirt permite acceder a diferentes nodos simultáneamente,
+sin embargo, las operaciones proporcionadas por la API están limitadas
+a un único nodo simultáneo. Excepto la migración de dominios, que
+se realiza entre dos nodos diferentes.
+
+Libvirt cuenta con una serie de objetos que se pueden manipular desde
+la API. Estos objetos que Libvirt exporta son:
+\begin{itemize}
+\item \emph{virConnectPtr}, es el elemento principal y que representa la
+conexión con un hipervisor. El objeto \emph{virConnectPtr} se obtiene al
+realizar una conexión con un hipervisor a través de la función emph{virConnectOpen},
+la cual toma una URI%
+\footnote{Identificador Uniforme de Recursos, en inglés, Uniform Resource Identifier.%
+} como parámetro. Esta URI nos proporciona la dirección del nodo así
+como la del hipervisor dentro de ese nodo, ya que podrían coexistir
+varios hipervisores en un mismo nodo.
+\item \emph{virDomainPtr}, representa la conexión a un dominio, es decir
+a una máquina virtual en concreto.
+\item \emph{virNetworkPtr}, representa una conexión con una red virtualizada.
+\item \emph{virStorageVolPtr}, representa la conexión con un volumen de
+almacenamiento que comunmente se utiliza para proporcionar un dispositivo
+de bloques para uno de los dominios.
+\item \emph{virStoragePoolPtr}, representa un \emph{pool} de almacenamiento.%
+\footnote{Un pool de almacenamiento es una región lógica para almacenar volúmenes
+de almacenamiento.%
+}
+\end{itemize}
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics{images/relacionobjetoslibvirt}
+\par\end{centering}
+
+\caption{Relación entre los objetos de Libvirt.}
+\label{Relaci=0000F3n entre los objetos de libvirt}
+\end{figure}
+
+
+Como se puede ver en la figura \ref{Relaci=0000F3n entre los objetos de libvirt},
+los objetos tienen una relación $1:n$ con el objeto principal \emph{virConnect},
+es decir por cada objeto \emph{virConnectPtr}, que referencia una
+conexión con un hipervisor, podemos tener múltiples conexiones a dominios,
+redes, volumenes o \emph{pools} de almacenamiento. También hay una
+relación $1:n$ entre el objeto \emph{virStoragePoolPtr} y el elemento
+\emph{virStorageVolPtr}, ya que un \emph{pool} de almacenamiento está
+formado por varios volúmenes.
+
+Los dominios, redes y \emph{pools} de almacenamiento, puede estar
+activos o definidos. El estado \emph{definido} es un estado inactivo
+pero en el cual reside en el nodo una descripción de dicho dominio
+permanentemente y que permite iniciar ese dominio posteriormente.
+Libvirt almacena en ficheros de tipo XML las definiciones de dominios,
+redes y almacenamiento.
+
+La API de Libvirt está escrita en el lenguage de programación C y
+soporta también C++. Cuenta además con \emph{bindings} para otros
+lenguages como C\#, Java, OCaml, Perl, PHP, Ruby y Python.
+
+
+\subsubsection{Controladores de Libvirt}
+
+Los controladores de Libvirt son los encargados de interactuar con
+los distintos hipervisores soportados. Los controladores también son
+los encargados de manejar otros componentes de la virtualización como
+el almacenamiento, dispositivos, redes, etc. Libvirt soporta actualmente
+controladores para los hipervisores: LXC (Linux Containers), OpenVZ,
+Qemu, UML, VirtualBox, VMWare ESX, WMWare Workstation/Player, IBM
+PowerVM y Parallels. Además soporta los controladores de almacenamiento
+para sistemas de ficheros locales, sistemas de ficheros en red, LVM
+(Logical Volume Manager), dispositivos de bloques, iSCSI, y dispositivos
+multicamino entre otros.
+
+Libvirt cuenta, además, con el controlador\emph{ remote }que permite
+interactuar con los controladores citados anteriormente mediante una
+conexión remota.
+
+
+\subsubsection{Demonio}
+
+En cada nodo en el que está presente Libvirt, hay además un demonio
+\emph{libvirtd.} El demonio \emph{libvirtd} se ejecuta automáticamente
+al arrancar el nodo y gestiona los hipervisores a través de los controladores.
+El demonio actúa como servidor permitiendo conexiónes desde clientes
+para poder gestionar el hipervisor o hipervisores que se ejecutan
+a su vez en dicho nodo y utilizar la API de Libvirt de forma remota.
+El demonio \emph{libvirtd }puede además, mediante el controlador \emph{remote}
+conectarse a otro demonio \emph{libvirtd} en otro nodo, permitiendo
+así la migración de máquinas virtuales y la gestión de un \emph{pool}
+de servidores físicos.
+
+
+\subsubsection{Conexión Remota}
+
+Para conectarse al demonio remotamente, Libvirt ofrece la posibilidad
+de utilizar conexiones cifradas. Estas conexiones pueden ser a través
+de un túnel SSH o bien a través de un un socket TCP/IP mediante autentificación
+y cifrado con TLS%
+\footnote{Seguridad de la capa de transporte, del inglés, Transport Layer Security.%
+} (requiere la generación de certificados en el cliente y en el servidor).
+También soporta conexiones a sockets TCP/IP sin cifrar, pero que son
+solo recomendables en entornos de desarrollo.
+
+Ya que Libvirt soporta diferentes hipervisores en un mismo nodo, utiliza
+URIs para identificar el hipervisor dentro de un nodo en concreto.
+En las URIs se especifica además de la URL%
+\footnote{Localizador de Recursos Uniforme, del inglés, Uniform Resource Locator.%
+} del nodo, el tipo de conexión y el controlador del hipervisor al
+que se quiere conectar. Por ejemplo:
+\begin{itemize}
+\item \url{qemu+ssh://root@mi.servidor.org/system}, para conectarse al
+hipervisor qemu mediante SSH en el nodo $mi.servidor.org$ como usuario
+\emph{root.}
+\item \url{xen+tls://mi.servidor.org/system}, para conectarse al hipervisor
+Xen a través de un socket TCP/IP cifrado con TLS que se encuentra
+en el nodo $mi.servidor.org$\emph{.}
+\end{itemize}
+Libvirt soporta además numerosos métodos de autentificación, desde
+la utilización de permisos de usuario y grupo de sockets UNIX, a autentificación
+utilizando PolicyKit, SASL o Kerberos.
+
+
+\subsubsection{Virsh}
+
+Libvirt cuenta además con un cliente en terminal que permite conectarse
+a un demonio Libvirt y ejecutar comandos de gestión sobre los dominios,
+redes o almacenamiento.
+
+
+\subsection{Gestión de Dominios}
+
+La definición de los dominios de Libvirt se almacena en ficheros XML,
+al igual que pasa con la definición de redes virtuales o almacenamiento.
+En la configuración de cada dominio, se puede elegir el tipo de hipervisor
+a utilizar, y la configuración del mismo, así como toda la configuración
+hardware que se desea, siempre y cuando sea compatible con el hipervisor
+utilizado. 
+
+Mediante la API de Libvirt se pueden crear o destruir dominios, así
+como encenderlos, apagarlos, pausarlos o migrarlos a otro anfitrión.
+
+La API de Libvirt permite además agregar nuevo hardware directamente
+a una máquina o modificar el ya existente, a veces sin necesidad de
+reiniciar el dominio, si el contralor en cuestión lo permite.
+
+
+\subsection{Gestión de Redes}
+
+Libvirt permite la definición de redes virtuales utilizando puentes
+a los que se conectan las máquinas virtuales para poder comunicarse
+entre ellas. Las redes virtuales pueden a su vez conectarse a la red
+de área local (LAN) física mediante alguno de los siguientes métodos:
+\begin{itemize}
+\item NAT (Network Address Translation): todo el tráfico que pasa entre
+los huéspedes, conectados a la red virtual, y la red física, es reenviado
+a la pila IP del anfitrión después de convertir la IP del húesped
+para aparecer como la IP pública del anfitrión. Esto permite a múltiples
+huéspedes tener acceso a la red física cuando al anfitrión solo se
+le está permitido tener una IP pública. Si hubiese alguna dirección
+IPv6 asignada a un huésped en la red virtual, dicho huésped accedería
+a la red física mediante enrutado ya que en IPv6 no existe el concepto
+de NAT. Las conexiones entrantes son permitidas (desde la versión
+1.0.3 de Libvirt) siempre y cuando esté explicitamente especificado
+el rango de puertos y la dirección IPv4 de la red virtual a la que
+van destinadas dichas conexiones.
+\item Enrutado: El tráfico de los húespedes es reenviado a la pila IP del
+anfitrión pero sin aplicar NAT. El tráfico entrante y saliente no
+están restringidos, se puede usar \emph{nwfilter}%
+\footnote{nwfilter es un un componente de Libvirt que nos permite filtrar el
+tráfico de red a voluntad del administrador.%
+} en la configuración del huésped para restringir el tráfico entrante.
+Este método asume que el enrutador de la red física tenga las entradas
+adecuadas en sus tablas de enrutamiento para encaminar el tráfico
+hacia la red virtual donde se encuentran los huéspedes.
+\end{itemize}
+Además, los húespedes también pueden conectarse directamente a la
+red de área local física compartiendo algún dispositivo de red, mediante
+alguna de las siguientes configuraciones:
+\begin{itemize}
+\item Puente: Mediante este método los húespedes se pueden conectar a un
+puente ya existente configurado de forma ajena a Libvirt, como puede
+ser un puente creado en el anfitrión. O también pueden conectarse
+directamente a la red física a través de un dispositivo de red o un
+grupo de dispostivos de red utilizando el controlador \emph{macvtap}.%
+\footnote{MacVTap es un controlador para facilitar la creación de puentes en
+redes virtuales.%
+} Utilizando estos métodos la dirección IP de los huéspedes pertenecerá
+a la misma subred que la red física y no habrá ningun tipo de restricción
+al tráfico entrante o saliente. Hay que destacar, que utilizando \emph{macvtap},
+el huésped y el anfitrión no pueden comunicarse directamente, sino
+que necesitan un switch externo para poder realizar dicha comunicación.
+\item Hostdev: este método utiliza \emph{PCI Passthrough} para asignar directamente
+un dispositivo de red físico a un huésped en concreto.
+\end{itemize}
+Libvirt también permite configurar la calidad de servicio para los
+huéspedes o redes virtuales. El tráfico entrante y saliente pueden
+ser limitados independientemente. Además de limitarlo mediante valores
+absolutos también permite utilizar valores medios, valores de pico
+máximos y ráfagas.
+
+Libvirt permite la asignación de etiquetas VLAN de forma transparente
+a los huéspedes de forma que los huéspedes conectados a una red virtual
+determinada pueden etiquetarse para usar una VLAN en concreto.
+
+También permite crear rutas estáticas. De forma que si tenemos una
+red virtual solo accesible por los huéspedes y una red virtual accesible
+tanto por el anfitrión como por los huéspedes, un huespéd con acceso a
+ambas redes puede actuar como router y dar acceso al anfitrión.
+
+En el caso de redes virtuales aisladas o conectadas a la red física
+mediante enrutamiento o NAT, Libvirt asigna las direcciones MAC a
+las interfaces virtuales de los huéspedes, y también opcionalmente
+las direcciones IP mediante DHCP. También ofrece servicios básicos
+de red como TFTP, DNS, etc...
+
+
+\subsection{Gestión del almacenamiento}
+
+El almacenamiento con Libvirt está basado en 2 tipos de objetos:
+\begin{description}
+\item [{Volumen}] Un volumen de almacenamiento se puede asignar a un huésped
+o juntarse con otros volúmenes para formar un \emph{pool}. Un volumen puede
+ser un dispositivo de bloques, un fichero \emph{raw} u otro tipo de
+fichero con otro formato destinado al almacenamiento.
+\item [{Pool}] El \emph{pool} es una cantidad de almacenamiento que se
+puede dividir en volúmenes.
+\end{description}
+Al definir un \emph{pool} con Libvirt, por ejemplo, un directorio
+exportado mediante NFS, el objeto \emph{pool} correspondiente mantiene
+información relativa al servidor NFS: URL, directorio exportado y
+donde se monta. Al iniciar el \emph{pool}, Libvirt se encarga de montar
+dicho directorio. Mediante las funciones que propociona la API de
+Libvirt para un objeto de tipo \emph{pool} se pueden crear en éste
+volúmenes nuevos, como por ejemplo, ficheros de imagen de disco destinados
+a las máquinas virtuales. No todos los tipos de \emph{pool} soportan
+la creación de volúmenes nuevos. 
+
+Libvirt puede ser también configurado para presentar, mediante iSCSI,%
+\footnote{Internet SCSI, es un estándar que permite el uso del protocolo SCSI
+sobre redes TCP/IP.%
+} un dispositivo SCSI remoto (denominado \emph{target)} como un \emph{pool}
+de almacenamiento. En este caso, al iniciar el \emph{pool}, Libvirt
+se encaga de registrarse en el \emph{target} y así hacer visibles
+las LUNs%
+\footnote{Una LUN es un número para identificar una unidad lógica, en general
+se utiliza en redes iSCSI para referenciar un disco lógico. Del inglés,
+Logic Unit Number.%
+} que hay en dicho \emph{target}. En este caso las LUNs son presentadas
+como volúmenes del \emph{pool}, y no pueden ser creados o destruidos
+voluménes ya que las LUNs solo se pueden configurar en el servidor
+iSCSI.
+
+Libvirt soporta los siguientes \emph{pools} de almacenamiento: 
+\begin{itemize}
+\item \emph{Directorios locales}: En este caso los volúmenes son simples
+ficheros \emph{raw} o ficheros \emph{raw} dispersos. También soporta
+otros ficheros de imagen de disco con formatos de almacenamiento diferentes
+como \emph{qcow2}.
+\item \emph{Sistema de ficheros}: En este caso se trata de un dispositivo
+de bloques como puede ser un disco o partición y que una vez montado
+su comportamiento es igual al de un \emph{pool} de tipo \emph{directorio
+local}.
+\item \emph{Sistema de ficheros en red}: Es una variante del \emph{pool}
+de tipo \emph{sistema de ficheros}, que utilizando un servidor de
+tipo NFS, monta dicho sistema de ficheros en red en un directorio
+local.
+\item \emph{Pools de Volúmenes Lógicos LVM}: Este tipo de \emph{pool} se
+forma a partir de un grupo LVM. Un grupo LVM es un gurpo de volúmenes lógicos
+que puede aglutinar múltiples volúmenes físicos, como por ejemplo
+discos o particiones. Dentro del grupo LVM, se encuentran los volúmenes
+lógicos que son considerados como volúmenes del \emph{pool }por Libvirt.
+\item \emph{Pools de disco}: En este caso el \emph{pool} se basa en un disco
+físico y sus particiones son consideradas como volúmenes.
+\item \emph{Pool iSCSI}: Este pool está basado en un \emph{target }iSCSI.
+Las LUNs deben ser configuradas en el servidor y son consideradas
+como volúmenes por Libvirt.
+\end{itemize}
+Además también están soportados los pools de tipo Multipath, RBD y
+Sheepdog.
+
+Libvirt permite además utilizar volúmenes de almacenamiento cifrados
+y la posibilidad de utilizar Sanlock para bloquear discos para que
+estos no puedan ser usados por más de una máquina virtual. 
+
+
+\subsection{Migración}
+
+Libvirt soporta dos tipos de migración, la migración nativa propia
+de cada hipervisor y la migración propia de Libvirt.
+\begin{itemize}
+\item Migración nativa: Puede soportar cifrado o no, dependiendo del hipervisor.
+Este tipo de migración es la que tiene un menor coste computacional
+ya que es la que utiliza el menor número de copias de datos. Para
+llevar a cabo este tipo de migración, se debe además adaptar la red
+y posiblemente abrir un gran número de puertos en el cortafuegos para
+permitir migraciones concurrentes.
+\item Migración de Libvirt: La migración de Libvirt se lleva a cabo a través
+de un túnel que permite el cifrado de los datos de la migración transmitidos.
+El coste computacional es mal alto al mantener más copias de las máquinas
+virtuales que se están migrando al pasar del hipervisor origen al
+demonio \emph{libvirtd} origen y de éste al hipervisor destino pasando primero
+por el demonio \emph{libvirtd} destino. Este tipo de migración no requiere ninguna
+configuración de red adicional a la que ya se necesita para la conexión
+remota al demonio \emph{libvirtd}. Además solo requiere abrir un puerto
+en el cortafuegos para permitir la migración concurrente de máquinas
+virtuales.
+\end{itemize}
+La gestión de la migración puede llevarse a cabo de forma directa
+o punto a punto (P2P), o incluso también puede no ser gestionada cuando
+se utiliza migración nativa:
+\begin{itemize}
+\item En la \emph{forma directa, }figura \ref{migracion directa mediante tunel},
+un cliente Libvirt se conecta a dos demonios \emph{libvirtd} en distintos
+nodos y realiza la migración de un nodo al otro sin requerir una conexión
+entre ellos. Si el cliente falla durante la migración, la migración
+también falla y continua la ejecución de la máquina virtual en el
+nodo de origen. 
+
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=0.5\textwidth]{images/migracionDirectalibvirt}
+\par\end{centering}
+
+\caption{Migración directa mediante túnel Libvirt.}
+\label{migracion directa mediante tunel}
+
+\end{figure}
+
+
+\item Si la migración es \emph{punto a punto}, figura \ref{migracion p2p mediante tunel},
+el cliente se conecta al nodo de origen para iniciar desde éste una
+migración hacia el nodo destino. En este caso, es el nodo origen el
+encargado de gestionar la migración, pudiendo continuar la migración
+incluso después de que el cliente falle o se desconecte una vez transmitidas
+las instrucciones de migración al nodo origen. Esto es posible ya
+que la migración se realiza directamente entre el nodo origen y el
+destino.
+
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=0.5\textwidth]{images/migracionP2Plibvirt}
+\par\end{centering}
+
+\caption{Migración P2P mediante túnel Libvirt.}
+\label{migracion p2p mediante tunel}
+
+\end{figure}
+
+
+\item Cuando la migración no es gestionada por Libvirt, figura \ref{migracion nativa no gestionada por libvirt},
+con lo cual debe ser nativa, el cliente se conecta al nodo origen
+para iniciar una migración directamente desde el hipervisor de origen.
+Una vez iniciada la migración, tanto si falla el cliente como el demonio
+\emph{libvirtd} en uno o ambos nodos, la migración continua de forma
+normal al estar gestionada directamente por el hipervisor.
+
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=0.5\textwidth]{images/migracionUnmanagednativa}
+\par\end{centering}
+
+\caption{Migración no gestionada por Libvirt y nativa.}
+\label{migracion nativa no gestionada por libvirt}
+
+\end{figure}
+
+
+\end{itemize}
+
+\section{SPICE}
+
+Spice es una solución de código abierto para proporcionar conectividad
+con la pantalla y los dispositivos téclado, ratón y audio de una máquina
+virtual remota que proporciona una experiencia de usuario parecida
+a la interacción con una máquina local, debido a que la mayor parte
+de la computación gráfica se hace en el cliente. 
+
+Spice se puede utilizar tanto en redes de área local como en redes
+de banda ancha. Además el cliente de Spice es multiplataforma (Windows
+y Linux) y dispone de un cliente HTML5 experimental con el que puede
+conectarse al escritorio remoto desde cualquier navegador web moderno.
+
+
+\subsection{Arquitectura}
+
+Los principales componentes de Spice (figura \ref{arquitectura de spice})
+son: el servidor, el cliente, el protocolo y también el dispositivo
+QXL y su controlador asociado. Además cuenta con un módulo adicional,
+el agente Spice que se puede ejecutar en el huésped y se comunica
+mendiante el puerto \emph{VDIPort.}
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=1\textwidth]{images/spice-arch}
+\par\end{centering}
+
+\caption{Arquitectura de Spice.}
+\label{arquitectura de spice}
+
+\end{figure}
+
+
+
+\subsection{Funcionamiento}
+
+El cliente se comunica con el servidor a través de una serie de canales
+específicos para cada tipo de dispositivo, utilizando un socket TCP
+para cada canal. Cada canal se corresponde con un hilo de ejecución
+en el cliente, lo que permite asignar prioridades distintas a cada
+dispositivo. Estos canales de comunicación pueden además estar cifrados
+mediante SSL.%
+\footnote{SSL, en inglés Secure Socket Layer, es un protocolo de cifrado para
+comunicaciones de red.%
+}
+
+Hay un canal principal, conocido como \emph{RedClient, }que gestiona
+los demás canales (creación, conexión, desconexión, etc) y se encarga
+de la migración.%
+\footnote{Al migrar una máquina virtual a otro servidor, el cliente Spice se
+conecta automáticamente al nuevo servidor donde se encuentra la máquina
+virtual.%
+} Además del canal principal, hay otros canales específicos para cada
+dispositivo:
+\begin{itemize}
+\item \emph{DisplayChannel} procesa los comandos gráficos, imágenes y vídeo.
+\item \emph{InputsChannel} es el canal de entrada del teclado y ratón.
+\item \emph{CursorChannel} es el canal que informa de la posición del cursor
+en la pantalla.
+\item \emph{PlaybackChanne}l es el canal dedicado a la recepción de audio
+desde el servidor para ser reproducida en el cliente.
+\item \emph{RecordChannel} es el canal que captura el audio en el lado del
+cliente para ser enviado al servidor.
+\end{itemize}
+\emph{El agente Spice} es un módulo que se ejecuta en el sistema operativo
+huésped. El servidor y el cliente Spice se comunicán con el agente
+para realizar tareas en el contexto del huésped, como la configuración
+de la pantalla del huésped. La comunicación con el agente se hace
+a través de un puerto VDI (Virtual Device Interface).%
+\footnote{VDI proporciona un estándar para proporcionar interfaces de dispositivos
+virtuales mediante software de forma que otros componentes software
+pueden interactuar con estos dispositivos.%
+}
+
+El Servidor Spice está implementado utilizando la librería \emph{libspice},
+una librería VDI modular que acepta plugins.
+
+Los canales de entrada al servidor, incluido el canal principal, son
+manejados por funciones específicas para cada canal. El canal de la
+pantalla y del cursor son manejados por un proceso específico que
+genera un hilo, llamado \emph{red worker}, por cada pantalla disponible.
+Hay, además, otras funciones especiales para manejar los canales de
+audio (reproducción y captura). 
+
+El servidor y la máquina virtual se comunican mediante las interfaces
+definidas para cada dispositvo (QXL para la pantalla, VDIPort para
+el agente, teclado, ratón, etc...) proporcionadas por el hipervisor.
+Por lo tanto, el servidor se comunica con la máquina virtual a través
+de una interfaz VDI y con el sistema operativo huésped a través de
+los controladores VDI que el huésped debe tener instalados.
+
+Los mensajes para comunicarse con los dispositivos de la máquina virtual
+pueden ser generados por el servidor o por el cliente. El controlador
+se comunica con el dispositivo VDI mediante un anillo de entrada y
+uno de salida. Los mensaje generados por el cliente y el servidor
+son escritos en una misma cola en el servidor y posteriormente serán
+escritos en el anillo de salida del dispositivo VDI. Por otro lado,
+los mensajes son leidos desde el anillo de entrada a un búfer de lectura
+en el servidor. El módulo \emph{message port} determina que mensajes
+son para el servidor y cuales deben ser reenviados al cliente.
+
+Para la pantalla, el servidor mantiene una cola específica de comandos
+QXL que son procesados y enviados al cliente. Spice siempre intenta
+delegar las tareas de renderizado al cliente. El renderizado en el
+anfitrión, bien sea mediante software o hardware (GPU), es la última
+opción.
+
+El servidor cuenta con un subsistema gráfico que se ejecuta en otro
+hilo (uno por pantalla), en paralelo al servidor principal. El subsistema
+gráfico se encarga de gestionar los dispositivos VDI de la pantalla
+y del cursor, los canales de comunicación asociados, así como de hacer
+compresión del flujo de vídeo o imágenes antes de su transmisión por
+el canal.
+
+El protocolo Spice define la comunicación entre el cliente y el servidor:
+transferir objetos gráficos, eventos de teclado y ratón, información
+de la posición del cursor, envío de los flujos de audio, y comandos
+de control para posibilitar, entre otras cosas, la migración.
+
+
+\subsection{Características}
+\begin{itemize}
+\item Spice soporta el procesado y transmisión de comandos gráficos 2D.%
+\footnote{Spice incluirá en el futuro aceleración 3D.%
+} Los comandos del dispositivo QXL son genéricos y por lo tanto independientes
+de la plataforma, de forma que tanto Windows como el servidor gráfico
+X de Linux, pueden usarlo de forma nativa. Si no se dispone del controlador
+QXL, Spice soporta también VGA pero con un rendimiento menor.
+\item Aceleración hardware: el renderizado básico del cliente Spice lo realiza
+usando la librería Cairo, que es multiplataforma e independiente del
+dispositivo. Cairo proporciona primitivas de gráficos vectoriales
+para el dibujado en 2 dimensiones. El renderizado se puede hacer opcionalmente
+mediante hardware utilizando la GPU%
+\footnote{Unidad de Procesamiento Gráfico, en inglés, Graphics Processing Unit.%
+} del cliente. La aceleración hardware utiliza OpenGL.%
+\footnote{OpenGL, es una librería mutiplataforma para interactuar con una GPU,
+que soporta el renderizado 2D y 3D.%
+} La acelaración hardware aumenta considerablemente el rendimiento,
+sin embargo, al usar OpenGL, que es una librería hardware que depende
+de los controladores de las tarjetas gráficas, Spice puede ofrecer
+diferentes resultados dependiendo del controlador de cada fabricante,
+o incluso provocar demasiada carga en el microprocesador del cliente.
+\item Spice utiliza diferentes algoritmos de compresión de imagen, elegidos
+en tiempo de ejecución. El servidor utiliza compresión sin pérdidas
+para comprimir las imágenes. Sin embargo, cuando se trata de vídeo,
+y aunque éste es una sucesión de imáges, el servidor detecta heurísticamente
+el flujo de vídeo al identificar regiones de la pantalla con altas
+tasas de refresco, y utilizar así una compresión M-JPEG%
+\footnote{M-JPEG (Motion JPEG), es un formato multimedia en el que cada fotograma
+de una secuencia de vídeo es comprimido como una imagen JPEG.%
+} (con pérdidas) para limitar el uso de ancho de banda de red.
+\item El cliente cuenta con una caché para evitar información de imágenes
+reduntantes. El servidor conoce que imágenes están en la caché del
+cliente.
+\item Permite un número ilimitado de monitores. La limitación la pone el
+sistema operativo huésped, el servidor y cliente. Spice soporta configuración
+automática de la pantalla virtual acorde con la configuración de la
+máquina donde se ejecuta el cliente (siempre y cuando el agente esté
+ejecutándose en el huésped).
+\item Spice soporta \emph{sincronía de labios}, es decir, sincronización
+entre los flujos de audio y vídeo. Debido a que los canales de vídeo
+y audio son independientes, Spice introduce marcas temporales en los
+cuadros%
+\footnote{Cada una de las imágenes que componen un vídeo, en inglés, \emph{frames.}%
+} de vídeo para poder sincronizarlo con el audio una vez recibido en
+el cliente.
+\item Spice soporta migración automática de máquinas virtuales, es decir,
+cuando se migra una máquina virtual a otro servidor, el cliente Spice
+se conecta automáticamente al nuevo servidor, de forma que la localización
+de la máquina virtual es transparente al usuario.
+\item Spice soporta la transmisión de audio en ambos sentidos así como opcionalmente
+la compresión del mismo con el algoritmo CELT.%
+\footnote{CELT es un codec que implementa un algoritmo de compresión de audio
+de alta calidad y un retardo muy bajo.%
+}
+\item El protocolo SPICE soporta cifrado OpenSSL en la comunicación entre
+cliente y servidor.
+\end{itemize}
+Algunas características futuras a destacar debido a su importancia
+en la experiencia de usuario son:
+\begin{itemize}
+\item Aceleración 3D.
+\item Soporte para dispositivos USB.
+\item Soporte para CD.
+\end{itemize}
+
+\clearemptydoublepage
+\chapter{Desarrollo del proyecto}
+
+En el presente proyecto se diseña una arquitectura cliente-servidor
+de máquinas virtuales orientada al ahorro energético así como a la
+fácil administración del mismo y teniendo en cuenta, como uno de los
+objetivos principales, que dicha arquitectura sea lo más transparente
+posible al usuario final.
+
+Lo que se pretende conseguir es que los usuarios utilicen un entorno
+virtualizado en su propio ordenador en lugar de uno nativo, y así,
+cuando el usuario decida apagar su ordenador, la máquina virtual que
+están utilizando sea enviada al servidor y continúe ejecutándose sin
+perder la conexión a la red. La máquina física del usuario se apaga
+una vez migrada la máquina virtual al servidor. Cuando el usuario
+decide volver a encender su ordenador, éste se conecta al servidor
+para volver a migrar la máquina virtual desde éste hacia el ordenador
+del usuario para obtener el mayor rendimiento posible.
+
+Es importante que se haga de la forma más transparente posible, de
+forma que el usuario no perciba que está utilizando una máquina virtual.
+El usuario debe poder utilizar los dispositivos de su ordenador con
+normalidad así como poder reinstalar su sistema operativo si así lo
+desea.
+
+
+\section{Arquitectura}
+
+La arquitectura diseñada cuenta con 3 elementos principales:
+\begin{enumerate}
+\item Servidor de máquinas virtuales.
+\item Servidor de almacenamiento.
+\item Clientes.
+\end{enumerate}
+El servidor de máquinas virtuales debe ejecutar un hipervisor para
+así poder virtualizar todas las máquinas virtuales de los clientes.
+A su vez, los clientes también deben ejecutar un hipervisor que permita
+ejecutar su máquina virtual, ya que no ejecutan un sistema nativo
+sino uno virtualizado.
+
+Para facilitar la migración, se requiere que el almacenamiento, sobre
+todo, el disco duro virtual de las máquinas, esté accesible por red
+tanto para el cliente como para el servidor. De otra forma, la migración,
+además de copiar información sobre el estado de la máquina y su memoria,
+debería también hacer una copia de su disco duro virtual, lo cual
+puede ser una operación de duración muy larga dando lugar a un rendimiento
+inaceptable empeorando considerablemente la experiencia de usuario.
+Es por eso que se necesita un servidor de almacenamiento común donde
+almacenar las imágenes de los discos virtuales.
+
+
+\subsection{Servidor de almacenamiento}
+
+Para el servidor de almacenamiento se utiliza un servidor iSCSI. iSCSI
+es un protocolo que funciona sobre redes TCP/IP y que permite el uso
+de dichas redes para transmitir comandos SCSI. Su implantación en
+entornos de producción está en auge debido al aumento de Gigabit Ethernet,
+al ser éste más barato que las soluciones propietarias basadas en fibra óptica
+que requieren de infraestructuras dedicadas a tal propósito. Debido
+además a que en este proyecto se supone una gran cantidad de clientes
+que son simples ordenadores personales, el uso de un protocolo como
+iSCSI que funciona sobre redes TCP/IP es conveniente ya que solo se
+requiere una tarjeta de red convencional para acceder al almacenamiento
+remoto. 
+
+
+\subsubsection{Arquitectura básica de iSCSI}
+
+En iSCSI se identifican las siguientes partes:
+\begin{itemize}
+\item El iniciador (\emph{initiator}): Hace la función de cliente. Puede
+estar implementado mediante software o hardware.
+\item Dispositivo SCSI remoto (\emph{target}): Es un recurso de almacenamiento
+alojado en el servidor iSCSI y que representa a uno de los nodos de
+almacenamiento en dicho servidor. 
+\item Número de Unidad Lógica (\emph{LUN}): representa un único dispositivo
+SCSI lógico que forma parte de un dispositivo \emph{target. }En iSCSI
+una LUN se corresponde normalmente con un unidad de disco.
+\end{itemize}
+El iniciador negocia la conexión a una LUN con el \emph{target, }y
+da como resultado una conexión iSCSI que emula la conexión a un disco
+duro SCSI local. 
+
+iSCSI utiliza nombres especiales para identificar iniciadores y \emph{targets.
+}Estos identificadores se conocen como IQN (iSCSI Qualified Name)
+y tienen el siguiente formato:
+
+\begin{lstlisting}
+iqn.2013-06.com.servidor-iscsi:cadena-de-caracteres-opcional
+\end{lstlisting}
+
+
+donde:
+\begin{itemize}
+\item iqn, es un literal por el que empieza todo IQN.
+\item 2013-06, es la fecha en la que la autoridad de nombres toma posesión
+de este dominio.
+\item com.servidor-iscsi, dominio inverso (servidor-iscsi.com) de la autoridad.
+\item Una cadena de caracteres opcional.
+\end{itemize}
+iSCSI permite a un ordenador conectarse mediante un iniciador iSCSI
+a un dispositivo SCSI remoto como puede ser un disco duro, cabina
+de cintas, etc, de forma que estos dispositivos aparecen como locales
+desde el punto de vista del iniciador y pueden ser utilizados como
+cualquier dispositivo local.
+
+
+\subsubsection{Configuración}
+
+En este proyecto utilizamos un servidor iSCSI basado en una instalación
+básica de la distribución de Linux Centos 6.3. Es necesario instalar
+el software del servidor iSCSI y configurar un \emph{target }por cada
+cliente. 
+
+Para hacer el servidor más escalable se utiliza LVM. Como se puede
+observar en la figura \ref{LVM}, LVM nos permite aglutinar varios
+volúmenes físicos, como pueden ser discos duros o particiones en un
+único grupo para posteriormente, y utilizando el espacio de almacenamiento
+resultante, crear volúmenes lógicos que se comportan como particiones
+lógicas. 
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics{images/lvm}
+\par\end{centering}
+
+\caption{Organización almacenamiento mediante LVM}
+\label{LVM}
+\end{figure}
+
+
+En la figura \ref{Arquitectura iSCSI} se puede apreciar como intervierne
+el servidor iSCSI en este sistema. Se crea un nuevo \emph{target}
+por cada cliente. A su vez, cada \emph{target} tiene asociada al menos
+una LUN que se corresponde con un único volúmen lógico determinado.
+Por lo tanto el servidor iSCSI ofrece a través de la red cada volúmen
+lógico como un dispositivo SCSI. En caso de querer asignar más de
+un disco duro a una misma máquina virtual bastaría con añadir una
+nueva LUN al \emph{target }de ese cliente, o lo que es lo mismo, asignar
+un nuevo volúmen lógico a ese cliente. 
+
+El iniciador iSCSI se encuentra tanto en el servidor de máquinas virtuales
+como en los clientes con lo única diferencia de que en estos últimos
+solo se conecta a un \emph{target }determinado mientras que el servidor
+de máquinas virtuales se conecta a todos.
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=1\textwidth]{images/iscsi}
+\par\end{centering}
+
+\caption{Arquitectura iSCSI}
+\label{Arquitectura iSCSI}
+
+\end{figure}
+
+
+Además los grupos LVM son dinámicos, por lo tanto, en caso de necesitar
+más espacio en el servidor de almacenamiento para crear nuevos clientes,
+bastaría con añadir volúmenes físicos al servidor y asignarlos al
+mismo grupo LVM de forma que el almacenamiento de éste sea mayor.
+
+Para diferenciar cada volúmen lógico y saber cual corresponde a cada
+cliente, se establece para cada \emph{target }un IQN donde la cadena
+de caracteres opcional se corresponde con la dirección MAC%
+\footnote{Una dirección MAC es un identificador único asignado a dispositivos
+de red.%
+} del cliente al que pertenece. De forma que un IQN cualquiera tiene
+la forma:
+
+\begin{lstlisting}
+iqn.2013-06.com.servidor-iscsi:90:2b:34:3e:30:88
+\end{lstlisting}
+
+
+Siendo 
+\begin{lstlisting}
+90:2b:34:3e:30:88
+\end{lstlisting}
+\emph{ }la dirección MAC de la interfaz
+de red del cliente al que pertenece dicho \emph{target}.
+
+
+\subsection{Servidor de máquinas virtuales}
+
+El servidor de máquinas virtuales es el encargado de mantener ejecutándose
+las máquinas virtuales de los clientes mientras estos permanecen apagados.
+Para esto, el servidor debe tener acceso al almacenamiento de cada
+cliente. Por lo tanto en el servidor es necesario instalar el software
+del cliente iSCSI, o lo que es lo mismo el iniciador iSCSI. El servidor
+debe además conectarse a todos los \emph{targets} existentes en el
+servidor iSCSI de forma que todos los discos SCSI de los clientes
+aparezcan como dispositivos conectados también en el servidor.
+
+Además del software del iniciador iSCSI, el servidor debe tener capacidad
+de virtualización, por lo que se instalarán además el software del hipervisor
+KVM (incluyendo el espacio de usuario Qemu), el servidor de SPICE
+y la API Libvirt.
+
+El demonio de Libvirt, \emph{libvirtd, }se configura para permitir
+conexiones TCP entrantes de forma que las máquinas virtuales se puedan
+gestionar remotamente.
+
+La configuración de cada máquina virtual es persistente en el servidor,
+es decir, es el servidor el que se encarga de almacenar la configuración
+de la máquina virtual de cada cliente. De forma que si una máquina
+virtual se apaga y se quiere iniciar nuevamente, ésta deberá ser iniciada
+en el servidor o bien en el cliente una vez conseguida dicha configuración
+desde el servidor. La configuración se almacena en el servidor dentro
+de ficheros XML. Cada fichero XML se corresponde con un dominio, y
+el nombre de cada dominio se corresponde con la dirección MAC de cada
+cliente, de forma que éste pueda identificar cual es su máquina
+virtual y así poder conectarse a ella.
+
+
+\subsection{Cliente\label{sub:Cliente}}
+
+En el cliente es donde reside la mayor complejidad de esta arquitectura.
+Una vez se arranca el cliente, éste debe ser capaz de conectarse al
+demonio \emph{libvirtd }que se está ejecutando en el servidor para
+llevar a cabo la migración de su máquina virtual.
+
+El cliente debe tener capacidad de virtualización. Para ello se instala
+el software del hipervisor KVM, un cliente y servidor SPICE, así como
+la API de Libvirt. El cliente utiliza como sistema operativo anfitrión
+una distribución de Linux Fedora 17 básica. Para la automatización
+del proceso de migración, de forma que sea transparente al usuario
+y éste no perciba que está utilizando una máquina virtual, se utilizan
+2 \emph{scripts} escritos en el lenguaje de programación interpretado
+Python: uno para el inicio y otro para el apagado del equipo del usuario.
+
+
+\subsubsection{Arranque del cliente}
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=0.75\textwidth]{images/diagrama-flujo-inicio-cliente}
+\par\end{centering}
+
+\caption{Diagrama flujo del inicio del cliente.}
+\label{diagrama-flujo-inicio}
+
+\end{figure}
+
+
+En la figura \ref{diagrama-flujo-inicio} se puede apreciar un diagrama
+de flujo del inicio de un cliente. Antes de iniciar la migración,
+el sistema operativo anfitrión del cliente debe tener acceso al almacenamiento
+donde se encuentra el disco duro virtual del dominio que se quiere
+migrar. Para ello, el cliente cuenta con un iniciador iSCSI que se
+conecta al \emph{target }del servidor iSCSI correspondiente. Para
+identificar dicho \emph{target,} el script de arranque utiliza la
+dirección MAC del dispositivo de red del equipo para construir la
+IQN que le corresponde. Una vez conectado al \emph{target} el sistema
+operativo anfitrión dispone del disco duro de la máquina virtual como
+si de un disco local se tratase. Este disco duro local se asignará
+directamente al sistema operativo huésped una vez terminada la migración.
+
+Posteriormente se establece una conexión a los demonios \emph{libvirtd
+}en el servidor y en el cliente para llevar a cabo la migración. En
+el servidor se encuentra la máquina virtual del cliente. Esta máquina
+virtual se identifica también a través de la dirección MAC del cliente
+que coincide con el nombre de dicho dominio. Llegado a este punto,
+se obtiene información del dominio relevante a su estado de ejecución,
+así como el fichero XML donde está definido. 
+
+Una vez comprobado el estado de ejecución del dominio el script actúa
+de forma diferente según éste sea activo o no.
+\begin{itemize}
+\item Si el dominio se está ejecutando en el servidor, el script establece
+una conexión entre el cliente SPICE y el servidor SPICE en el servidor
+de máquinas virtuales. A partir de este momento, ya se puede interactuar
+con la máquina virtual aunque ésta todavía está ejecutándose en el
+servidor. Posteriormente se inicia la migración de la máquina virtual
+hacia el cliente. Una vez finalizada la migración, el cliente SPICE
+se reconecta al servidor SPICE en el cliente de forma totalmente transparente
+al usuario.
+\item Si el dominio no se está ejecutando, el script crea un nuevo dominio
+directamente en el cliente a partir de la definición del dominio obtenida
+desde el servidor. Una vez creado se inicia el dominio y se conecta
+el cliente SPICE.
+\end{itemize}
+Debido a que en el servidor hay más de una máquina virtual y por lo
+tanto un servidor SPICE por cada una de ellas, el cliente debe conocer
+el puerto del servidor SPICE que conecta con su máquina virtual. Esta
+información se obtiene directamente de la definición de la máquina
+virtual que reside en el servidor.
+
+Una vez la máquina virtual esté ejecutándose en el cliente, se redimensiona
+su memoria RAM al máximo establecido en su definición, y que dependerá
+de la cantidad de memoria física de la que dispone el cliente.
+
+El script de inicio se ejecuta automáticamente al encender el equipo
+del usuario justo después de cargar el sistema operativo anfitrión
+del mismo. El sistema operativo anfitrión ejecuta además el servidor
+gráfico X de Linux, así como un gestor de ventanas sencillo en el
+que el cliente SPICE es la única ventana en modo pantalla completa
+que puede apreciarse. De forma que el usuario no percibe el sistema
+operativo anfitrión.
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=0.3\textwidth]{images/diagrama-flujo-APAGADO-cliente}
+\par\end{centering}
+
+\caption{Diagrama de flujo del apagado del cliente.}
+\label{diagrama-flujo-apagado-cliente}
+
+\end{figure}
+
+
+
+\subsubsection{Apagado del cliente}
+
+En la figura \ref{diagrama-flujo-apagado-cliente} se puede observar
+el diagrama de flujo correspondiente al apagado del cliente. Para
+apagar la máquina física donde se ejecuta el cliente%
+\footnote{No confundir el apagado del cliente con el apagado del sistema operativo
+virtualizado que se ejecuta en el mismo.%
+} se pulsa el botón de apagado, lo que genera un evento que ejecuta
+el script de apagado. Al igual que en el proceso de encendido, el
+script se conecta a los demonios \emph{libvirtd }del cliente y del
+servidor. Se establece una conexión con la máquina virtual que se
+está ejecutando en el cliente, identificada por la MAC del anfitrión
+y se redimensiona su memoria RAM, haciéndola más pequeña de forma
+que la migración sea más rápida y la memoria RAM utilizada una vez
+la máquina esté en el servidor sea menor. Una vez redimensionada la
+memoria RAM se procede a la migración de la máquina virtual y posteriormente
+al apagado del cliente.
+
+Una vez apagado el cliente, el sistema operativo virtualizado que
+residía en éste, continúa ejecutándose en el servidor y accesible
+por red.
+
+
+\subsection{Configuración de la red de las máquinas virtuales}
+
+Una parte importante de la configuración de las máquinas virtuales
+es la configuración de red. Para que la migración no afecte a la conectividad
+de las máquinas virtuales la configuración debe ser la misma en el
+cliente y en el servidor.
+
+Para que las máquinas virtuales tengan acceso a la red de área local
+se utiliza el método de conexión mediante puente externo como el que
+se puede apreciar en la figura \ref{conexion mediante un puente externo}.
+Dicho puente se crea en el anfitrión, por lo tanto debe estar configurado
+tanto en el sistema operativo anfitrión del servidor como del cliente. 
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics{images/red}
+\par\end{centering}
+
+\caption{Conexión de las máquinas virtuales mediante un puente en el anfitrión.}
+\label{conexion mediante un puente externo}
+\end{figure}
+
+
+Posteriormente se configura el dispositivo físico de red de tal forma
+que pase a formar parte del puente, dando así conectividad al mismo.
+Una vez el puente tiene acceso a la red de área local, se pueden asociar
+al mismo las interfaces virtuales de red de las máquinas virtuales
+presentes en el anfitrión dandole acceso a la red.
+
+Opcionalmente se puede utilizar un dispositivo de red adicional en
+el anfitrión (tanto en el cliente como en el servidor) con el fin
+de aislar la red de los huéspedes de la red de gestión de las máquinas
+virtuales. También se pueden separar dichas redes utilizando un único
+dispositivo de red si se dispone de un switch con soporte para VLANs.
+
+
+\section{Arranque por red de los clientes}
+
+Debido a que la mayor parte de la complejidad de esta arquitectura
+cliente-servidor reside en el cliente, se desarrolla adicionalmente
+un servicio de arranque por red, con el objetivo de minimizar dicha
+complejidad en los clientes. Este diseño se basa en el uso de un servidor
+TFTP%
+\footnote{Trivial File Transfer Protocol, es un protocolo de transferencia de
+ficheros muy básico. %
+} y un entorno PXE%
+\footnote{Pre-Boot Execution Environment, entorno que permite el arranque de
+ordenadores a través de una interfaz de red independientemente de
+los dispositivos de almacenamiento locales.%
+} para permitir el arranque en red de los clientes. El objetivo de
+este diseño es facilitar la administración, instalación de nuevos
+clientes en las estaciones de trabajo, evitando tener que instalar
+todo el software de virtualización en cada uno de ellos. 
+
+Además del sistema de arranque por red, el disco duro de los clientes
+pasa a ser un disco SCSI al que se accede mediante el protocolo iSCSI
+y que estará eventualmente alojado en el mismo servidor de almacenamiento
+donde se encuentran los discos de las máquinas virtuales. Dicho disco
+SCSI mantiene una instalación del sistema operativo anfitrión del
+cliente así como la API Libvirt, el hipervisor KVM y el cliente y
+servidor de SPICE ya configurados.
+
+Con este método se consigue que toda la complejidad pase al servidor.
+El cliente ya no necesita disco duro físico, ni configuración de su
+sistema de virtualización, sino que el sistema base será proporcionado
+por el servidor. Además el disco duro de los clientes será común a
+todos éstos ya se que proporciona un sistema de solo lectura, de otra
+forma, solo un cliente podría tener acceso al dispositivo SCSI, por
+ser éste un dispositivo de bloques.
+
+Esta configuración permite además al administrador encargarse de la
+actualización del sistema operativo base de los clientes, de forma
+transparente para el usuario.
+
+En la figura \ref{proceso arranque por red de los clientes} se puede
+observar el proceso de arranque por red de los clientes que será detallado
+en los apartados siguientes. Una vez el sistema operativo anfitrión
+del cliente está arrancado, éste ejecuta el script de inicio detallado
+en la figura \ref{diagrama-flujo-inicio}.
+
+\begin{figure}[htpb]
+\begin{centering}
+\includegraphics[width=0.95\textwidth]{images/pxeboot}
+\par\end{centering}
+
+\caption{Proceso arranque por red del cliente.}
+\label{proceso arranque por red de los clientes}
+\end{figure}
+
+
+
+\subsection{Cliente}
+
+Para la parte del cliente solo es necesario que el ordenador tenga
+la posibilidad de arranque por red. Para esto es necesario que el
+dispotivo de red tenga un \emph{firmwar}e con soporte para PXE y configurar
+en la BIOS el dispositivo de red como dispositivo más prioritario
+para el arranque.
+
+Cuando se enciende el cliente, el \emph{firmwar}e del dispositivo
+de red busca mediante una petición \emph{broadcas}t un servidor DHCP%
+\footnote{Del inglés, Dynamic Host Configuration Protocol, es un protocolo de
+red que permite a los equipos de red obtener sus parámetros de configuración
+de forma automática.%
+} con soporte para PXE en la red. Dicho servidor DHCP es el que proporciona
+en su respuesta la información necesaria para localizar el servidor
+PXE a partir del cual obteniene mediante TFTP el programa de arranque
+por red NBP.%
+\footnote{Network Boot Program, es el programa de arranque en red.%
+} El NBP, se carga en la memoria RAM del cliente y comienza a ejecutarse,
+haciendo más peticiones al servidor TFTP para obtener el núcleo de
+Linux del cliente así como los parámetros de arranque.
+
+
+\subsection{Servidor}
+
+Para permitir el arranque por red, el servidor debe tener configuradas
+los siguientes servicios: DHCP, TFTP y PXE, y debe además almacenar
+la imagen de arranque de Linux \emph{initrd.img}%
+\footnote{Initrd, en inglés Initial RAM disk, es un sistema de ficheros temporal
+que utiliza el núcleo de Linux para poder llevar a cabo las acciones
+necesarias para montar el sistema de ficheros raíz.%
+} y el propio núcleo de Linux \emph{vmlinuz}.%
+\footnote{El fichero ejecutable que contiene el núcleo de Linux se llama normalmente
+\emph{vmlinuz.}%
+}
+
+
+\subsubsection{DHCP}
+
+Se configura un servidor DHCP que asigna direcciones IP estáticas
+a los clientes, identificados por su dirección MAC. El servidor DHCP
+además de proporcionar la configuración de red a los clientes, informa
+de la dirección IP del servidor TFTP y del fichero NBP que el cliente
+se debe descargar. En este caso, el fichero a descargar es \emph{pxelinux.0,}
+un gestor de arranque que permite, una vez ejecutado en el cliente,
+el arranque por red de un núcleo de Linux.
+
+
+\subsubsection{TFTP}
+
+El servidor TFTP proporciona al cliente todos los ficheros necesarios:
+el gestor de arranque \emph{pxelinux.0}, así como un fichero con la
+configuración del propio gestor de arranque. Esta configuración indica
+qué sistemas operativos se pueden arrancar y de que forma. En este
+caso, la configuración del gestor de arranque contiene la información
+necesaria para arrancar el núcleo de Linux del cliente, que en nuestro
+caso es descargado desde este mismo servidor. Además contiene la información
+necesaria para localizar la partición raíz del sistema, que se encuentra
+en el servidor de almacenamiento iSCSI.
+
+
+\subsection{Sistema operativo anfitrión del cliente}
+
+El sistema operativo anfitrión de los clientes, se almacena en el
+servidor iSCSI. Consiste en una instalación básica de Linux con todos
+los componentes necesarios para la virtualizión tal como se describe
+en el apartado \ref{sub:Cliente}.
+
+Para permitir que este sistema operativo pueda arrancar por red y
+utilizar una partición raíz remota a través de iSCSI es necesario
+modificar la imagen de arranque \emph{initrd.img} de Linux para añadirle
+soporte para el protocolo iSCSI añadiendo los controladores necesarios.
+En el proceso de arranque, el cliente obtiene desde el servidor TFTP/PXE
+los parámetros de arranque necesarios entre los que cabe destacar
+la dirección IP del servidor iSCSI y el identificador IQN del \emph{target}
+que contiene la instalación del sistema operativo común de tosos
+los clientes.
+
+El sistema operativo anfitrión del cliente debe ser de solo lectura,
+para que varios clientes puedan utilizar el mismo \emph{target} iSCSI.
+Para hacer el sistema de solo lectura, se modifica la secuencia de
+arranque del sistema operativo Linux, impidiendo que éste monte la
+partición raíz en modo lectura-escritura una vez finalizado el arranque.
+Los directorios del sistema de ficheros que necesitan acceso de escritura
+se mueven a la partición \emph{/dev/shm} (que está montada en la memoria
+RAM) y se enlazan en su localización habitual.
+
+
+\section{Resultado final del sistema}
+
+En la figura \ref{Arquitectura cliente-servidor del sistema} se puede
+observar la arquitectura final del sistema completo. Tanto los clientes
+como el servidor de máquinas virtuales deben pertenecer a la VLAN
+de gestión para poder llevar a cabo las migraciones así como para
+la comunicación entre los clientes y servidores SPICE. Además también
+deben pertenecer a la VLAN de las máquinas virtuales para poder dar
+acceso a las mismas a la red tanto si se están ejecutando en el servidor
+como en el cliente. El servidor DHCP debe pertenecer a la VLAN de
+gestión de forma que permita el arranque en red de los clientes, aunque
+también podría estar eventualmente conectado a la VLAN de las máquinas
+virtuales para proporcionar a éstas la configuración de red. Sin embargo,
+esto no es necesario ya que las máquinas virtuales podrián tener una
+configuración de red estática o bien obtener la configuración de otro
+servidor DHCP ajeno al sistema.
+
+\begin{figure}[htpb]
+\begin{raggedright}
+\includegraphics[width=0.8\textwidth]{images/arquitectura1}
+\par\end{raggedright}
+
+\caption{Arquitectura Cliente-Servidor del sistema.}
+\label{Arquitectura cliente-servidor del sistema}
+\end{figure}
+
+
+Como resultado final, se obtiene un sistema que permite apagar los
+equipos de los usuarios mientras que sus sistemas operativos virtualizados
+continúan ejecutándose en el servidor y accesibles por red. Cuando
+los usuarios vuelven a encender sus equipos recuperan su sistema virtualizado
+y además éste se ejecuta en su propio equipo contando con los propios
+recursos del hardware del usuario y descargando al servidor de tareas
+pesadas.
+
+Para añadir un nuevo equipo al sistema, el administrador tiene que
+llevar a cabo las siguientes tareas:
+\begin{itemize}
+\item Crear un nuevo volumén lógico en el servidor de almacenamiento y asignarlo
+a un nuevo \emph{target }identificado con la dirección MAC del nuevo
+equipo. Conectar el servidor de máquinas virtuales a dicho \emph{target.} 
+\item Definir en Libvirt un dominio nuevo estándar y personalizarlo con
+la MAC como nombre de dominio y adaptar la cantidad de memoria RAM
+máxima permitida a las características del equipo. También se debe
+definir un nuevo puerto para el servidor SPICE y el nuevo dispositivo
+SCSI al que se conecta previamente, como dispositivo de almacenamiento
+del dominio.
+\item Añadir en la configuración del servidor DHCP una nueva entrada con
+la configuración de red para el nuevo equipo.
+\end{itemize}
+El nuevo usuario simplemente debe configurar el arranque por red en
+la BIOS y encender su equipo. En este momento el sistema virtualizado
+tiene todas las características de un sistema nativo, pudiendo instalar
+en él el sistema operativo que se desea, incluso una instalación multi-arranque
+con más de un sistema operativo. Para llevar a cabo la instalación
+del sistema operativo del usuario, las máquinas virtuales están configuradas
+de forma que el primer dispositivo de arranque sea la unidad de cdrom,
+la cual es configurada para conectar directamente con la unidad de
+cdrom física del equipo del usuario.
+
+Para facilitar la instación del sistema operativo Windows,%
+\footnote{Las distribuciones de Linux más comunes vienen con soporte para VirtIO
+por defecto.%
+} las máquinas virtuales están configuradas para tener una segunda
+unidad de cdrom, que está ligada a una imagen ISO que contiene los
+controladores VirtIO necesarios para la instalación. Está imagen ISO
+se encuentra alojada en el sistema de ficheros del anfitrión.
+
+\clearemptydoublepage
+\chapter{Conclusiones}
+
+Debido a que el sector de las Tecnologías de la Información y Comunicación
+(TIC) cobra cada vez mayor importancia es obvia la necesidad de tomar
+medidas de ahorro energético optimizando su consumo y concienciando
+en un uso más responsable de las mismas.
+
+Sin embargo, con la expansión de las TIC, hay también una mayor necesidad
+de que los equipos permanezcan conectados a la red permanentemente,
+aumentando su consumo energético aun cuando su uso es bastante reducido
+o esporádico.
+
+Con la utilización de un sistema como el diseñado en este proyecto
+se consigue un ahorro energético considerable. Este ahorro energético
+es más apreciable cuando el número de ordenadores personales que utilizan
+este sistema es mayor, de forma que se compense el consumo energético
+base de los servidores utilizados.
+
+A diferencia de otros sistemas comerciales que permiten el uso de
+escritorios virtuales en la nube, el sistema diseñado permite un mayor
+control al usuario de su propia máquina virtual, haciendo uso de toda
+la potencia hardware de su equipo cuando el usuario lo desee al ejecutarse
+la máquina virtual en su propio equipo, y reduciendo su consumo energético
+cuando la máquina virtual se envía al servidor y se apaga el equipo.
+Además el usuario puede instalar el sistema operativo que desee de
+entre los soportados por KVM (distribuciones de Linux, Windows, y
+sistemas operativos tipo UNIX como la familia BSD y Solaris, así como
+otros sistemas operativos menos comunes) así como hacer una
+instalación de varios sistemas operativos utilizando un gestor de
+arranque como GRUB.
+
+Este sistema facilita además la instalación masiva de sistemas operativos
+en entornos de trabajo homogéneos, proporcionando a todos los clientes
+un disco duro virtual que contiene un sistema operativo huésped ya
+instalado y preconfigurado.
+
+\clearemptydoublepage
+\chapter{Líneas Futuras}
+
+El futuro de este proyecto está fuertemente ligado a las mejoras que
+se hagan en el ámbito de la virtualización. Los avances en las extensiones
+hardware de los microprocesadores Intel y AMD que soportan la virtualización
+del microprocesador, pero también de la unidad de gestión de memoria
+y la virtualización de dispositivos, se ven reflejados directamente
+en el rendimiento de éste sistema. Las mejoras implementadas en el
+hipervisor KVM afectan de la misma manera.
+
+El protocolo SPICE también influye en el rendimiento del sistema.
+A día de hoy, SPICE solo permite comandos 2D pero el soporte para
+comandos 3D ya está en desarrollo. Esto permitirá a los nuevos escritorios
+3D ejecutarse remotamente de forma más fluida. Además en el protocolo
+SPICE se está trabajando en nuevos canales de comunicación que permitan
+utilizar los dispositivos lector de DVD y puertos USB de forma remota.
+Esto permitirá a los usuarios de este sistema instalar un nuevo sistema
+operativo desde su lector de DVD no solo cuando la máquina virtual
+está ejecutándose en el cliente sino también de forma remota.
+
+A continuación se describen algunas mejoras en este diseño que afectan
+tanto al servidor como al cliente.
+
+
+\section{Mejoras en el servidor}
+
+Al servidor de máquinas virtuales se le pueden añadir algunas funcionalidades
+extra que permitan un mejor aprovechamiento de la infraestructura
+creada. Entre algunas funcionalidades destacan la posibilidad de conectarse
+remotamente a las máquinas virtuales cuando éstas se ejecutan en el
+servidor y la distribución de imágenes de instalación a los clientes.
+
+
+\subsection{Acceso remoto a las máquinas virtuales}
+
+En el estado actual de este sistema, los usuarios pueden conectarse
+a su escritorio remoto instalando en su sistema operativo un servidor
+VNC%
+\footnote{Siglas en inglés de Virtual Network Computing. VNC es un sistema que
+permite exportar por red la pantalla del cliente y capturar los eventos
+del teclado y ratón de forma que permite utilizar un escritorio de
+forma remota.%
+} o RDP,%
+\footnote{RDP, del inglés Remote Desktop Protocol, es un protocolo que permite
+el acceso remoto a escritorios Windows%
+} siempre y cuando la red en la que su máquina virtual se encuentra
+sea accesible desde el exterior. Sin embargo estos servicios se ejecutan
+en el sistema operativo huésped y por lo tanto a través de ellos no
+podemos reiniciar la máquina virtual para luego elegir en el gestor
+de arranque que sistema operativo deseamos arrancar. Además las redes
+en las que se encuentran las máquinas virtuales de los usuarios no
+suelen ser accesibles de forma pública.
+
+Como mejora del servidor de máquinas virtuales se propone una configuración
+mediante la cual el servidor esté accesible publicamente o mediante
+una VPN de forma que los usuarios puedan conectarse desde cualquier
+parte utilizando un cliente de SPICE. De esta forma los usuarios tienen
+acceso a sus máquinas virtuales cuando éstas se encuentran en el servidor,
+proporcionando así un servicio adicional de escritorio en la nube
+como ya hacen algunas soluciones comerciales. Además si se quiere
+prescindir de la aplicación del cliente SPICE, puede configurarse
+un servidor web que utilice el cliente de SPICE escrito en HTML5,
+de forma que los usuarios solo necesiten un navegador para poder acceder
+a su escritorio. SPICE además tiene un rendimiento mucho mayor que
+VNC ya que envía al cliente los comandos 2D necesarios para hacer
+las operaciones de renderizado en el mismo, en lugar de enviar el
+estado del \emph{framebuffer}%
+\footnote{El \emph{framebuffer} contiene una parte de la memoria de vídeo que
+se corresponde con el estado actual de la pantalla.%
+} continuamente al cliente como hace VNC.
+
+
+\subsection{Servidor de imágenes de instalación}
+
+La secuencia de arranque de las máquinas virtuales de los usuarios
+tienen como primer dispositivo de arranque el lector de DVD del equipo
+del usuario y como segundo dispositivo su disco duro virtual. Sin
+embargo, podría configurarse el dispositivo virtual de red como primer
+dispositivo de arranque y aprovechar el servidor TFTP/PXE para permitir
+a los clientes hacer instalaciones por red de sistemas operativos
+que se ofrecen desde el servidor y se pueden seleccionar de una lista
+que se provee en el gestor de arranque.
+
+
+\section{Mejoras en el cliente}
+
+Para el cliente se propone la configuración de un canal de comunicación
+establecido entre el anfitrión y el huésped a partir de un puerto
+serie virtual. Utilizando este canal se puede informar al usuario
+del estado de su sistema de virtualización a través de una aplicación
+programada específicamente para cada sistema operativo huésped.
+
+Este canal de comunicación podría ser utilizado para informar al usuario
+del proceso de la migración de su máquina virtual así como de posibles
+cambios en el tamaño de su memoria RAM. Así, cuando el usuario pulse
+el botón de apagado, pueda ver en que estado se encuentra la migración
+de su máquina virtual hacia el servidor y por lo tanto saber cuanto
+falta hasta que se apague su equipo. O, una vez iniciado su equipo
+y conectado mediante SPICE a su máquina virtual, el usuario pueda
+saber cuando la máquina virtual finaliza su migración y está ya ejecutándose
+en su propio equipo y haciendo uso de toda la memoria RAM que tiene
+asignada.
+
+
+
+\appendix
+\clearemptydoublepage
+\chapter{Script de inicio del cliente}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstinputlisting[language=Python,
+  label=getvmpy,
+  title={getvm.py},
+  showstringspaces=false,
+  breakatwhitespace=false,
+  breaklines=true,
+  formfeed=\newpage,
+  tabsize=4,
+  basicstyle=\small,
+  stringstyle=\color{mymauve},
+  commentstyle=\itshape\color{mygreen},
+  keywordstyle=\bfseries\color{blue},
+  numberstyle=\tiny\color{mygray},
+  basicstyle=\ttfamily]{code/getvm.py}
+
+
+\clearemptydoublepage
+\chapter{Script de apagado del cliente}
+
+
+
+\lstinputlisting[language=Python,
+  label=sendvmpy,
+  title={sendvm.py},
+  showstringspaces=false,
+  breakatwhitespace=false,
+  breaklines=true,
+  formfeed=\newpage,
+  tabsize=4,
+  basicstyle=\small,
+  stringstyle=\color{mymauve},
+  commentstyle=\itshape\color{mygreen},
+  keywordstyle=\bfseries\color{blue},                                                                                                                                                                                                         
+  numberstyle=\tiny\color{mygray},                                                                                                                                                                                                            
+  basicstyle=\ttfamily]{code/sendvm.py}
+
+\clearemptydoublepage
+\chapter{Fichero de configuración de las máquinas virtuales}
+\begin{lstlisting}[language=XML,
+    label=78e7d1804034,
+    title={78e7d1804034.xml},
+    showstringspaces=false,
+    breaklines=true,
+    formfeed=\newpage,
+    tabsize=4,
+    basicstyle=\small,
+    stringstyle=\color{mymauve},
+    commentstyle=\itshape\color{mygreen},
+    keywordstyle=\bfseries\color{blue},
+    numberstyle=\tiny\color{mygray},
+    basicstyle=\ttfamily]
+
+<domain type='kvm'>
+
+  <name>78e7d1804034</name>
+
+  <uuid>7f19cb28-d4fa-6dea-a64b-17869e253786</uuid>
+  <memory unit='KiB'>3145728</memory>
+  <currentMemory unit='KiB'>999424</currentMemory>
+  <vcpu>4</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc-0.15'>hvm</type>
+    <boot dev='cdrom'/>
+    <boot dev='hd'/>
+    <bootmenu enable='yes'/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <pae/>
+  </features>
+
+  <cpu mode='custom' match='exact'>
+    <model fallback='allow'>kvm64</model>
+  </cpu>
+
+  <clock offset='utc'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>restart</on_crash>
+
+  <devices>
+
+    <emulator>/usr/bin/qemu-kvm</emulator>
+
+    <disk type='block' device='disk'>
+      <driver name='qemu' type='raw' cache='none'/>
+      <source dev='/dev/disk/by-id/scsi-1IET_00020001'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+
+    <disk type='file' device='cdrom'>
+      <driver name='qemu' type='raw'/>
+      <source file='/opt/virtio-win-0.1-52.iso'/>
+      <target dev='hda' bus='ide'/>
+      <readonly/>
+    </disk>
+
+    <disk type='block' device='cdrom'>
+      <driver name='qemu' type='raw'/>
+      <source dev='/dev/sr0'/>
+      <target dev='hdc' bus='ide'/>
+      <readonly/>
+    </disk>
+
+    <interface type='bridge'>
+      <mac address='52:54:00:44:61:69'/>
+      <source bridge='br0'/>
+      <model type='virtio'/>
+    </interface>
+
+    <serial type='pty'>
+      <target port='0'/>
+    </serial>
+
+    <console type='pty'>
+      <target type='serial' port='0'/>
+    </console>
+
+    <channel type='spicevmc'>
+      <target type='virtio' name='com.redhat.spice.0'/>
+      <address type='virtio-serial' controller='0' bus='0' port='1'/>
+    </channel>
+
+    <input type='tablet' bus='usb'/>
+    <input type='mouse' bus='ps2'/>
+
+    <graphics type='spice' port='5901' autoport='no' listen='0.0.0.0'>
+      <listen type='address' address='0.0.0.0'/>
+    </graphics>
+
+    <sound model='ich6'>
+    </sound>
+
+    <video>
+      <model type='qxl' vram='65536' heads='1'/>
+    </video>
+
+    <memballoon model='virtio'>
+    </memballoon>
+
+  </devices>
+</domain>
+\end{lstlisting}
+\backmatter
+
+\nocite{KVMBestPractices}
+\nocite{Creasy:1981:OVT:1664853.1664863}
+\nocite{IBMVirt}
+\nocite{RiseType0}
+\nocite{Adams:2006:CSH:1168917.1168860}
+\nocite{VirtOverview}
+\nocite{HWSupport}
+\nocite{EPT}
+\nocite{RVI}
+\nocite{Overcommiting}
+\nocite{KVMTunning}
+\nocite{KVMSecurity}
+\nocite{SpiceNewbies}
+\nocite{VDIfaces}
+\nocite{Libvirt}
+\clearemptydoublepage
+\bibliographystyle{mtesis}
+\bibliography{biblio}
+
+\end{document}
