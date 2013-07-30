@@ -1,6 +1,6 @@
 %% LyX 2.0.2 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[oneside,english,spanish]{book}
+\documentclass[twoside,parskip-,pointlessnumbers,final,english,spanish]{book}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{geometry}
@@ -103,7 +103,7 @@ web para la gestión de salas virtuales de videoconferencia \textit{Adobe Connect
 \thispagestyle{empty}
 \section*{\centering{Proyecto Fin de Carrera}}
 \vspace{1 cm}
-\subsection*{\centering{Diseño, desarrollo y puesta en servicio de una aplicación web para la gestión de salas virtuales de videoconferencia \textit{Adobe Connect}}}
+\subsection*{\centering{Diseño, desarrollo y puesta en servicio de una aplicación web para la gestión de salas virtuales de videoconferencia \textit{Adobe Connect}\textsuperscript{\textregistered{}}}}
 
 \vspace{2 cm}
 \begin{description}
@@ -112,8 +112,9 @@ web para la gestión de salas virtuales de videoconferencia \textit{Adobe Connect
 \item [{Tutores:}] Yolanda Blanco Fernández, Vicente Goyanes de Miguel.
 \end{description}
 
-\vspace{1 cm}
+\vspace{2 cm}
 El tribunal nombrado para juzgar el proyecto fin de carrera arriba citado, compuesto por los miembros:
+\vspace{1 cm}
 \begin{description}
 \item [{Presidente:}] 
 \item [{Secretario:}] 
@@ -123,7 +124,7 @@ El tribunal nombrado para juzgar el proyecto fin de carrera arriba citado, compu
 \vspace{1 cm}
 \centerline{Acuerda otorgarle la calificación de:}
 
-\vspace{2 cm}
+\vspace{2.5 cm}
 
 \centerline{El Presidente\hspace{3 cm}El Secretario\hspace{3 cm}El Vocal}
 
@@ -141,14 +142,15 @@ El tribunal nombrado para juzgar el proyecto fin de carrera arriba citado, compu
 \lyxrightaddress{\vspace{6cm}
 }
 
-
+\topskip0pt
+\vspace*{\fill}
 \lyxrightaddress{A mi familia}
+\vspace*{\fill}
 
 \newpage{}
 \pagenumbering{roman}
 \subsection*{\centering{Resumen}}
 
-\section*{Objetivos}
 
 Los mecanismos de comunicación por videoconferencia siempre han sido
 una herramienta esencial para el correcto desarrollo empresarial,
@@ -158,13 +160,12 @@ duda fundamentales para el desarrollo ágil y la búsqueda de soluciones.
 También en el ámbito universitario nos encontramos con colaboraciones
 entre universidades situadas en diferentes comunidades autónomas o
 países, con una gran demanda de mecanismos de comunicación, tanto
-para ampliar sus grupos de investigación como para poder conpartir
+para ampliar sus grupos de investigación como para poder compartir
 sus hallazgos con la creciente y globalizada comunidad científica.
 Estos escenarios nos ofrecen múltiples roles de usuarios altamente
 diferenciados, pero con una necesidad común.
 
 \medskip{}
-
 
 El presente proyecto surge de la necesidad de abastecer de una plataforma
 de videoconferencia a usuarios de múltiples roles y diferentes ámbitos
@@ -177,19 +178,17 @@ específicas.
 
 \medskip{}
 
-
 Para realizar esta aplicación haremos uso del \textit{framework} específico
 para PHP Symfony en su segunda versión revisada, una potente herramienta
 que simplificará nuestro trabajo a la hora de diseñar la aplicación.
 Nos aportará un escenario excelente para poder ampliar el proyecto
 en caso de ser necesario y como toda plataforma de software libre,
 cuenta con una gran comunidad que lo respalda, lo cual nos ayudará
-a una rápida resolución de errores. Hemos elegido PHP 5 porque
+con una rápida resolución de errores. Hemos elegido PHP 5 porque
 puede ser desplegado en la mayoría de los servidores web y en casi
 todos los sistemas operativos y plataformas sin costo alguno.
 
 \medskip{}
-
 
 Como motor de videoconferencia utilizaremos el Software propietario
 Adobe Connect\textsuperscript{®} que posee un interfaz perfecto
@@ -198,28 +197,26 @@ Este software también posee una potente API que nos permitirá sacar
 el mayor partido a las funciones de Adobe Connect Profesional\textsuperscript{®}
 y controlarlas desde nuestra aplicación\@. La experiencia nos hace
 saber que el uso de Adobe Connect Profesional\textsuperscript{®}
-es complejo para cualquier usuario que no posea un perfil tÃ©cnico
+es complejo para cualquier usuario que no posea un perfil técnico
 y la multitud de opciones disponibles hace que su interfaz sea poco
 intuitivo.
 
 \medskip{}
 
-
 Para almacenar toda la información de nuestra aplicación, tanto de
 los usuarios como de sus reuniones de videoconferencia, utilizaremos
 MySQL 5.5, ya que su velocidad, característica importante para aplicaciones
 web, es ideal. Siguiendo con la filosofía de software libre, se
-acotarÃ¡ enormemente el tiempo de búsqueda de soluciones ante errores
+acotará enormemente el tiempo de búsqueda de soluciones ante errores
 que puedan surgir durante la fase de desarrollo.
 
 \medskip{}
 
-
 Uno de los mayores objetivos de este proyecto es ofrecer un interfaz
 intuitivo que haga popular el servicio sin necesidad de conocimientos
-tÃ©cnicos o lecturas extensas. Para ello usaremos la biblioteca
+técnicos o lecturas extensas. Para ello usaremos la biblioteca
 de Javascript jQuery. Su gran capacidad para personalizar el diseño
-de nuestra pÃ¡gina y la facilidad para crear funcionalidades y animaciones
+de nuestra página y la facilidad para crear funcionalidades y animaciones
 avanzadas nos proporcionará unos magníficos resultados. Las interacciones
 AJAX son otro punto a tener en cuenta a la hora de utilizar jQuery
 ya que simplifica enormemente su utilización y nos da la capacidad
@@ -227,7 +224,6 @@ de disminuir el ancho de banda utilizado, así como de reducir la velocidad
 de acceso a la aplicación.
 
 \medskip{}
-
 
 Hoy día es muy importante que las aplicaciones puedan estar en contacto
 con otras, para obtener datos o simplemente sincronizar información
@@ -248,11 +244,12 @@ carga de peticiones. Para ello usaremos los datos proporcionados
 por la API de Adobe Connect\textsuperscript{®} y los visualizaremos
 haciendo uso de la librería karmicgraphs de jQuery.
 
-\pagebreak{}
+\newpage{}
 
 \tableofcontents{}
 
-\pagebreak{}
+\newpage{}
+\setcounter{page}{1}
 \pagenumbering{arabic}
 
 \chapter{Introducción\label{chap:Introducci=0000F3n}}
