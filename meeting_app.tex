@@ -149,6 +149,7 @@ El tribunal nombrado para juzgar el proyecto fin de carrera arriba citado, compu
 
 \newpage{}
 \pagenumbering{roman}
+\vspace{1 cm}
 \subsection*{\centering{Resumen}}
 
 
@@ -293,7 +294,7 @@ lo general 128 kbits/s) para vídeo comprimido y transmisión de audio\@.
 
 
 \begin{figure}
-\hspace{4cm}\includegraphics[scale=0.6]{Diseno/comunciacion_modif}
+\centerline{\includegraphics[scale=0.6]{Diseno/comunciacion_modif}}
 
 \caption{Diagrama de comunicación}
 \label{comunicacion}
@@ -381,7 +382,7 @@ resaltar la reserva de salas, múltiples posibilidades de disposición
 de los elementos de la sala, es decir, se podrá seleccionar el lugar
 dónde aparecerán los ponentes en la reunión y el contenido visual
 que aporten, también el acceso a gráficas estadísticas que muestran
-en tiempo real el uso de la aplicación o un serivicio de alerta que
+en tiempo real el uso de la aplicación o un servicio de alerta que
 advierte a los administradores de una posible saturación del sistema,
 ya sea por exceso de usuarios o por escasez de salas\@.
 
@@ -390,7 +391,7 @@ ya sea por exceso de usuarios o por escasez de salas\@.
 
 La búsqueda de una aplicación popular tan ansiada por todo desarrollador
 web nos obligará a desarrollar un interfaz intuitivo, de forma que
-alcancemos el objetivo de una rápida integración de los usuarios sin
+alcancemos una rápida integración de los usuarios sin
 necesidad de conocimientos técnicos o lecturas extensas\@.
 
 \smallskip{}
@@ -442,7 +443,7 @@ que se utilizará como referencia a lo largo de este proyecto\@.
 Se describirán las posibles líneas futuras desprendidas del desarrollo
 de la aplicación y de las experiencias de los usuarios que la han
 utilizado en la senda del desarrollo eficiente\@. Se comentarán las
-ideas surgidas durante el desarrollo y que han aportado grandes dosis
+ideas que han nacido durante el desarrollo y que han aportado grandes dosis
 de conocimiento e intuición para ampliar algunas de las funciones
 de la aplicación\@.
 
@@ -450,7 +451,7 @@ de la aplicación\@.
 
 
 Se finalizará con la bibliografía empleada en el desarrollo del proyecto
-y de esta memoria para el deleite de usuarios que sientan predilección
+y de esta memoria para el deleite de usuarios con predilección
 por el mundo del desarrollo web y sientan el deseo de aumentar sus
 conocimientos en este ámbito\@.
 
@@ -568,8 +569,8 @@ a aportar valor, desarrollando las características únicas de cada
 proyecto\@. En este proyecto se ha utilizado la segunda versión de
 este \textit{framework} que posee una importante cantidad de mejoras
 tanto a nivel de desarrollador como internas, cabe resaltar el aumento
-de la facilidad de migración a versiones superiores mucho menos trabajado
-en le pasado\@. Es por ello que las referencias a Symfony pertencen
+de la compatibilidad con versiones futuras, mucho menos trabajado
+en el pasado\@. Es por ello que las referencias a Symfony pertencen
 en todo el proyecto a su segunda versión, por tanto tendremos partes
 comunes y mejoras con respecto a versiones anteriores\@.
 
@@ -591,15 +592,15 @@ proyecto se describen a continuación\@.
 
 \subsection{El controlador}
 
-En esta sección mostraremos cómo se organizan y qué son los controladores
+En esta sección se mostrará cómo se organizan y qué son los controladores
 en la estructura de Symfony\@.
 
 \smallskip{}
 
 
-Se llama controlador al conjunto de directorios, en nuestro caso situados
+Se llama controlador al conjunto de directorios, en este proyecto situados
 en la carpeta \textit{src/Cmar/MeetingBundle}, que almacenan la lógica
-de los diferentes elementos de nuestra aplicación\@. Es, por así
+de los diferentes elementos de la aplicación\@. Es, por así
 decirlo, el cerebro de cada una de las funciones que se realizan\@.
 El controlador recoge los datos de los formularios y de la base de
 datos y ofrece las respuestas que se visualizarán en las plantillas
@@ -608,12 +609,12 @@ Twig, que describiremos en la sección \ref{sub:La-vista}\@.
 \smallskip{}
 
 
-Nos ofrecen la posibilidad de generar respuestas, como páginas HTML
+Ofrecen la posibilidad de generar respuestas, como páginas HTML
 o ficheros XML para fuentes RSS o servicios Web, y JSON para peticiones
 AJAX, ajustando únicamente el valor de la variable \textit{format}
 en la descripción de las funciones del controlador para las cuales
-necesitemos un tipo de respuesta u otra\@. Posee instrucciones específicas
-para acceder al objeto \textit{request}\footnote{Se utiliza nomenclatura PHP para esta variable.},
+se necesite un tipo de respuesta u otra\@. Posee instrucciones específicas
+para acce\-der al objeto \textit{request}\footnote{Se utiliza nomenclatura PHP para esta variable.},
 o de respuesta de un formulario, a través de una variable llamada
 \textit{app.request}\cite{key-7}\cite{key-3}\@.
 
@@ -624,7 +625,7 @@ Symfony posee un elegante objeto de sesión que representa el cliente
 (puede ser una persona real usando un navegador, un \textit{bot}
 o un servicio web)\@. Entre dos peticiones, Symfony almacena los
 atributos en una cookie usando sesiones nativas de PHP\@. De esta
-forma podemos generar funciones del tipo migas de pan de forma sencilla
+forma es posible generar funciones del tipo migas de pan de forma sencilla
 utilizando los atributos de esta \textit{cookie} o generar acceso
 a un servidor evitando peticiones superfluas si aún no ha caducado
 la sesión\@.
@@ -640,19 +641,19 @@ completo es normalizar los desarrollos\@. Gracias a la estructura
 predeterminada de archivos y directorios de Symfony, cualquier desarrollador
 con conocimientos básicos puede asumir el mantenimiento de un proyecto
 elaborado con este \textit{framework}, premisa muy importante para
-el desarrollo colaborativo de todas las aplicaciones\@.
+el desarrollo colaborativo de cualquier aplicación\@.
 
 \smallskip{}
 
 
-Adjuntamos una breve descripción de la funcionalidad de cada directorio
+Se adjunta una breve descripción de la funcionalidad de cada directorio
 de Symfony en la figura \ref{Explic-direct-Symfony}\@.
 
 \smallskip{}
 
 
 \begin{figure}[H]
-\hspace{3.5cm}\includegraphics[scale=0.5]{EstructuraDirectoriosSymfony}
+\centerline{\includegraphics[scale=0.5]{EstructuraDirectoriosSymfony}}
 
 \caption{Estrucutra de directorios en Symfony}
 \label{estruc-direct-Sym}
@@ -660,7 +661,7 @@ de Symfony en la figura \ref{Explic-direct-Symfony}\@.
 
 
 \begin{figure}
-\hspace{5.5cm}\includegraphics[scale=0.5]{ExplicacionEstructuraDirectoriosSymfony}
+\centerline{\includegraphics[scale=0.5]{ExplicacionEstructuraDirectoriosSymfony}}
 
 \caption{Funcionalidades de la estucutra de directorios en Symfony}
 \label{Explic-direct-Symfony}
@@ -1003,7 +1004,7 @@ a los errores del código \cite{key-10}\@.
 
 
 \begin{figure}
-\hspace{5cm}\includegraphics[scale=0.6]{Diseno/PHP_arq}
+\centerline{\includegraphics[scale=0.6]{Diseno/PHP_arq}}
 
 \caption{Procesos que describen PHP}
 \end{figure}
@@ -1058,7 +1059,7 @@ de referencia para el diseño y evaluación de otros servidores web\@.
 Pero en la actualidad está incrementando su utilización para uso comercial\@.
 
 \begin{wrapfigure}{L}{0.4\columnwidth}%
-\hspace{1.3cm}\includegraphics[scale=0.5]{Diseno/apache_estruc}
+\centerline{\includegraphics[scale=0.5]{Diseno/apache_estruc}}
 
 \caption{Arquitectura de directorios de Apache}
 
@@ -1530,7 +1531,7 @@ y donde les resulte más conveniente\@.
 
 \end{enumerate}
 \begin{figure}
-\hspace{3.4cm}\includegraphics[scale=0.3]{Diseno/RelacionUsuarioAdobeFlashPlayer}
+\centerline{\includegraphics[scale=0.3]{Diseno/RelacionUsuarioAdobeFlashPlayer}}
 
 \caption{Utilización de Adobe Flash Player}
 \end{figure}
@@ -1829,7 +1830,7 @@ descarga de un \textit{plugin}, y 4 servidores que pasamos a describir
 a continuación\@.
 
 \begin{figure}
-\hspace{1.8cm}\includegraphics[scale=0.5]{Diseno/Esquema_aplicacion}
+\centerline{\includegraphics[scale=0.5]{Diseno/Esquema_aplicacion}}
 
 \caption{Diagrama estructural de la aplicación}
 \label{Estruc_aplicacion}
@@ -1935,7 +1936,7 @@ el nombre de la sala en la pantalla de \textit{Adobe Connect}\textsuperscript{\t
 por este motivo no se ha implementado esta funcionalidad\@.
 
 \begin{figure}
-\hspace{2.8cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/HelpMeeting\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/HelpMeeting\string".png}}
 
 \caption{Ayuda de la aplicación}
 
@@ -1967,7 +1968,7 @@ son fundamentales para gestionar las funcionalidades que ofrece la
 aplicación\@.
 
 \begin{figure}
-\hspace{2cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/inciosineMeetings\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/inciosineMeetings\string".png}}
 
 \caption{Pantalla de inicio por vez primera a la aplicación.}
 
@@ -2226,7 +2227,7 @@ A continuación se describen las entidas y sus respectivos repositorios\@.
 
 
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Meeting\string".png}
+\centerline{\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Meeting\string".png}}
 
 \caption{Tabla para almacenar datos de reuniones}
 \label{Tabla_eMeeting}
@@ -2911,7 +2912,7 @@ o dar acceso a las reuniones\@.
 \end{itemize}
 \end{itemize}
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/User\string".png}
+\centerline{\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/User\string".png}}
 
 \caption{Tabla para Usuarios}
 \label{Tabla_usuario}
@@ -2949,7 +2950,7 @@ de forma única\@.
 
 \end{itemize}
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Recording\string".png}
+\centerline{\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Recording\string".png}}
 
 \caption{Tabla para grabaciones}
 \label{Tabla_grabaciones}
@@ -3004,7 +3005,7 @@ reunión se visualice como minimizada\@.
 \end{itemize}
 \end{itemize}
 \begin{figure}[h]
-\hspace{3cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Log\string".png}
+\centerline{\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Log\string".png}}
 
 \caption{Tabla para almacenar datos estadísticos parciales}
 \label{Log}
@@ -3078,7 +3079,7 @@ del sistema para advertirle de tal situación\@.
 
 
 \begin{figure}[h]
-\hspace{3cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Log_Total\string".png}
+\centerline{\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Log_Total\string".png}}
 
 \caption{Tabla para almacenar datos estadísticos totales}
 \label{Log_total}
@@ -3108,7 +3109,7 @@ sin más que realizar las instrucciones:
 
 
 \begin{figure}[h]
-\hspace{3.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Meeting_user\string".png}
+\centerline{\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Meeting_user\string".png}}
 
 \caption{Tabla de cruce de las tablas meeting y user}
 \label{meeting_user}
@@ -3125,7 +3126,7 @@ por el servidor\@. Estas y otras útiles funcionalidades se encuentran
 disponibles gracias a esta tabla\@.
 
 \begin{figure}[h]
-\hspace{2.5cm}\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Staff\string".png}
+\centerline{\includegraphics[scale=0.5]{\string"Diseno/Imagenes base de datos/Staff\string".png}}
 
 \caption{Tabla para grupos}
 \label{Tabla_grupos}
@@ -3299,7 +3300,7 @@ usuario de DigiMar\@.
 
 \end{itemize}
 \begin{figure}[H]
-\hspace{2.7cm}\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Entrada de acceso anonimo\string".png}
+\centerline{\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Entrada de acceso anonimo\string".png}}
 
 \caption{Acceso anónimo}
 
@@ -3331,7 +3332,7 @@ el boceto de diseño de las primeras versiones de interfaz se ha utilizado
 la herramienta \textit{Mockups} de \textit{Balsamiq} \cite{key-19}\@.
 
 \begin{figure}[H]
-\hspace{3cm}\includegraphics[scale=0.4]{Diseno/boceto}
+\centerline{\includegraphics[scale=0.4]{Diseno/boceto}}
 
 \caption{Maqueta de la primera versión}
 \label{wrap:maqueta_1_version}
@@ -3351,7 +3352,7 @@ Este mensaje se desvanece progresivamente gracias a una funcionalidad
 de \textit{jQuery UI} \cite{key-13}\@.
 
 \begin{figure}[H]
-\hspace{3cm}\includegraphics[scale=0.3]{Diseno/version_1}
+\centerline{\includegraphics[scale=0.3]{Diseno/version_1}}
 
 \caption{Primer interfaz de usuario visualizado en el explorador}
 \label{interfaz1}
@@ -3379,7 +3380,7 @@ los botones de la aplicación han sido diseñados utilizando jQuery
 UI \cite{key-13}\@.
 
 \begin{figure}[H]
-\hspace{2.3cm}\includegraphics[scale=0.3]{\string"Fotos de eMeeting/meetingApp\string".png}
+\centerline{\includegraphics[scale=0.3]{\string"Fotos de eMeeting/meetingApp\string".png}}
 
 \caption{Versión final del interfaz de usuario}
 \label{intefaz_final}
@@ -3451,7 +3452,7 @@ de grabaciones\@.
 
 \end{itemize}
 \begin{figure}[H]
-\hspace{3cm}\includegraphics[scale=0.25]{\string"Fotos de eMeeting/Minimized_rooms\string".png}
+\centerline{\includegraphics[scale=0.25]{\string"Fotos de eMeeting/Minimized_rooms\string".png}}
 
 \caption{Lista de reuniones reducida}
 
@@ -3492,7 +3493,7 @@ en cada reunión de videoconferencia\@.
 \end{enumerate}
 \end{itemize}
 \begin{figure}
-\hspace{5cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/eMeeting Final Help/TextoToInvite\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/eMeeting Final Help/TextoToInvite\string".png}}
 
 \caption{Texto por defecto para invitar a usuarios a reuniones}
 
@@ -3522,7 +3523,7 @@ que explica la funcionalidad del elemento al que acompaña, ver figura
 
 \end{itemize}
 \begin{figure}[H]
-\hspace{0.8cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/TipTipText\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/TipTipText\string".png}}
 
 \caption{Mensaje emergente de ayuda}
 
@@ -3571,7 +3572,7 @@ librería jQuery y la tecnología AJAX\@.
 
 \end{itemize}
 \begin{figure}
-\hspace{4.5cm}\includegraphics[scale=0.5]{\string"Fotos de eMeeting/InviteUsers\string".jpg}
+\centerline{\includegraphics[scale=0.5]{\string"Fotos de eMeeting/InviteUsers\string".jpg}}
 
 \caption{Modos de invitación de usuarios a una reunión}
 
@@ -3592,7 +3593,7 @@ el acceso a las funciones globales de la aplicación que pasamos a
 describir a continuación\@.
 
 \begin{figure}[H]
-\hspace{1cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/Botonera_superior\string".jpg}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/Botonera_superior\string".jpg}}
 
 \caption{Menú superior}
 
@@ -3608,7 +3609,7 @@ describir a continuación\@.
 
 
 \begin{figure}[H]
-\hspace{4cm}\includegraphics[scale=0.35]{Diseno/achievement_files}
+\centerline{\includegraphics[scale=0.35]{Diseno/achievement_files}}
 
 \caption{Ventana emergente para \textit{All recordings}}
 \label{achievement_files}
@@ -3623,7 +3624,7 @@ en caso de existir\@.
 
 
 \begin{figure}[H]
-\hspace{3.4cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/adobe connect test\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/adobe connect test\string".png}}
 
 \caption{Prueba de conexión de \textit{Adobe Connect}\textsuperscript{\textregistered{}}\textsuperscript{}}
 
@@ -3661,7 +3662,7 @@ código de colores relacionado con cada tipo de reunión\@.
 
 \end{itemize}
 \begin{figure}
-\hspace{0.8cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/FilterMeeting\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/FilterMeeting\string".png}}
 
 \caption{Desplegable para el filtro de reuniones}
 
@@ -3691,7 +3692,7 @@ privada)\@. El campo descripción es opcional\@. Ver figura \ref{CreateMeeting}\@
 
 \end{itemize}
 \begin{figure}
-\hspace{2.1cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/creandoeMeetingpublico\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/creandoeMeetingpublico\string".png}}
 
 \caption{Menú e creación de reuniones}
 
@@ -4150,7 +4151,7 @@ pinchando en el botón \textit{Save}\@.
 
 
 \begin{figure}[H]
-\hspace{3.5cm}\includegraphics[scale=0.4]{Diseno/InviteDigiMarPartners}
+\centerline{\includegraphics[scale=0.4]{Diseno/InviteDigiMarPartners}}
 
 \caption{Ventana emergente al pinchar en el botón \textit{Invite DigiMar Partners}}
 \end{figure}
@@ -4247,7 +4248,7 @@ función para mostrarse en la ventana emergente de la figura \ref{RecordsUser}\@.
 
 \end{itemize}
 \begin{figure}[H]
-\hspace{3.5cm}\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Fotos antiguas/achiement files\string".png}
+\centerline{\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Fotos antiguas/achiement files\string".png}}
 
 \caption{Lista de grabaciones de un usuario}
 
@@ -4301,7 +4302,7 @@ de la entidad \emph{meeting }en la base de datos\@.
 
 
 \begin{figure}
-\hspace{3.7cm}\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Fotos antiguas/recordings y URL\string".png}
+\centerline{\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Fotos antiguas/recordings y URL\string".png}}
 
 \caption{Menú de la lista de grabaciones de cada reunión}
 
@@ -4325,7 +4326,7 @@ grabaciones que visualizará el usuario que reciba la URL\@.
 
 
 \begin{figure}
-\hspace{3.7cm}\includegraphics[scale=0.3]{\string"Fotos de eMeeting/ListaRecordings\string".png}
+\centerline{\includegraphics[scale=0.3]{\string"Fotos de eMeeting/ListaRecordings\string".png}}
 
 \caption{Lista de grabaciones para usuarios externos}
 
@@ -4362,7 +4363,7 @@ La plantilla generada puede verse en la figura \ref{UserAdminForm}\@.
 
 
 \begin{figure}
-\hspace{6cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/EditUserForm\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/EditUserForm\string".png}}
 
 \caption{Plantilla para la edición de usuarios por el administrador}
 
@@ -4605,7 +4606,7 @@ los diferentes diseños para la plantilla o la posibilidad de grabar
 el audio, escuchar otros audios o incluso compartirlos en la videoconferencia\@.
 
 \begin{figure}
-\hspace{0.3cm}\includegraphics[scale=0.4]{\string"Fotos de eMeeting/ADOInterface\string".png}
+\centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/ADOInterface\string".png}}
 
 \caption{Interfaz de videoconferencia de \textit{Adobe Connect}\textsuperscript{\textregistered{}}}
 
@@ -4699,7 +4700,7 @@ es la posibilidad de registrarse a través de un servidor CAS, que
 pasamos a describir\@.
 
 \begin{table}[H]
-\hspace{2cm}\includegraphics[width=12cm,height=7cm]{Diseno/CAS}
+\centerline{\includegraphics[width=12cm,height=7cm]{Diseno/CAS}}
 
 \caption{Servidor CAS}
 \label{Servidor_CAS}
@@ -4736,7 +4737,7 @@ o no puede hacer ese usuario en función de sus roles\@.
 
 
 \begin{figure}
-\subfloat[Formulario de registro en el servidor CAS]{\hspace{2.5cm}\includegraphics[scale=0.3]{\string"Fotos de eMeeting/CASService\string".png}
+\subfloat[Formulario de registro en el servidor CAS]{\centerline{\includegraphics[scale=0.3]{\string"Fotos de eMeeting/CASService\string".png}}
 
 \hspace{2.5cm}
 
@@ -5382,7 +5383,7 @@ a la base de datos para devolver la lista de grabaciones para cada
 reunión, ver figura \ref{RecordingUser}\@.
 \end{itemize}
 \begin{figure}[H]
-\hspace{3cm}\includegraphics[scale=0.6]{\string"Fotos de eMeeting/Recordgins_new\string".png}
+\centerline{\includegraphics[scale=0.6]{\string"Fotos de eMeeting/Recordgins_new\string".png}}
 
 \caption{Lista de grabaciones accesible desde la cuenta del usuario}
 
@@ -5404,7 +5405,7 @@ que es accesible, por el contrario, el color rojo indica que la grabación
 está bloqueda\@.
 \end{itemize}
 \begin{figure}[H]
-\hspace{3cm}\includegraphics[scale=0.35]{\string"Fotos de eMeeting/ListaRecordings\string".png}
+\centerline{\includegraphics[scale=0.35]{\string"Fotos de eMeeting/ListaRecordings\string".png}}
 
 \caption{Lista de grabaciones mostrada a usuarios externos}
 
@@ -5418,7 +5419,7 @@ de forma temporal pulsando el botón \textit{Disabled} para bloquear
 o \textit{Enabled} para desbloquear, ver figura \ref{TemplateMeeting}\@.
 \end{itemize}
 \begin{figure}[H]
-\hspace{4.5cm}\includegraphics[scale=0.22]{\string"Fotos de eMeeting/Fotos antiguas/emeetingdisabled\string".png}
+\centerline{\includegraphics[scale=0.22]{\string"Fotos de eMeeting/Fotos antiguas/emeetingdisabled\string".png}}
 
 \caption{Plantilla con estado bloqueado y desbloqueado de sala}
 
@@ -5436,7 +5437,7 @@ que reúne los datos necesarios para generar un formulario de edición
 como el de la figura \ref{editAdminForm}\@.
 \end{itemize}
 \begin{figure}[H]
-\hspace{3.5cm}\includegraphics[scale=0.25]{\string"Fotos de eMeeting/editForm\string".png}
+\centerline{\includegraphics[scale=0.25]{\string"Fotos de eMeeting/editForm\string".png}}
 
 \caption{Formulario de edición de datos de una reunión en modo administrador}
 
@@ -5459,7 +5460,7 @@ Esta función tiene un formulario asociado como el que se muestra en
 la figura \ref{MeetingAdminForm}\@.
 \end{itemize}
 \begin{figure}[H]
-\hspace{3.5cm}\includegraphics[scale=0.25]{\string"Fotos de eMeeting/MeetingAdminForm\string".png}
+\centerline{\includegraphics[scale=0.25]{\string"Fotos de eMeeting/MeetingAdminForm\string".png}}
 
 \caption{Formulario para crear una nueva reunión en modo administrador}
 
@@ -5477,7 +5478,7 @@ en el orden establecido, tanto en el nombre y apellidos como en el
 correo electrónico, ver figura \ref{AutocompleteFunction}\@.
 \end{itemize}
 \begin{figure}[H]
-\hspace{3.5cm}\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Fotos antiguas/eMeeting Final Help/InvitePartners\string".png}
+\centerline{\includegraphics[scale=0.3]{\string"Fotos de eMeeting/Fotos antiguas/eMeeting Final Help/InvitePartners\string".png}}
 
 \caption{Función autocompletado para agregar usuarios}
 
@@ -5496,7 +5497,7 @@ máxima de salas cada día y el número total de usuarios simultáneos
 en la aplicación por cada reunión\@.
 \end{itemize}
 \begin{figure}[H]
-\hspace{2.5cm}\includegraphics[scale=0.45]{\string"Fotos de eMeeting/AdminMenu\string".png}
+\centerline{\includegraphics[scale=0.45]{\string"Fotos de eMeeting/AdminMenu\string".png}}
 
 \caption{Menú de administración}
 
@@ -5688,7 +5689,7 @@ altamente la productividad del diseñador y ofrece una organización
 muy completa y ágil, ideal para elaborar una excelente documentación\@.
 
 \begin{figure}[H]
-\hspace{3.6cm}\includegraphics[scale=0.45]{R/participantes}
+\centerline{\includegraphics[scale=0.45]{R/participantes}}
 
 \caption{Participantes por día}
 
@@ -5737,7 +5738,7 @@ por lo que es posible que se amplíe el número de licencias para disminuír
 la posibilidad de denegación de servicio\@.
 
 \begin{figure}[H]
-\hspace{4cm}\includegraphics[scale=0.5]{R/FrecuenciaDeReuniones}
+\centerline{\includegraphics[scale=0.5]{R/FrecuenciaDeReuniones}}
 
 \caption{Frecuecia de número de participantes en cada reunión}
 
