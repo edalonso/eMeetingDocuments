@@ -344,7 +344,7 @@ El diseño visual de este proyecto toma prestada la estética de ``Campus
 do Mar'' para facilitar la comprensión al lector de las funciones
 realizadas, ya que ha sido el primer lugar donde se ha desplegado
 esta aplicación\@. Por el mismo motivo, se ha dotado a la aplicación
-con el nombre ``eMeeting''\footnote{Por comodidad nos referiremos a la aplicación con este término a lo largo de la memoria.},
+con el nombre eMeeting\footnote{Por comodidad nos referiremos a la aplicación con este término a lo largo de la memoria.},
 que resulta atractivo al usuario y provee a la aplicación de un arma
 más para ser utilizada\@.
 
@@ -670,9 +670,9 @@ de Symfony en la figura \ref{Explic-direct-Symfony}\@.
 \begin{itemize}
 \item \colorbox{lightgray}{web/}: El directorio web raíz es el hogar de
 todos los archivo públicos y estáticos como imágenes, hojas de estilo
-y archivos JavaScript. También es donde reside cada controlador frontal\@.
+y archivos JavaScript. También reside cada controlador frontal\@.
 Un pequeño script PHP cuyo trabajo es arrancar la aplicación\@. El
-kernel requiere primero del archivo bootstrap.php, el cual inicia
+\textit{kernel} requiere primero del archivo bootstrap.php, el cual inicia
 el \textit{framework} y registra al \textit{autoloader}\@. Como
 cualquier controlador frontal, \textit{app.php} usa una clase \textit{Kernel},
 llamada \textit{AppKernel}, para iniciar la aplicación\@.
@@ -686,7 +686,7 @@ de la aplicación sólo es analizada durante el primer \textit{request}
 y luego compilada a código PHP que se guarda en el directorio \textit{app/cache/}\@.
 \item Durante el desarrollo de una aplicación web, las cosas pueden salir
 mal de muchas maneras. Los archivos de log en el directorio \textit{app/logs/}
-de la aplicación nos ofrecen todo sobre los \textit{requests} para
+de la aplicación ofrecen todo lo necesario sobre los \textit{requests} para
 arreglar el problema rápidamente\@.
 \end{itemize}
 \item \colorbox{lightgray}{vendor/}: Las librerías de terceros deberían
@@ -715,18 +715,18 @@ Esto le permite sobreescribir un \textit{bundle} existente para adaptar
 sus controladores, plantillas y cualquier archivo que contenga\@.
 Es aquí donde los nombres lógicos resultan útiles ya que abstraen
 al programador del lugar en donde se encuentra realmente ubicado el
-recurso\@. Por este motivo como veremos en el apartado de diseño,
+recurso\@. Por este motivo como se verá en el apartado de diseño,
 los controladores tendrán nombres que hacen referencia a la función
 que desempeñan\@. A su vez Symfony crea una estructura de directorios
-por cada aplicación que definimos con el comando Symfony \textit{generate:app}\@.
+por cada aplicación que se define con el comando Symfony \textit{generate:app}\@.
 \end{itemize}
 \smallskip{}
 
 
-La estructura de directorios de nuestra aplicación parte de la base
-estructural de Symfony que acabamos de describir en la figura \ref{estruc-direct-Sym}\@.
+La estructura de directorios de la aplicación eMeeting parte de la base
+estructural de Symfony que se describe en la figura \ref{estruc-direct-Sym}\@.
 A esta base estructural se le añade, en sus correspondientes directorios,
-los componentes que nuestra aplicación necesita, de forma que obtenemos
+los componentes que la aplicación necesita, de forma que se obtiene
 una estructura de directorios como la que se muestra en la figura
 \ref{estruc-direct-eMeeting}\@.
 
@@ -741,7 +741,7 @@ una estructura de directorios como la que se muestra en la figura
 
 
 El contenido y la razón de la existencia de los directorios específicos
-para nuestra aplicación serán descritos con detalle en el capítulo
+para la aplicación serán descritos con detalle en el capítulo
 \ref{chap:Dise=0000F1o-del-proyecto}\@.
 
 \medskip{}
@@ -763,7 +763,7 @@ PHP, se ve reducido a la mínima expresión\@.
 \item Seguro: Tiene un modo para evaluar código en la plantilla que no es
 de confianza. Esto permite utilizarlo como un lenguaje de plantillas
 para aplicaciones en las que los usuarios pueden modificar el diseño
-de la plantilla\@. El objetivo de modularidad de nuestro proyecto
+de la plantilla\@. El objetivo de modularidad de eMeeting
 agradece enormemente el uso de este motor de plantillas\@.
 \item Flexible: Posee un analizador léxico flexible. Esto permite al desarrollador
 definir sus propias etiquetas y filtros personalizados, y crear su
@@ -784,10 +784,10 @@ en la lógica implementada con PHP\@.
 
 
 
-Con estas plantillas también es muy sencillo incluir otras plantillas
+Permite una sencilla herencia de plantillas
 para evitar la redundancia de código o incluir URIs que hacen referencia
-a páginas de nuestro propio código\@. Las plantillas para cada sección
-de nuestra aplicación se alojan en la carpeta \textit{src/Cmar/MeetingBundle/views}\@.
+a páginas del propio código de la aplicación\@. Las plantillas para cada sección
+de eMeeting se alojan en la carpeta \textit{src/Cmar/MeetingBundle/views}\@.
 
 \end{itemize}
 \medskip{}
@@ -796,22 +796,22 @@ de nuestra aplicación se alojan en la carpeta \textit{src/Cmar/MeetingBundle/vie
 
 \subsection{Doctrine}
 
-El Proyecto Doctrine consta de un conjunto de bibliotecas PHP seleccionadas
+El proyecto Doctrine consta de un conjunto de bibliotecas PHP seleccionadas
 principalmente para ofrecer servicios de persistencia y funcionalidades
-en las relaciones sobre las bases de datos que utilicemos\@. Entre
+en las relaciones sobre las bases de datos utilizadas\@. Entre
 sus principales características cabe destacar el asignador relacional
 de objetos (ORM) y la capa de abstracción de base de datos\@.
 
 \smallskip{}
 
 
-Esta herramienta de Symfony nos permite actuar sobre la base de datos
+Esta herramienta de Symfony permite actuar sobre la base de datos
 de una forma sencilla y en cualquier parte del código ya que permite
-abstraer al programador del motor de base de datos que utilicemos\@.
-Esta característica nos permite aumentar la modularidad de nuestro
+abstraer al programador del motor de base de datos utilizado\@.
+Esta característica permite aumentar la modularidad del
 proyecto y poder desplegarlo sobre el motor de base de datos que posea
 el usuario final sin modificar apenas líneas de código\@. Sin duda,
-alguna de las consultas específicas y complejas que realice nuestra
+alguna de las consultas específicas y complejas que realice la
 aplicación deberán ser reescritas para adaptarse al nuevo entorno,
 pero se intentará que sean ínfimas para cumplir con la modularidad
 propuesta en los objetivos del proyecto \cite{key-7}\@.
@@ -862,7 +862,7 @@ por el propio programador \cite{key-7}\@.
 Para optimizar y aprovechar al máximo el uso de Doctrine se deben
 describir las tablas de la base de datos con el formato específico
 adoptado por Symfony en sus desarrollos para el ORM llamado \textit{YAML},
-que pasamos a describir a continuación\@.
+que se describe a continuación\@.
 
 \medskip{}
 
@@ -881,38 +881,38 @@ los datos (\emph{strings, integers, dates, arrays y hashes}).
 En YAML, la estructura se muestra a través de la sangría, la secuencia
 de elementos se denotan por un guión, y los pares clave/valor están
 separados por dos puntos\@. YAML también tiene una sintaxis abreviada
-para describir la misma estructura con menos líneas, donde los arrays
+para des\-cribir la misma estructura con menos líneas, donde los arrays
 explícitamente se muestran con {[}{]} y los hashes o array asociativos
 con \{\} \cite{key-9}\@.
 
 \smallskip{}
 
 
-El framework Symfony lo utiliza ampliamente para sus archivos de configuración
+El \textit{framework} Symfony lo utiliza ampliamente para sus archivos de configuración
 o para la creación de tablas y estructuras de Doctrine\@. Por ejemplo
 en los ficheros \textit{security.yml} y \textit{routing.yml} que
-mencionaremos en la sección \ref{sec:Seguridad-de-la}\@. Estos ficheros
+se mencionarán en la sección \ref{sec:Seguridad-de-la}\@. Estos ficheros
 siguen la estructura típica de un fichero YAML y la relación entre
 ambos ofrece la seguridad para cada ruta de la aplicación\@. Como
-veremos en el capítulo \ref{chap:Desarrollo-del-proyecto}, las rutas
+se verá en el capítulo \ref{chap:Desarrollo-del-proyecto}, las rutas
 de Symfony cobran especial importancia ya que están asociadas a funciones,
-en caso de que sea necesario, y la seguridad de alguna de ellas puede
+en caso de que sea necesario, y la seguridad de algunas de estas funciones puede
 ser crítica\@.
 
 \smallskip{}
 
 
 Gracias al archivo de descripción de la base de datos \textit{schema.yml},
-podemos utilizar más ampliamente las simplificaciones que ofrece Doctrine
-al generar los comandos SQL necesarios para crear las tablas en nuestra
+es posible utilizar más ampliamente las simplificaciones que ofrece Doctrine
+al generar los comandos SQL necesarios para crear las tablas en la
 base de datos\@. 
 
 \smallskip{}
 
 
-Describimos, a modo de ejemplo, alguna de estas tareas:
+Se describe, a modo de ejemplo, alguna de estas tareas:
 \begin{itemize}
-\item Para generar el SQL se debe contruir el modelo a partir del contenido
+\item Para generar el SQL se debe construir el modelo a partir del contenido
 del archivo \textit{schema.yml}\@.
 
 
@@ -937,7 +937,7 @@ php symfony doctrine:build-sql
 
 \item La tarea doctrine:build-sql genera comandos SQL en el directorio \textit{data/sql/},
 optimizado para el motor de base de datos que se ha configurado, en
-nuestro caso MySQL\@.
+el caso de eMeeting MySQL\@.
 \end{itemize}
 \smallskip{}
 
@@ -958,19 +958,19 @@ consecuencias irreversibles\@.
 \subsection{Las entidades}
 
 Estos elementos de Symfony guardan la estructura de las piezas del
-juego en nuestra aplicación\@. A partir de la estructura de las entidades,
+juego de la aplicación\@. A partir de la estructura de las entidades,
 Doctrine construirá los elementos que rellenarán las tablas de la
-base de datos y aportarán las características y relaciones que introduzcamos
+base de datos y aportarán las características y relaciones que se insertarán
 en las cabeceras de estos elementos\@.
 
 \smallskip{}
 
 
-Las entidades aportan a nuestro proyecto una gran modularidad ya que
-podremos insertar un nuevo elemento en nuestra base de datos o un
+Las entidades aportan al proyecto una gran modularidad ya que
+se podrá insertar un nuevo elemento en la base de datos o un
 nuevo campo en el elemento preciso para incrementar las funcionalidades
 o complementar las existentes si se queda en el tintero alguna que
-se descubra en el proceso de puesta en servicio\@. También nos ofrece
+se descubra en el proceso de puesta en servicio\@. También ofrece
 facilidades a la hora de corregir errores en el proceso de diseño
 o cuando la aplicación está ya en producción\@. 
 
@@ -1045,10 +1045,10 @@ componentes independientes\@.
 
 \section{Apache}
 
-Para la puesta en servicio de la aplicación se ha optado por la opción
+Como servidor web de la aplicación se ha optado por la opción
 de Apache 2\@. Utilizando PHP para el desarrollo es obvio el uso
-de Apache ya que está implementado como un módulo de forma que aprovecha
-la máxima integración con el servidor y velocidad posible\@.
+de Apache ya que existe un módulo específico de forma que se aprovecha
+al máximo la integración con el servidor y se alcanzan velocidades excelentes\@.
 
 \smallskip{}
 
@@ -1069,7 +1069,7 @@ Pero en la actualidad está incrementando su utilización para uso comercial\@.
 
 Los directorios de Apache albergan funciones de muy diferentes tipos
 como configuración, almacenamiento de librerías, etc\@. Se dispone
-a continuación un breve recorrido por la estructura que podemos observar
+a continuación un breve recorrido por la estructura reflejada
 en la figura \ref{Apache_estruct}, que aclarará algunos conceptos
 sobre este servidor web\@.
 
@@ -1111,12 +1111,10 @@ u otros menesteres\@.
 
 
 En el interior del directorio \textit{webapps/} se encuentra la raíz
-de la aplicación web, aunque en nuestro caso hemos modificado el archivo
-\textit{default} dentro del servidor creando un \textit{virtualhost}
-que hace que cuando una URL determinada, que para nosotros puede ser
-\textit{emeeting.campusdomar.es, emeetings.campusdomar.es, meeting.campusdomar.es, meetings.cam\-pusdomar.es},
-intenta acceder al servidor Apache, el propio archivo de configuración
-redirige la petición a la carpeta \textit{web} de Symfony donde se
+de la aplicación web, aunque para el caso que nos atañe se ha modificado el archivo
+\textit{default} en el interior del servidor creando un \textit{virtualhost}
+que redirecciona la petición sobre una URL determinada, que para el 
+caso de eMeeting será \textit{emeeting.campusdomar.es, emeetings.campusdomar.es, meeting.campusdomar.es, meetings.cam\-pusdomar.es}, a la carpeta \textit{web} de Symfony donde se
 encuentra el fichero \textit{app.php} que arranca la aplicación\@.
 
 \smallskip{}
@@ -1149,7 +1147,7 @@ pulsar botones y ventanas con mensajes de aviso al usuario\@.
 \smallskip{}
 
 
-En esta sección se hablará de las librería javascript utilizadas para
+En esta sección se hablará de las librerías javascript utilizadas para
 realizar las animaciones del interfaz de usuario, la implementación
 de peticiones AJAX y la lógica en la que se apoyan algunas de las
 funciones Javascript propias que se describirán en la subsección \ref{sub:Funciones-propias}\@.
@@ -1175,8 +1173,8 @@ con el lenguaje de programación Java \cite{key-11}\@.
 
 \subsection{jQuery}
 
-jQuery es una biblioteca de JavaScript rápida y concisa que simplifica
-el código en documentos HTML, manejo de eventos, animación, y las
+jQuery es una librería de JavaScript rápida y concisa que simplifica
+el código en do\-cumentos HTML, manejo de eventos, animación, y las
 interacciones Ajax para el desarrollo web rápido\@.
 
 \smallskip{}
@@ -1186,7 +1184,7 @@ El proyecto jQuery comenzó como una idea en 2005 y ha crecido hasta
 convertirse en el conjunto de proyectos que conocemos hoy en día.
 jQuery está diseñado para cambiar la forma en que el usuario escribe
 JavaScript. Sin duda utilizar la API de cualquier \emph{software}
-es cómodo y sencillo\@. Es un camino rápido para conseguir las funcionalidades
+es cómodo y sencillo\@. Es un camino rápido para conseguir funcionalidades
 en una aplicación o página web, de una forma rápida obteniendo unos
 resultados verdaderamente satisfactorios \cite{key-12}\@.
 
@@ -1201,7 +1199,7 @@ con respecto a sus predecesoras\@.
 
 
 Una de las mejoras es la unificación de todos los caminos para lanzar
-eventos y detenerlos en un documento jQuery en las APIs \textit{.on()}
+eventos y dete\-nerlos en un documento jQuery en las APIs \textit{.on()}
 y \textit{off()\@.}
 
 
@@ -1221,7 +1219,7 @@ y \textit{off()\@.}
 Esta mejora facilita la programación y evita las confusiones en casos
 especiales de objetos que no poseen determinados eventos o donde la
 forma de ejecutar un evento debido al tipo de elemento desde el que
-precisa lanzar un evento se realiza con la función \textit{.todelegate()}
+precisa lanzar el evento se realiza con la función \textit{.todelegate()}
 o \textit{.bind()}\@.
 
 
@@ -1234,7 +1232,7 @@ mucho más rápido, especialmente para los casos más comunes\@.
 
 
 Para optimizar el código de los casos más utilizados, se analizó una
-muestra representativa de código de Google CodeSearch. Casi dos tercios
+muestra representativa de código de Google Code Search. Casi dos tercios
 de los selectores utilizados en \textit{.life()} y \textit{.todelegate()}
 llaman a métodos con la etiqueta \textit{tag\#id.class}\@.\cite{key-13}
 
@@ -1245,21 +1243,21 @@ Esta librería es sencilla y fácil de manejar utilizando la documentación
 detallada y sus tutoriales, además existe una comunidad muy activa
 a disposición de cualquier usuario\@. Compatible con IE 6.0 +, Firefox
 3 +, Safari 3.1 +, Opera 9.6 + y Google Chrome\@. Ofrece al usuario
-una enorme potencia, que permite alcanzar un alto nivel en toda aplicación
+una enorme potencia, que permite alcanzar un alto nivel funcional en toda aplicación
 web\@.
 
 
 jQuery UI proporciona abstracciones de bajo nivel de interacción y
 animación, efectos avanzados y de alto nivel y \textit{widgets} configurables\@.
-Está construido en la parte superior de la biblioteca jQuery JavaScript,
+Está construido en la parte superior de la librería jQuery de JavaScript,
 y se utiliza para crear aplicaciones web altamente interactivas \cite{key-12}\cite{key-13}\@.
 
 \item jQuery-kamicgraphs
 
 
-Esta potente librería para generar gráficas se utilizada en este proyecto
-para mostrar las estadísticas al administrador\@. Con una petición
-AJAX selecciona tablas en la base de datos y posee un inmenso repertorio
+Esta potente librería para generar gráficas es utilizada en este proyecto
+para mostrar las estadísticas al administrador\@. Con peticiones
+AJAX se seleccionan tablas o entradas en la base de datos y posee un inmenso repertorio
 de gráficas para mostrar resultados a partir de los datos en formato
 JSON que le sirven las aplicaciones\@.
 
@@ -1275,7 +1273,8 @@ se ajusta para aparecer encima, debajo, a la izquierda o a la derecha
 del elemento, dependiendo de la necesidad para permanecer dentro de
 la ventana del navegador. \textit{TipTip} es muy ligero y personalizable
 fácilmente\@. Todos los menús de información para los botones e iconos
-de ayuda implementa con \textit{TipTip} la ventana emergente de información\@.
+de ayuda de eMeeting se implementan con la ventana emergente de información 
+que ofrece \textit{TipTip}\@.
 
 \end{itemize}
 
@@ -1324,7 +1323,7 @@ Si la longitud total de los campos en un registro es menor de 128
 bytes, el puntero medirá un byte, de lo contrario, tendrá dos bytes
 de longitud\@. La matriz de estos punteros se conoce como el directorio
 de registros\@. El área a donde señalan estos punteros se denomina
-la parte de datos del registro\@.
+parte de datos del registro\@.
 \item Internamente, InnoDB almacena las columnas de caracteres de longitud
 fija en un formato de longitud fija\@. InnoDB trunca los espacios
 sobrantes de las columnas VARCHAR\@. Nótese que MySQL puede convertir
@@ -1335,7 +1334,7 @@ en una columna de longitud variable\@. En una columna de longitud
 fija, reservará en la parte de datos la longitud asignada a dicha
 columna\@. La razón por la que se reserva este espacio fijo a pesar
 de tratarse de un valor NULL, es que en el futuro se podrá insertar
-en su lugar un valor no-NULL sin provocar la fragmentación de la página
+en su lugar un valor distinto de NULL sin provocar la fragmentación de la página
 de índice\@.
 \end{itemize}
 \smallskip{}
@@ -1368,7 +1367,7 @@ permisos en la base de datos mysql\@.
 
 
 Es preciso ser cuidadoso al utilizar MD5 para producir nombres de
-tablas, porque puede producir nombres ilegales\@. En nuestro caso
+tablas, porque puede producir nombres ilegales\@. En el caso de eMeeting
 el MD5 es usado únicamente para generar unas URLs especiales para
 el acceso de usuarios y se almacenan en las tablas, pero nunca es
 utilizado para generar nombres de tablas\@.
@@ -1380,7 +1379,7 @@ MySQL posee procedimientos almacenados y funciones que son funcionalidades
 añadidas a partir de la versión de MySQL 5.0\@. Un procedimiento
 almacenado es un conjunto de comandos SQL que pueden almacenarse en
 el servidor\@. Una vez que se hace, los clientes no necesitan relanzar
-los comandos individuales pero pueden en su lugar referirse al procedimiento
+los comandos individuales pero pueden en su lugar referirse al proce\-dimiento
 almacenado\@.
 
 \smallskip{}
@@ -1395,7 +1394,7 @@ en el cliente\@.
 \smallskip{}
 
 
-Los procedimientos almacenados le permiten tener bibliotecas o funciones
+Los procedimientos almacenados permiten tener bibliotecas o funciones
 en el servidor que sirve de base de datos\@. Esta característica
 es compartida por los lenguajes de programación modernos que permiten
 este diseño interno, por ejemplo, usando clases\@.
@@ -1408,9 +1407,9 @@ MySQL sigue la sintaxis SQL:2008 para procedimientos almacenados\@.
 \smallskip{}
 
 
-Muchas de estas restricciones son corregidas por Doctrine y en caso
+Muchas de estas restricciones son corregidas por Doctrine y, en caso
 de no tener la capacidad de correción, la generación de las estructuras
-de la base de datos mediante las instrucciones de propias de Doctrine
+de la base de datos mediante las instrucciones propias de Doctrine
 ofrecerá los errores correspondientes para una rápida corrección del
 código erróneo\@.
 
@@ -1437,7 +1436,6 @@ los exploradores del mercado\@. El consorcio W3C valora cualquier
 cambio que se realice para conseguir un estándar actualizado y compatible
 con el mayor número de exploradores, por ello las novedades que incorpora
 CSS en su tercera versión son altamente recomendables\@.
-
 
 \chapter{Decisiones de diseño\label{chap:Dise=0000F1o-del-proyecto}}
 
@@ -1475,7 +1473,7 @@ Connect\texttrademark{}, es especial para el desarrollo de reuniones
 en línea al instante y clases virtuales, a través de una amplia gama
 de navegadores web y sin necesidad de descargas pesadas\@. Permite
 compartir contenido dinámico, incluido flujo de audio, vídeo y simulaciones
-de \emph{software}, también hace posible las conferencias de vídeo
+de \emph{software}, también hace posible las confe\-rencias de vídeo
 entre varias personas\@. Además, las salas de reuniones personalizables
 de \textit{Acrobat Connect Professional}\textsuperscript{\textregistered{}}
 y todo su contenido se guardan automáticamente y siempre quedan disponibles,
@@ -1555,7 +1553,7 @@ la organización\@.
 
 
 La API de \textit{Adobe Connect}\textsuperscript{\textregistered{}}
-es sin duda su principal baza para que cualquier desarrollador de
+es sin duda su principal baza para que cualquier desarro\-llador de
 aplicaciones web lo elija como motor de videoconferencia\@.
 
 \smallskip{}
@@ -1598,8 +1596,9 @@ hacen que este \textit{framework} ofrezca al desarrollador la posibilidad
 de realizar aplicaciones web basadas en PHP muy sofisticadas\@. Una
 de las virtudes más importantes para la elección de este \textit{framework},
 es la gran comunidad que lo respalda y que aporta correción de errores
-e implantación de tecnologías punteras en sus últimas versiones\@.
-Las versiones actuales nos garantizan que la evolución de Symfony
+e implantación de tecnologías punteras en sus últimas versiones\@. Por otro lado,
+la inmensa y completa documentación web que existe en su web facilita la incorporación al proyecto
+de nuevos desarrolladores\@. Las versiones actuales nos garantizan que la evolución de Symfony
 guarde una buena estructura de manera que actualizar el antiguo \textit{software}
 implementado con Symfony no traerá grandes quebraderos de cabeza\@.
 
@@ -1613,7 +1612,12 @@ y optimizar el tiempo empleado para conseguir las nuevas funcionalidades
 en un breve espacio de tiempo y sin un gran despliegue humano\@.
 Cualquier tecnología web puede ser incrustada en los ficheros de Symfony
 para mejorar o aumentar la compatibilidad entre aplicaciones y necesidades
-del usuario final\@.
+del usuario final\@. La evolución de Symfony marcada por su creador Fabien Potencier
+lleva a este framework a una evolución cada vez más modular en pequeñas funcionalidades,
+este echo facilita la integración de módulos concretos de Symfony en diferentes aplicaciones
+sin la necesidad de realizar la aplicación completamente utilizando Symfony. De esta forma
+proyectos desarrollados íntegramente en PHP pueden hacer uso de funcionalidades de Symfony
+sin realizar una migración completa\@.
 
 \medskip{}
 
@@ -1672,7 +1676,7 @@ recomendado para la puesta en servicio de aplicaciones web\@.
 
 \section{Apache}
 
-La elección del servidor Apache se debe a las siguientes ventajas:
+La elección del servidor web Apache se debe a las siguientes ventajas:
 
 \smallskip{}
 
@@ -1681,10 +1685,10 @@ La elección del servidor Apache se debe a las siguientes ventajas:
 
 
 Podemos incluir multitud de módulos para adecuar el servidor a las
-necesidades de nuestra aplicación\@. De hecho, PHP posee un módulo
+necesidades de la aplicación\@. De hecho, PHP posee un módulo
 específico para Apache, como ya se ha comentado en el capítulo \ref{chap:Tecnolog=0000EDas-empleadas},
-que aprovecha al máximo la velocidad de Apache ya que actúa sobre
-el núcleo del servidor de forma directa a través de este módulo\@.
+que aprovecha al máximo la velocidad ya que actúa sobre
+el núcleo del servidor de forma directa\@.
 
 \item Código abierto:
 
@@ -1715,7 +1719,7 @@ proyecto módulo para PHP\@.
 
 
 Gracias a su popularidad que crece día a día debido a su licencia,
-cualquier desarrollador cuenta con una amplia comunidad que lo respalda
+cualquier desarro\-llador cuenta con una amplia comunidad que lo respalda
 y aumenta la actividad tanto de desarrolladores como de expertos en
 este servidor\@.
 
@@ -1741,7 +1745,7 @@ y activa comunidad MySQL\@.
 \item Velocidad: MySQL es mucho mas rápido que la mayor parte de sus rivales,
 por tanto en este aspecto es obvia su elección\@.
 \item Funcionalidad: MySQL dispone de muchas de las funciones que exigen
-los desarrolladores profesionales, como compatibilidad completa con
+los desarro\-lladores profesionales, como compatibilidad completa con
 ACID, compatibilidad para la mayor parte de SQL ANSI, volcados online,
 duplicación, funciones SSL e interacción con la mayor parte de los
 entornos de programación. Se desarrolla y actualiza mas rápidamente
@@ -1783,7 +1787,7 @@ vez más en otros sectores\@.
 
 \chapter{Implementación del proyecto\label{chap:Desarrollo-del-proyecto}}
 
-La aplicación ``eMeeting'' está diseñada para crear salas de forma
+La aplicación eMeeting está diseñada para crear salas de forma
 dinámica bajo demanda y acceder a las mismas de forma similar a una
 llamada telefónica, es decir, en el momento de acceso se consulta
 la disponibilidad de recursos y se deniega el acceso en el peor de
@@ -1923,7 +1927,7 @@ para alertar al administrador de la aplicación sobre la proximidad
 al número máximo de salas en uso, por si cree oportuno disponer de
 más salas y debe negociarlo con la compañía suministradora de recursos,
 en nuestro caso \textit{Adobe Connect}\textsuperscript{\textregistered{}}\@.
-La aplicación ``eMeeting'' podría utilizarse con otro motor de videoconferencia,
+La aplicación eMeeting podría utilizarse con otro motor de videoconferencia,
 pero sería de todas formas necesario informar al administrador de
 la proximidad del número máximo de salas en uso, ya que en cualquier
 motor el número de salas es un recurso limitado\@. Un inconveniente
@@ -1958,7 +1962,7 @@ y el usuario entra por primera vez a la aplicación y no posee ninguna
 sala, una enorme flecha le inidica las instrucciones a seguir para
 crear su propia sala como se puede ver en la figura \ref{FirsTimeAccess}\@.
 También se dispone de un manual en red con indicaciones para realizar
-cualquier acción disponible dentro de la aplicación ``eMeeting'',
+cualquier acción disponible dentro de la aplicación eMeeting,
 ver figura \ref{HelpMeeting}\@. En nuestra lógica de base de datos,
 las salas libres son en realidad reuniones (\textit{meetings}) almacenadas
 en la tabla \textquotedblleft{}meeting\textquotedblright{} y siempre
@@ -1998,7 +2002,7 @@ A partir de la lista total de licencias disponibles se configura el
 número máximo de salas mágicas\@. El sistema podría permitir configurar
 todas las licencias como mágicas aunque es una opción absurda ya que
 la finalidad del diseño de este sistema consiste en proporcionar muchas
-entidades \emph{eMeeting} a cada usuario\emph{ }con una disposición
+entidades eMeeting a cada usuario con una disposición
 de licencias limitada, este hecho lleva al administrador a fijar un
 número máximo de salas mágicas en los ficheros de configuración\@.
 Cualquier sala del sistema puede ser marcada como mágica por el administrador
@@ -2101,7 +2105,7 @@ generada con el SecretSalt de la sala\@.
 
 \section{CRON\label{sec:CRON}}
 
-El cron es la parte del servidor ``eMeeting'' que se encarga de
+El cron es la parte del servidor eMeeting que se encarga de
 ejecutar funciones periódicas que ayudan a la sincronización, depuración
 y mantenimiento de la aplicación\@. Cada una de estas funciones realiza
 tareas críticas para el correcto funcionamiento de la aplicación y
@@ -3645,7 +3649,7 @@ las pruebas de conexión visualizándose un menú similar al de la figura
 
 
 Al pinchar sobre este botón se accede a una ayuda que indica las diferentes
-funcionalidades proporcionadas por \textit{eMeeting} y explica cómo
+funcionalidades proporcionadas por eMeeting y explica cómo
 se utilizan\@. Los usuarios podrán resolver las diferentes dudas
 que puedan surgir sin más que ojear esta página\@. Ver figura \ref{HelpMeeting}
 
@@ -3748,7 +3752,7 @@ salas privadas, acceso descrito en la sección \ref{sec:Concepto-de-sala}\@.
 
 Con este botón se elimina la sala del interfaz de usuario y también
 de todos los usuarios invitados al eMeeting. Únicamente el creador
-del \emph{eMeeting} tiene el privilegio de eliminar su sala para evitar
+del eMeeting tiene el privilegio de eliminar su sala para evitar
 futuros conflictos y potenciar que los usuarios creen sus propias
 salas\@.
 
@@ -3756,12 +3760,12 @@ salas\@.
 Se comprueba si el eMeeting posee grabaciones y se almacenan en una
 carpeta interna de \textit{Adobe Connect}\textsuperscript{\textregistered{}}\@.
 En el botón antes descrito como \emph{All recordings} tendremos acceso
-a las grabaciones de los \emph{eMeetings} eliminados\@.
+a las grabaciones de los eMeetings eliminados\@.
 
 \item Recordings
 
 
-Con este botón se visualizarán las grabaciones realizadas en el \emph{eMeeting}
+Con este botón se visualizarán las grabaciones realizadas en el eMeeting
 hasta el momento\@. Se accede vía AJAX al \emph{EndPoint} correspondiente
 de Symfony para conseguir los valores actualizados de la lista de
 grabaciones\@. En la sección \ref{sec:CRON} se ha hablado de la
@@ -4594,7 +4598,7 @@ Como ya se ha comentado en la sección \ref{sec:AdobeConnectProfessional}
 y se puede observar en la figura \ref{AdobeInterface} el interfaz
 de videoconferencia lo ofrece \textit{Adobe Connect Professional}\textsuperscript{\textregistered{}},
 de todas formas este interfaz posee varios modos que pueden ser configurados
-desde la aplicación ``eMeeting''\@. En cada uno de estos modos
+desde la aplicación eMeeting\@. En cada uno de estos modos
 la disposición de los elementos de la pantalla cambia para ofrecer
 interfaces apropiados a cada uso, como puede ser una videoconferencia
 múltiple, una ponencia con presentaciones de diapositivas o reuniones
@@ -4630,14 +4634,14 @@ autenticación, permitirá registrarse a todos los usuarios en todas
 las aplicaciones registrándose únicamente en una de ellas\@. La información
 modificada en cualquier aplicación se sincronizará con el resto gracias
 al ``Directorio +''\@. Este servidor realizará peticiones periódicas
-a todas las aplicaciones, incluida ``eMeeting'', para actualizar
+a todas las aplicaciones, incluida eMeeting, para actualizar
 datos\@. Este flujo de datos se realizará en ambos sentidos y con
 un formato determinado\@. La descripción de los datos solicitados
 se almacena en archivos XML y ``Directorio +'' ejecutará las funciones
 que necesite para actualizarse adecuadamente\@. La descripción de
 las funciones que ejecutará Directorio + referentes a eMeeting se
 almacenan en un fichero llamado \texttt{middleware.wsdl} y que ambas
-partes poseen\@. Evidentemente el archivo de ``eMeeting'' sólo
+partes poseen\@. Evidentemente el archivo de eMeeting sólo
 contiene sus funciones\@. Las funciones asociadas a este archivo
 y la descripción de su contenido pasamos a describirlas a continuación\@.
 
@@ -4655,7 +4659,7 @@ distribuido\@.
 
 
 En el fichero \texttt{middleware.wsdl} se indica el formato de información
-que ``Directorio +'' envía a ``eMeeting'' en formato XML\@. Esta
+que ``Directorio +'' envía a eMeeting en formato XML\@. Esta
 información se procesará en las distintas funciones implementadas
 en la aplicación para rellenar los campos necesarios en la de datos,
 para los usuarios y grupos pertenecientes a la plataforma ``Campus
@@ -4663,7 +4667,7 @@ do Mar''\@. Algunas de estas funciones son: \textit{createUser, EnjoinGroup o ad
 Cada una de estas funciones, a partir de los flujos generados por
 ``Directorio +'' hacia nuestra aplicación, adaptan los datos enviados
 para almacenarlos en la base de datos, de esta forma se realiza la
-sincronización de la aplicación ``eMeeting'' de forma completamente
+sincronización de la aplicación eMeeting de forma completamente
 transparente para el usuario\@. La primera función añade un nuevo
 usuario a la aplicación cuando un nuevo usuario es añadido a ``Directorio
 +''\@. Si un nuevo usuario es añadido a un grupo se invoca la segunda
@@ -4694,7 +4698,7 @@ sin más que comentar y descomentar unas cuantas líneas en el fichero
 
 
 Como aplicación independiente descrita en el capítulo \ref{chap:Dise=0000F1o-del-proyecto},
-es imprescindible que ``eMeeting'' ofrezca estos diferentes tipos
+es imprescindible que eMeeting ofrezca estos diferentes tipos
 de seguridad y registro de usuarios\@. Una de las más interesantes
 es la posibilidad de registrarse a través de un servidor CAS, que
 pasamos a describir\@.
@@ -4767,7 +4771,7 @@ de la figura \ref{LoginFormCAS}\@.
 \smallskip{}
 
 
-Como se ha comentado para ``eMeeting'' también se ha implementado
+Como se ha comentado para eMeeting también se ha implementado
 la posibilidad de acceder a través de un formulario creado con Symfony\@.
 Symfony compara la información introducida con la almacenada en la
 base de datos de la aplicación, para permitir el acceso a la aplicación\@.
@@ -4844,7 +4848,7 @@ dentro de la aplicación como usuarios internos\@.
 
 
 El comando \texttt{cmar:test:meeting}, permite comprobar si el servidor
-donde se aloja la aplicación ``eMeeting'' posee conectividad con
+donde se aloja la aplicación eMeeting posee conectividad con
 el servidor donde está alojada la aplicación \textit{Adobe Connect}\textsuperscript{\textregistered{}}\textsuperscript{}\@.
 Una forma rápida de detectar errores de conexión con dicho servidor
 ayudará a descartar errores ágilmente\@.
