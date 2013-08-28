@@ -2263,9 +2263,9 @@ una reunión, los identificadores de reunión o datos de creación\@.
 /**
 * @var integer $id
 *
-* @ORM\Column(name="id", type="integer")
+* @ORM\Column(name=``id'', type=``integer'')
 * @ORM\Id 
-* @ORM\GeneratedValue(strategy="AUTO")
+* @ORM\GeneratedValue(strategy=``AUTO'')
 */
 private $id;
 
@@ -2273,7 +2273,7 @@ private $id;
 /** 
 * @var integer $state 
 *
-* @ORM\Column(name="state", type="integer")
+* @ORM\Column(name=``state'', type=``integer'')
 */
 private $state = self::STATE_NEW;
 
@@ -2282,7 +2282,7 @@ private $state = self::STATE_NEW;
 * @var string $salt 
 * 
 * @Assert\NotBlank() 
-* @ORM\Column(name="salt", type="string", length=255, nullable=false) 
+* @ORM\Column(name=``salt'', type=``string'', length=255, nullable=false) 
 */
 private $salt; 
 
@@ -2292,7 +2292,7 @@ private $salt;
 * @var string $secretsalt
 * 
 * @Assert\NotBlank() 
-* @ORM\Column(name="secretsalt", type="string", length=255, nullable=false)
+* @ORM\Column(name=``secretsalt'', type=``string'', length=255, nullable=false)
 */
 private $secretsalt; 
 
@@ -2302,7 +2302,7 @@ private $secretsalt;
 * @var string $viewsalt 
 *
 * @Assert\NotBlank()
-* @ORM\Column(name="viewsalt", type="string", length=255, nullable=false)
+* @ORM\Column(name=``viewsalt'', type=``string'', length=255, nullable=false)
 */
 private $viewsalt;
 
@@ -2311,7 +2311,7 @@ private $viewsalt;
 * @var string $title 
 * 
 * @Assert\NotBlank() 
-* @ORM\Column(name="title", type="string", length=255, nullable=false)
+* @ORM\Column(name=``title'', type=``string'', length=255, nullable=false)
 */
 private $title;
 
@@ -2319,7 +2319,7 @@ private $title;
 /** 
 * @var text $description 
 * 
-* @ORM\Column(name="description", type="text", nullable=true) 
+* @ORM\Column(name=``description'', type=``text'', nullable=true) 
 */
 private $description;
 
@@ -2327,7 +2327,7 @@ private $description;
 /** 
 * @var string $URL
 * 
-* @ORM\Column(name="URL", type="string", length=255, nullable=true) 
+* @ORM\Column(name=``URL'', type=``string'', length=255, nullable=true) 
 */
 private $URL; 
 
@@ -2336,7 +2336,7 @@ private $URL;
 * @var string $title 
 * 
 * @Assert\NotBlank() 
-* @ORM\Column(name="title", type="string", length=255, nullable=false)
+* @ORM\Column(name=``title'', type=``string'', length=255, nullable=false)
 */ 
 private $title; 
 
@@ -2344,7 +2344,7 @@ private $title;
 /** 
 * @var text $description 
 * 
-* @ORM\Column(name="description", type="text", nullable=true)
+* @ORM\Column(name=``description'', type=``text'', nullable=true)
 */
 private $description;
 
@@ -2352,7 +2352,7 @@ private $description;
 /** 
 * @var string $URL 
 * 
-* @ORM\Column(name="URL", type="string", length=255, nullable=true) 
+* @ORM\Column(name=``URL'', type=``string'', length=255, nullable=true) 
 */
 private $URL; 
 
@@ -2360,7 +2360,7 @@ private $URL;
 /** 
 * @var datetime $date
 * 
-* @ORM\Column(name="date", type="datetime")
+* @ORM\Column(name=``date'', type=``datetime'')
 */
 private $date;
 
@@ -2368,7 +2368,7 @@ private $date;
 /**
 * @var boolean $public
 * 
-* @ORM\Column(name="public", type="boolean", nullable=true)
+* @ORM\Column(name=``public'', type=``boolean'', nullable=true)
 */
 private $public;
 
@@ -2376,7 +2376,7 @@ private $public;
 /**
 * @var boolean $public
 * 
-* @ORM\Column(name="magic", type="boolean", nullable=false)
+* @ORM\Column(name=``magic'', type=``boolean'', nullable=false)
 */
 private $magic; 
 
@@ -2384,8 +2384,8 @@ private $magic;
 /** 
 * @var User $owner
 *
-* @ORM\ManyToOne(targetEntity="User", inversedBy="id")
-* @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+* @ORM\ManyToOne(targetEntity=``User'', inversedBy=``id'')
+* @ORM\JoinColumn(name=``owner_id'', referencedColumnName=``id'')
 */ 
 private $owner; 
 
@@ -2393,8 +2393,8 @@ private $owner;
 /** 
 * @var Group $group 
 *
-* @ORM\ManyToOne(targetEntity="Group", inversedBy="id", cascade={"remove"})
-* @ORM\JoinColumn(name="group_id", referencedColumnName="id") 
+* @ORM\ManyToOne(targetEntity=``Group'', inversedBy=``id'', cascade={``remove''})
+* @ORM\JoinColumn(name=``group_id'', referencedColumnName=``id'') 
 */ 
 private $group = null;
 
@@ -2402,10 +2402,10 @@ private $group = null;
 /**
 * @var ArrayCollection $users
 *
-* @ORM\ManyToMany(targetEntity="User", cascade={"remove"})
-* @ORM\JoinTable(name="meeting_user",
-*      joinColumns={@ORM\JoinColumn(name="meeting_id", referencedColumnName="id")},
-*      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+* @ORM\ManyToMany(targetEntity=``User'', cascade={``remove''})
+* @ORM\JoinTable(name=``meeting_user'',
+*      joinColumns={@ORM\JoinColumn(name=``meeting_id'', referencedColumnName=``id'')},
+*      inverseJoinColumns={@ORM\JoinColumn(name=``user_id'', referencedColumnName=``id'')}
 *      ) 
 */ 
 private $users;
@@ -2414,7 +2414,7 @@ private $users;
 /** 
 * @var ArrayCollection $recordings 
 *
-* @ORM\OneToMany(targetEntity="Recording", mappedBy="meeting", cascade={"remove"}) 
+* @ORM\OneToMany(targetEntity=``Recording'', mappedBy=``meeting'', cascade={``remove''}) 
 */ 
 private $recordings; 
 
@@ -2422,7 +2422,7 @@ private $recordings;
 /** 
 * @var ArrayCollection $recordings 
 * 
-* @ORM\OneToMany(targetEntity="NickName", mappedBy="meeting", cascade={"remove"})
+* @ORM\OneToMany(targetEntity=``NickName'', mappedBy=``meeting'', cascade={``remove''})
 */
 private $nicknames;
 
@@ -2430,7 +2430,7 @@ private $nicknames;
 /** 
 * @var integer $concurrent 
 * 
-* @ORM\Column(name="concurrent", type="integer")
+* @ORM\Column(name=``concurrent'', type=``integer'')
 */ 
 private $concurrent = 0;
 
@@ -2438,7 +2438,7 @@ private $concurrent = 0;
 /** 
 * @var datetime $created 
 *
-* @ORM\Column(name="created", type="datetime") 
+* @ORM\Column(name=``created'', type=``datetime'') 
 */ 
 private $created;
 
@@ -2446,7 +2446,7 @@ private $created;
 /**
 * @var datetime $updated 
 *
-* @ORM\Column(name="updated", type="datetime") 
+* @ORM\Column(name=``updated'', type=``datetime'') 
 */ 
 private $updated; 
 
@@ -2460,8 +2460,8 @@ private $updated;
 public function __construct(User $owner = null) { 
 
    $this->owner = $owner;
-   $this->created = $this->updated = new  DateTime("now"); 
-   $this->date = new  DateTime("tomorrow"); 
+   $this->created = $this->updated = new  DateTime(``now''); 
+   $this->date = new  DateTime(``tomorrow''); 
    $this->users = new \Doctrine\Common\Collections\ArrayCollection(); 
    $this->recordings = new \Doctrine\Common\Collections\ArrayCollection(); 
 
@@ -2586,7 +2586,7 @@ en la tabla e identifica cada entidad ``Meeting'' dentro de la base
 de datos de forma única, requisito impuesto por el motor MySQL para
 identificar los contenidos de cada tabla\@.
 \item En la columna ``owner\_id'' se almacena el identificador correspondiente
-al propietario y creador de cada reunión\@.
+al pro\-pie\-tario y creador de cada reunión\@.
 \item ``Group\_id'' se corresponde con una funcionalidad \textit{Out of Scope}\footnote{Fuera de los objetivos de la versión final.},
 por lo tanto no se ha utilizado en la actual versión del proyecto,
 pero está reservada para una funcionalidad en la que una reunión puede
@@ -2610,7 +2610,7 @@ borrada\@. La aplicación almacena datos para posteriores estadísticas\@.
 funcionalidad desarrollada para la versión en la que se podría programar
 grabaciones y que se describirá con detenimiento en la sección \ref{sec:L=0000EDneas-Futuras}\@. 
 \item Una reunión \textit{LOCKED} es aquella que el usuario bloquea para
-que otros usuarios que han sido invitados no tengan acceso a la sala
+que otros usua\-rios que han sido invitados no tengan acceso a la sala
 (como una llave que cierra la puerta a la entrada de la sala de videoconferencia)\@.
 \end{itemize}
 \item Las columnas ``salt'', ``secretesalt'' y ``viewsalt'' almacenan
@@ -2632,20 +2632,20 @@ a la reunión en el caso de usuarios que tienen acceso a la aplicación\@.
 descripción de la reunión que aparecerá en la página principal acompañando
 a cada reunión\@.
 \item La columna ``url'' contiene la URL de acceso a cada reunión y de
-esta forma se dispone de un acceso rápido para ofrecerla en cualquier
+esta forma se dispone de ella en cualquier
 parte del código\@.
 \item ``date'' indica la fecha de creación de la reunión, esta columna
 podría utilizarse para otros usos si fuese necesario debido a la existencia
-de la columna ``created''\@.
+de la columna ``created'' de significado muy similar\@.
 \item ``public'' es una columna con valor \textit{booleano} que indica
 si la reunión es pública (en caso de ser cierta) o privada (en caso
 de ser falsa)\@.
 \item ``magic'' es otra columna \textit{booleana} que indica si la reunion
-es mágica o no para poder otorgarle los privilegios oportunos como
+es mágica o no para poder otorgarle los privilegios oportunos a la sala, como
 se ha visto en la subsección \ref{sub:Sala-m=0000E1gica}\@.
 \item La columna ``created'' almacena la fecha de creación de la reunión\@.
 \item La columna ``updated'' indica si se ha modificado alguna variable
-de la reunión y facilita la toma decisiones a la hora de eliminar
+de la reunión y agiliza la toma decisiones a la hora de eliminar
 o dar acceso a las reuniones\@.
 \end{itemize}
 \end{itemize}
@@ -2670,21 +2670,21 @@ El repositorio de esta entidad posee las siguientes funciones:
 \begin{itemize}
 \item \texttt{findOneUserByEmail}: esta función encuentra un único usuario
 en la base de datos identificado por su correo electrónico\@. El
-correo electrónico es único para cada usuario y una herramienta potente
-para idenificar usuarios de forma única\@. 
+correo electrónico que es único para cada usuario ofrece una herramienta potente
+para idenificar usuarios\@. 
 \item \texttt{findUsersByTerm}: es la petición utilizada para la función
 autocompletar que se explicará en la sección \ref{sec:URLs-de-acceso}\@.
 Esta petición recibe tres letras como mínimo y devuelve la entidad
 o entidades de usuario que contengan esas letras en el mismo orden
-en cualquiera de las columnas que forman la tabla de usuario\@.
+en cualquiera de las columnas que conforman la tabla de usuario\@.
 \end{itemize}
 
-En la tabla \textit{user}, ver figura\ref{Tabla_usuario}, se almacenan
+En la tabla \textit{user}, ver figura \ref{Tabla_usuario}, se almacenan
 datos referentes al usuario\@. Por simple inspección se intuye qué
 tipo de parámetros del usuario se guardan en cada columna de esta
 tabla\@. De nuevo se tiene una variable ``id'' imprescindible para
-el motor MySQL y poder así identificar cada entidad dentro de la tabla
-de forma única\@.
+que el motor MySQL pueda identificar cada entidad dentro de la tabla
+de forma unívoca\@.
 
 \end{itemize}
 \begin{figure}[h]
@@ -2705,16 +2705,17 @@ grabación o ``state'' que almacena el estado de cada grabación como
 se explicará en la sección \ref{sec:Dise=0000F1o-de-la}\@. Este
 estado puede ser \textit{REACHABLE} cuando tenemos acceso a la grabación
 o \textit{LOCKED} cuando la grabación está bloqueada y no se tiene
-acceso a ella\@. Otros datos que se almacena son el título de la
+acceso a ella\@. Otros datos que se almacenan son el título de la
 grabación, la URL de acceso a la misma y la fecha de creación\@.
 
 
 El repositorio de esta entidad posee la siguiente función:
 \begin{itemize}
-\item \texttt{findOneRecordingByTitle}: devuelve una entidad grabación \emph{(recording)}
+\item \texttt{findOneRecordingByTitle}: devuelve una entidad grabación (\emph{recording})
 a partir del título de una grabación\@. Este hecho es posible debido
 a que el servidor \textit{Adobe Connect}\textsuperscript{\textregistered{}}
-no permite grabaciones con el mismo nombre\@.
+no permite grabaciones con el mismo nombre, por consiguiente, una petición sobre
+la columna título de la grabación retornará una única entidad \emph{recording}\@.
 \end{itemize}
 \end{itemize}
 \smallskip{}
@@ -2725,8 +2726,8 @@ no permite grabaciones con el mismo nombre\@.
 
 Esta entidad posee un identificador, el sobrenombre\emph{ }(\emph{nickname})
 que el usuario tendrá en cada reunión en la que participe y una breve
-descripción en caso de que fuese necesaria\@. Otra columna de esta
-tabla salvaguarda el identificador de las reuniones que cada usuario
+descripción en caso de que fuese necesaria\@. Se ha utilizado también esta
+tabla para salvaguardar el identificador de las reuniones que cada usuario
 haya minimizado en su interfaz como se puede ver en la figura \ref{ReduceMeeting}\@.
 
 
@@ -2738,7 +2739,7 @@ entidad reunión que se pasan como parámetro\@.
 \item \texttt{findNickNameByUserOrderByRank}: devuelve la entidad \emph{nickname}
 a partir de una entidad de usuario ordenada por orden de importancia\@.
 \item \texttt{findOneMinimizedByMeeting}: hace una petición a la base de
-datos para devolver una entidad \emph{nickname }en caso de que la
+datos para devolver una entidad \emph{nickname} en caso de que la
 reunión se visualice como minimizada\@.
 \end{itemize}
 \end{itemize}
@@ -2802,15 +2803,15 @@ el cual se tomó la muestra, es decir, el momento en el que el cron
 ejecutó el comando correspondiente que rellena esta tabla\@.
 \item En la variable ``participants'' se guarda el número total de participantes
 activos en el servidor \textit{Adobe Connect}\textsuperscript{\textregistered{}}\textsuperscript{},
-es decir, el número de usuarios que están participando en una videoconferencia\@.
+es decir, el número de usuarios que están parti\-cipando en una videoconferencia\@.
 \item En la variable ``active\_rooms'' se guarda el número de salas de
 videoconferencia que están siendo utilizadas\@.
 \end{itemize}
 
 Estas dos últimas variables serán procesadas por la función que hace
 referencia a ellas en el cron de forma que si se llega a una zona
-próxima a la saturación se enviará un correo electrónico al administrador
-del sistema para advertirle de tal situación\@.
+próxima a la ocupación total de recursos del sistema se enviará un correo
+electrónico al administrador para advertirle de tal situación\@.
 
 \end{itemize}
 \smallskip{}
@@ -2824,8 +2825,8 @@ del sistema para advertirle de tal situación\@.
 \end{figure}
 
 
-La figura \ref{meeting_user}, es una tabla creada por Symfony a petición
-del programador y que almacena de forma automática un cruce de datos
+La figura \ref{meeting_user}, muestra una tabla diseñada por Symfony creada
+a petición del usuario para realizar un cruce de datos de forma automática
 entre tablas, en este caso relaciona los identificadores de reuniones
 con sus respectivos usuarios\@. De esta forma se tendrá acceso a
 las tablas de reuniones y de usuarios en cualquier parte del
@@ -2835,11 +2836,11 @@ a partir de su identificador, a la vez que se podrán recorrer los
 datos de todos los usuarios de una reunión a partir del identificador
 de la reunión\@. Al disponer de esta tabla es posible acceder al
 nombre de un grupo a partir de un usuario que pertenezca a ese grupo
-sin más que realizar las instrucciones:
+sin más que escribir la línea:
 
 \begin{lstlisting}
 
-\$Group\_name=\$user->getGroup()->getName();
+$Group_name=$user->getGroup()->getName();
 
 \end{lstlisting}
 
@@ -2888,9 +2889,9 @@ instancia\@.
 Como complemento a la tabla de grupos, mediante la configuración de
 la entidad \textit{group} y de la entidad \textit{user} de Symfony
 se realiza el cruce en la base de datos de los identificadores de
-ambas entidades mediante una relación ``n\textrightarrow{}n'', ya
+ambas entidades mediante una relación ``n\textrightarrow{}m'', ya
 que un usuario puede pertenecer a ``n'' grupos y un grupo puede
-contener ``n'' usuarios\@.
+contener ``m'' usuarios\@.
 
 \smallskip{}
 
@@ -2929,7 +2930,7 @@ External Partner &  & X & X & \tabularnewline
 \hline 
 \end{tabular}
 
-\caption{Tipos de usuarios frente a tipos de registro en la aplicación}
+\caption{Tipos de usuarios frente al rol dentro de la aplicación}
 \label{Tipos_usuarios}
 \end{table}
 
@@ -2970,7 +2971,7 @@ Es el usuario con menos privilegios, no le está permitido grabar ni
 interactuar en la sala, únicamente puede observar a los diferentes
 usuarios participando en la reunión\@. Esta funcionalidad es muy
 útil para ponencias o conferencias en las que sólo pueden participar
-los asistentes físicos a las mismas\@.
+determinados usuarios y la audiencia es muy amplia\@.
 
 \end{itemize}
 \medskip{}
@@ -2991,7 +2992,7 @@ administrador posee privilegios que hacen única la gestión de la aplicación\@.
 Este usuario tiene acceso a la base de datos de la aplicación y puede
 manipular los contenidos a su voluntad\@. La siguiente lista hace
 referencia a las funcionalidades particulares de los administradores
-y nos ofrece una visión de las posibilidades de la aplicación\@.
+y ofrece una visión de las posibilidades de la aplicación\@.
 \begin{itemize}
 \item El administrador tiene acceso a las estadísticas de la aplicación\@.
 Mediante gráficos realizados con el API de Javascript jQuery-kamicgraphs,
@@ -3027,13 +3028,13 @@ de ingresar en la aplicación como usuario de DigiMar o entrar como
 usuario anónimo\@.
 
 
-La URL generada para este efecto tiene dos roles, presentador o participante,
+Esta URL posee dos roles, presentador o participante,
 estos roles serán otorgados por el propietario (``\textsl{owner}'')
 de la reunión\@. El enlace para entrar como anónimo se construye
-a traves de la URL que se le envía, apareciendo el parámetro \textsl{guest=true}
-en la URL, lo cual hace que por defecto el panel de acceso anónimo
+añadiendo a la URL que se envía el parámetro \textsl{guest=true},
+lo cual hace que por defecto el panel de acceso para invitados
 marque la opción de entrar como huesped\@. En cualquier otro caso
-la opción marcada por defecto será un formulario para entrar como
+con la opción marcada por defecto se visualizará un formulario para entrar como
 usuario de DigiMar\@.
 
 \end{itemize}
@@ -3047,13 +3048,13 @@ usuario de DigiMar\@.
 \end{figure}
 
 
-\medskip{}
+\smallskip{}
 
 
 
 \section{El interfaz de usuario\label{sec:El-interfaz-de}}
 
-En esta sección describiremos las modificaciones y las decisiones
+En esta sección se comentarán las modificaciones y las decisiones
 de diseño que se han tomado en el interfaz de usuario desde el inicio
 de la implementación\@. Esta sección ayudará al lector en la interpretación
 de las diferentes funciones que se describirán a lo largo del capítulo
@@ -3063,8 +3064,8 @@ y la relación de éstas con el interfaz de usuario\@.
 
 
 Como se puede ver en la figura \ref{wrap:maqueta_1_version}, así
-nació el primer interfaz de usuario para esta aplicación en el cual
-se tenía clara la información que se debe visualizar, pero no tanto
+nació el primer interfaz de usuario para eMeeting en el cual
+estaba clara la información a visualizar, pero no tanto
 la experiencia de usuario ante la visión de la información\@. Para
 el boceto de diseño de las primeras versiones de interfaz se ha utilizado
 la herramienta \textit{Mockups} de \textit{Balsamiq} \cite{key-19}\@.
@@ -3080,7 +3081,7 @@ la herramienta \textit{Mockups} de \textit{Balsamiq} \cite{key-19}\@.
 En la figura \ref{wrap:maqueta_1_version} se observa lo esencial
 de una funcionalidad para crear una nueva reunión (botón ``+ \emph{Meeting}'')
 y un botón para agregar usuarios a la reunión (``+ \emph{Partner
-to Meeting}'')\@. Aparecen los datos que se muestrasnpara cada reunión,
+to Meeting}'')\@. Aparecen los datos que se muestran para cada reunión,
 tales como el título, un enlace para invitar usuarios ajenos a la
 aplicación, una pequeña descripción y un botón para eliminar la reunión
 (``Cancel Meeting'')\@. En la parte superior central se vislumbra
@@ -3125,7 +3126,7 @@ UI \cite{key-13}\@.
 \end{figure}
 
 
-\medskip{}
+\smallskip{}
 
 
 
@@ -3133,7 +3134,7 @@ UI \cite{key-13}\@.
 
 Se describen a continuación las funciones de los botones que se contemplan
 en la figura \ref{BotoneraParaCadaReuni=0000F3n}\@. En esta figura
-se observa la botonera para administradores, como pecualiaridad cabe
+se observa la botonera para administradores, como peculiaridad cabe
 comentar la sutil diferencia entre la figura a) y la figura b) que
 posee el botón para cambiar una reunión al estado mágica ya que este
 menú es diferente para usuarios administradores\@.
@@ -3144,7 +3145,7 @@ menú es diferente para usuarios administradores\@.
 \begin{figure}[H]
 \hspace{3.5cm}\subfloat[Botonera para no administradores]{\includegraphics[scale=0.45]{\string"Fotos de eMeeting/Fotos antiguas/botonera_lateral_noAdmin\string".jpg}
 
-}\hspace{1.5cm}\subfloat[Botonera para administador]{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/botonera_lateral_admin\string".jpg}
+}\hspace{1.5cm}\subfloat[Botonera para admi\-nistradores]{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/botonera_lateral_admin\string".jpg}
 
 }
 
@@ -3157,7 +3158,6 @@ menú es diferente para usuarios administradores\@.
 \begin{itemize}
 \item Join
 
-
 Como se observa en la figura \ref{intefaz_final} el único botón verde
 y el de mayor tamaño por su importancia permite el acceso a la sala
 para disfrutar de la videoconferencia\@. Cuando el usuario pulse
@@ -3169,7 +3169,6 @@ en la sección \ref{sec:Concepto-de-sala}\@.
 
 \item Disabled
 
-
 Deshabilita la sala temporalmente\@. Este botón sólo está disponible
 para el dueño de la sala\@. Cuando se pincha en este botón se llama
 a la función asociada y mediante el método POST se pasa una variable
@@ -3178,7 +3177,6 @@ deshabilitada para alternar su estado entre uno u otro\@.
 
 \item Delete
 
-
 Elimina la sala de la lista de reuniones disponibles en el interfaz
 de usuario\@. Sin embargo, se ha decidido por diseño que una reunión
 nunca se elimine por completo del sistema, es decir, se borra del
@@ -3186,7 +3184,7 @@ servidor \textit{Adobe Connect}\textsuperscript{\textregistered{}},
 pero nunca de la base de datos de la aplicación de forma que en el
 botón \textsl{\emph{A}}\emph{ll} \emph{Recordings} siempre estarán
 disponibles las reuniones eliminadas con su correspondiente lista
-de grabaciones\@.
+de grabaciones si las hubiera\@.
 
 \end{itemize}
 \begin{figure}[H]
@@ -3202,18 +3200,18 @@ de grabaciones\@.
 \item Icono de flecha
 
 
-Este icono situado a la derecha del botón Delete, nos da la posibilidad
-de modificar la vista de la reunión\@. De esta forma el usuario puede
-observar más reuniones en la parte superior de la página, como se
+Este icono situado a la derecha del botón Delete, ofrece la posibilidad
+de minimizar el espacio que ocupa una reunión dentro del panel de control\@.
+De esta forma el usuario puede observar más reuniones en la parte superior de la página, como se
 puede observar en la figura \ref{BotoneraParaCadaReuni=0000F3n}\@.
 
 \item Recordings
 
 
-Proporciona el acceso a las grabaciones de la reunión a la que pertenece
-el botón\@. Las grabaciones que aparecen en la figura ya han finalizado,
-y aparecen después de ejecutarse la correspondiente función en el
-cron que se mencionó en la sección \ref{sec:CRON} en la ventana emergente
+Proporciona el acceso a las grabaciones de la reunión\@. Las grabaciones aparecerán tras
+esta ventana una vez hayan finalizado. En caso de que sea la reunión la que finalice
+aparecerán, después de ejecutarse la correspondiente función en el
+cron que se mencionó en la sección \ref{sec:CRON}, en la ventana emergente
 que se despliega al pulsar en el botón \emph{All recordings}\@.
 
 \item Change NickName
@@ -3244,7 +3242,7 @@ en cada reunión de videoconferencia\@.
 
 
 Al pulsar sobre este icono se despliega una ventana emergente como
-la de la figura \ref{InviteText}\@. Nos muestra un texto destinado
+la de la figura \ref{InviteText}\@. Se muestra un texto destinado
 a usuarios ajenos a la aplicación de forma que si lo reciben puedan
 disfrutar de la sala a partir de la URL que se incluye\@. El texto
 contiene las instrucciones necesarias para entrar a la sala y la ventana
@@ -3255,7 +3253,7 @@ las directrices necesarias para enviarlo\@.
 
 
 Este icono aparece a lo largo de la aplicación y con la ayuda de la
-librería jQuery-tipTip emerge un mensaje al pasar el puntero por encima
+librería jQuery-tipTip emerge un mensaje al pasar el puntero por sobre él
 que explica la funcionalidad del elemento al que acompaña, ver figura
 \ref{EmergentHelp}\@.
 
@@ -3278,9 +3276,9 @@ a usuarios externos que se muestran en la figura \ref{InviteUsers}\@.
 De esta forma puede invitarse a una lista de usuarios a una reunión
 con estos enlaces y en el futuro invalidar esos enlaces para invitar
 a otro grupo de usuarios de forma que los primeros no tendrán acceso
-a la reunión\@.
+a la reunión a menos que se les envíe el nuevo enlace generado\@.
 
-\item Url de enlace para otros usuarios:
+\item URLs para invitar a otros usuarios:
 
 \begin{itemize}
 \item Presenter Access
@@ -3289,7 +3287,7 @@ a la reunión\@.
 Este enlace proporciona a su poseedor privilegios de presentador en
 la reunión, como se adelanta en la subsección \ref{sub:Definici=0000F3n-de-roles}\@.
 Un presentador podrá introducir contenido en la sala, como presentaciones
-o compartir su escritorio\@. Sin duda podrá compartir la imagen de
+o compartir su escritorio\@. Como es obvio podrá compartir la imagen de
 su cámara web y el audio\@.
 
 \item Limited Access
@@ -3326,9 +3324,8 @@ librería jQuery y la tecnología AJAX\@.
 \subsection{Botonera superior de menú\label{sub:Botonera-superior-de}}
 
 Esta botonera situada en la parte superior del cuerpo central de la
-web, como se puede ver en la figura \ref{MenuSuperior}, nos proporciona
-el acceso a las funciones globales de la aplicación que pasamos a
-describir a continuación\@.
+web, como se puede ver en la figura \ref{MenuSuperior}, proporciona
+el acceso a las funciones globales de la aplicación que se describen a continuación\@.
 
 \begin{figure}[H]
 \centerline{\includegraphics[scale=0.4]{\string"Fotos de eMeeting/Fotos antiguas/Botonera_superior\string".jpg}}
