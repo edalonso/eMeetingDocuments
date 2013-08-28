@@ -3350,7 +3350,7 @@ el acceso a las funciones globales de la aplicación que se describen a continuac
 \label{achievement_files}
 \end{figure}
 Desde este botón se accede a una lista de reuniones como la mostrada
-en la figura \ref{achievement_files} que han finalizado\@. Nos ofrece
+en la figura \ref{achievement_files} que han finalizado\@. Ofrece
 información sobre su fecha y hora de creación y la lista de grabaciones
 en caso de existir\@.
 
@@ -3380,20 +3380,20 @@ las pruebas de conexión visualizándose un menú similar al de la figura
 
 
 Al pinchar sobre este botón se accede a una ayuda que indica las diferentes
-funcionalidades proporcionadas por eMeeting y explica cómo
+funciona\-lidades proporcionadas por eMeeting y explica cómo
 se utilizan\@. Los usuarios podrán resolver las diferentes dudas
 que puedan surgir sin más que ojear esta página\@. Ver figura \ref{HelpMeeting}
 
 \item \emph{All eMeetings }
 
 
-Este botón permite filtrar las reuniones de un tipo determinado, ya
-sean públicas, privadas, mágicas en caso del usuario administrador,
-las reuniones a las que ha sido invitado el usuario y la opción marcada
+Este botón es realmente un filtro de reuniones por tipo. El nombre cambia
+en función del filtro seleccionado ya sea público, privado, mágico, que sólo aparece si el usuario es administrador,
+invitado para las reuniones a las que ha sido invitado el usuario y la opción marcada
 por defecto, de ahí el nombre que vemos en la figura, que muestra
 todas las reuniones del usuario\@. Este desplegable puede verse en
 la figura \ref{FilterMeeting}, donde también puede observarse el
-código de colores relacionado con cada tipo de reunión\@.
+código de colores relacionado con cada tipo de reunión que aparece también a la izquierda de cada elemento reunión\@.
 
 \end{itemize}
 \begin{figure}
@@ -3420,7 +3420,7 @@ dueño\@. Ver figura \ref{AdminMenu}\@.
 
 
 En la ventana modal que se desplegará al pinchar sobre este botón
-se podrá seleccionar el título de la reunión, un sobrenombre de usuario
+se podrá seleccionar el título de la reunión, el sobrenombre de usuario
 que se visualizará en la sala, invitar usuarios de ``Campus do Mar''
 a la nueva reunión y determinar el carácter de la sala (pública o
 privada)\@. El campo descripción es opcional\@. Ver figura \ref{CreateMeeting}\@.
@@ -3451,8 +3451,8 @@ acceso a la aplicación.
 
 En esta subsección se describirán las funciones relacionadas con los
 botones que se han descrito en las secciones anteriores\@. De esta
-forma se verán en detalle las comprobaciones y la lógica que se realiza
-en cada botón y que permanece transparente al usuario\@.
+forma se aclarará en detalle las comprobaciones y la lógica, transparente al usuario, que se realiza
+en cada botón\@.
 
 \smallskip{}
 
@@ -3461,14 +3461,18 @@ en cada botón y que permanece transparente al usuario\@.
 
 
 Este botón realiza una serie de comprobaciones antes de acceder a
-la reunión correspondiente en \textit{Adobe Connect}\textsuperscript{\textregistered{}}\@.
-Comprueba el número de eMeetings simultáneos ya que está limitado
+la reunión co\-rrespondiente en \textit{Adobe Connect}\textsuperscript{\textregistered{}}\@.
+\begin{itemize}
+\item Comprueba el número de eMeetings simultáneos ya que está limitado
 por las licencias compradas por el administrador del servidor de conexión
-a \textit{Adobe}\textsuperscript{\textregistered{}}\@. Comprueba
-que la sala todavía existe y que se tienen los privilegios necesarios
-para disfrutar el eMeeting, ya que el usuario creador ha podido desahibilitar
+a \textit{Adobe}\textsuperscript{\textregistered{}}\@.
+\item Comprueba que la sala todavía existe y que se tienen los privilegios necesarios
+para disfrutar del eMeeting, ya que el usuario creador ha podido desahibilitar
 la sala o incluso eliminarla antes de que la página se recargue y
 por tanto todavía podría aparecer como activa en el interfaz\@.
+\item Comprueba que el usuario posee los privilegios necesarios para acceder a
+la reunión\@.
+\end{itemize}
 
 \item Enabled/Disabled
 
@@ -3488,9 +3492,9 @@ futuros conflictos y potenciar que los usuarios creen sus propias
 salas\@.
 
 
-Se comprueba si el eMeeting posee grabaciones y se almacenan en una
+Antes de eliminar el eMeeting del interfaz se comprueba si posee grabaciones y se almacenan en una
 carpeta interna de \textit{Adobe Connect}\textsuperscript{\textregistered{}}\@.
-En el botón antes descrito como \emph{All recordings} tendremos acceso
+En el botón antes descrito como \emph{All recordings} se guarda el acceso
 a las grabaciones de los eMeetings eliminados\@.
 
 \item Recordings
@@ -3508,7 +3512,7 @@ nuevas grabaciones en la base de datos al finalizar las mismas\@.
 
 En la ventana modal que despliega este botón se da la opción de cambiar
 el sobrenombre (\emph{NickName}) de cada reunión\@. Este código comprueba
-que no insertamos un sobrenombre vacío, aunque sería posible en el
+que no se inserta un sobrenombre vacío, aunque sería posible en el
 \textit{Adobe Connect}\textsuperscript{\textregistered{}}\textsuperscript{}
 la posibilidad de no tenerlo\@.
 
@@ -3520,15 +3524,25 @@ la posibilidad de no tenerlo\@.
 \section{URLs de acceso a la aplicación\label{sec:URLs-de-acceso}}
 
 En esta sección, y para acompañar a las funcionaliadades descritas
-en la sección \ref{sec:El-interfaz-de}, explicaremos las diferentes
+en la sección \ref{sec:El-interfaz-de}, se explican con detalle las diferentes
 rutas que se han implementado para esta aplicación y que dan acceso
-a las funciones de los controladores\@. Symfony nos ofrece esta potente
-funcionalidad, de forma que se podrá indicar la función que realizará
-la aplicación en función de la URL de acceso a la aplicación\@. A
+a las funciones de los controladores\@. Symfony ofrece esta potente
+funcionalidad de asociación entre URL y lógica a realizar al acceder
+a dicha URL de acceso a la aplicación\@. A
 raíz de la explicación de estas rutas de acceso en la sección \ref{sec:Concepto-de-sala}
 el lector ya posee una visión más completa de la estructura de la
-aplicación y también del gran trabajo simplificado mediante la utilización
-de Symfony\@.
+aplicación y también del gran trabajo que simplifica la utilización
+de Symfony\@. En esta lista de rutas existen tres parámetros a destacar:
+
+\begin{itemize}
+\item El nombre para acceder a la función desde el interior de los controladores y plantillas.
+\item Tipo de petición realizada sobre el servidor, ya ser POST o GET, para acceder a la función.
+\item La URL para acceder a la función vía web.
+\end{itemize}
+
+\smallskip{}
+
+Estos parámetros mejoran la seguridad de la aplicación ante ataques como la inyección SQL y ofrecen una fácil utilización de las funciones que describimos a continuación.
 
 \smallskip{}
 
@@ -3560,7 +3574,7 @@ una lista de todos los grupos que posee la aplicación\@.
 
 Situado en \textit{Controller/GroupAdminController.php}, recibe como
 parámetro el identificador del grupo que se visualizará en el formulario
-de edición para el menú de administrador\@.
+de edición para el menú de admi\-nistrador\@.
 
 \end{itemize}
 \smallskip{}
@@ -3602,7 +3616,7 @@ menú de administración\@.
 
 
 Situado en \textit{Controller/GroupAdminController.php}, valida el
-formulario de edición y actuliza la base de datos\@.
+formulario de edición y actualiza la base de datos\@.
 
 \end{itemize}
 \smallskip{}
